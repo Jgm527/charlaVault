@@ -23,7 +23,7 @@
   }
 
   /* BASE */
-  html, body, .reveal-viewport { background: var(--bg); }
+  html, body, .reveal, .reveal-viewport, .reveal .slides { background: var(--bg); }
   .reveal { font-family: var(--sans); color: var(--ink); font-weight: 400; }
   .reveal .slides { text-align: left; }
   .reveal .slides section { height: 1080px; overflow: hidden; background: var(--bg); }
@@ -47,7 +47,7 @@
 
   .cursor {
     display: inline-block; background: var(--accent);
-    animation: blink 1.06s steps(1, end) infinite;
+    animation: blink 1.06s steps(2, end) infinite;
   }
   @keyframes blink { 50% { opacity: 0; } }
   @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
