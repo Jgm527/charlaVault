@@ -24,6 +24,13 @@ servidor y sin conexión: reveal.js y las capturas viven dentro del repo.
 | `recursos/` | capturas de límite de uso de Claude, Codex y OpenCode |
 | `AGENTS.md` | excepciones del proyecto a la skill de presentaciones |
 
+## Herramientas (no versionadas)
+
+Un clon no necesita instalar nada. Las utilidades de trabajo quedan fuera del
+repo a propósito: la skill de presentaciones se instala con
+`npx skills add arifszn/slide-wright` y el verificador del deck vive en
+`.agents/skills/`. Nada de eso hace falta para presentar.
+
 ## Pendiente
 
 - Capturas de S3 (raíz del vault) y S8 (el grafo), que hoy son marcadores punteados.

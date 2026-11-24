@@ -1,0 +1,13 @@
+# Dependencias y herramientas locales: no hacen falta para presentar
+node_modules/
+.agents/
+.claude/
+skills-lock.json
+
+# Sistema
+Thumbs.db
+.DS_Store
+
+# Artefactos de verificación del deck
+_sheet.png
+_s5.png
