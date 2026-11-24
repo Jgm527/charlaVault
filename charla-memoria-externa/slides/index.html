@@ -103,11 +103,11 @@
   .row5.muted .k { color: #64757f; }
   .row5.muted .d { color: #44515c; }
 
-  /* S6 · schema */
-  .s6 { justify-content: center; gap: 52px; }
-  .s6 .code { font-size: 34px; }
-  .s6 .format { font-size: 48px; font-weight: 300; letter-spacing: -.015em; color: var(--ink-mid); margin: 0; }
-  .s6 .format b { font-family: var(--mono); font-weight: 400; color: var(--accent); }
+  /* S6 · schema: la frase manda, el archivo va detrás como prueba */
+  .s6 { justify-content: center; gap: 30px; }
+  .s6 .format { font-size: 104px; font-weight: 300; letter-spacing: -.032em; line-height: 1.06; color: #f2f7fb; margin: 0 0 14px; }
+  .s6 .format .dim { color: var(--ink-dim); }
+  .s6 .code { font-size: 30px; }
 
   /* S7 · vault vs obsidian */
   .s7 { justify-content: center; }
@@ -141,10 +141,14 @@
   .node.n3 { grid-area: 3 / 1; } .node.n4 { grid-area: 3 / 3; }
   .hub { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--bg); border: 1px solid rgba(92,200,255,.6); color: var(--accent); font-family: var(--mono); font-size: 42px; letter-spacing: .26em; text-indent: .26em; padding: 44px 64px; white-space: nowrap; }
 
-  /* S13 · el número */
+  /* S13 · lo que hay dentro: los casos primero, la cifra al pie */
   .s13 { justify-content: center; }
-  .big { font-size: 146px; font-weight: 300; letter-spacing: -.035em; line-height: 1.05; color: var(--ink); margin: 0; }
-  .big .num { font-variant-numeric: tabular-nums; color: var(--accent); }
+  .s13 .eyebrow { font-family: var(--mono); font-size: 26px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-dim); margin: 0 0 34px; }
+  .things { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .things li { font-size: 58px; font-weight: 300; letter-spacing: -.02em; line-height: 1.24; color: var(--ink-dim); }
+  .things li b { font-weight: 300; color: #f2f7fb; }
+  .receipts { font-family: var(--mono); font-size: 30px; letter-spacing: .01em; color: var(--ink-dim); margin: 46px 0 0; }
+  .receipts .num { color: var(--accent); font-variant-numeric: tabular-nums; }
 
   /* S14 · cierre */
   .s14 { justify-content: center; }
@@ -301,6 +305,7 @@
     <!-- ================= S6 · SCHEMA ================= -->
     <section>
       <div class="frame s6">
+        <p class="format"><span class="dim">sin formato,</span><br />esto es un cajón desastre</p>
         <div class="file-head"><i></i> SCHEMA.md <span class="count">⋯ 74 líneas · 6 secciones</span></div>
         <div class="code">
           <span class="ln hi"><span class="n">36</span>title: Título</span>
@@ -310,7 +315,6 @@
           <span class="ln hi"><span class="n">63</span>Mínimo 2 [[wikilinks]] por nota</span>
           <span class="ln"><span class="n">65</span>00-raw/ es inmutable</span>
         </div>
-        <p class="format">sin formato, esto es un cajón desastre</p>
       </div>
       <aside class="notes">
         También hay un SCHEMA.md en el que se definen las reglas de cómo se deben tomar las notas, su
@@ -319,6 +323,8 @@
 
         — Es un extracto de 74 líneas: además del frontmatter define la estructura de carpetas, la
           taxonomía de tags y las convenciones. No es solo el encabezado.
+        — La frase es ahora el titular de la slide y el archivo es la prueba que va debajo. Si alguien
+          lee la frase y no el código, la slide ya ha hecho su trabajo.
       </aside>
     </section>
 
@@ -415,21 +421,34 @@
       </aside>
     </section>
 
-    <!-- ================= S13 · EL NÚMERO ================= -->
+    <!-- ================= S13 · LO QUE HAY DENTRO ================= -->
     <section>
       <div class="frame s13">
-        <p class="big">casi <span class="num">7.000</span> notas</p>
+        <p class="eyebrow">un año y medio de esto</p>
+        <ul class="things">
+          <li>el servidor de <b>Minecraft</b></li>
+          <li>las <b>playlists</b> de Spotify, analizadas</li>
+          <li>el <b>scraper</b> de Moodle, de hace 6 meses</li>
+          <li>el <b>temario</b> de clase</li>
+          <li>los <b>proyectos</b> personales</li>
+        </ul>
+        <p class="receipts">casi <span class="num">7.000</span> notas · 7.459 fuentes · 430 commits</p>
         <div class="gauge"><span></span></div>
       </div>
       <aside class="notes">
-        Lo llevo usando durante el último año y medio. Se acuerda de todo: cómo está montado mi servidor
-        de Minecraft, mis playlists analizadas de Spotify, descargas de Moodle, temario de clase,
-        proyectos personales.
+        Lo llevo usando durante el último año y medio. Y dentro hay de todo: cómo está montado mi servidor
+        de Minecraft, las playlists de Spotify ya analizadas, el scraper de Moodle que hice hace 6 meses,
+        el temario de clase, proyectos personales. Se acuerda de todo.
+
+        Casi siete mil notas. Eso no lo escribo yo: lo escribe el cron.
 
         Y ojo con la frase fácil: todo eso está en local; el modelo solo ve lo que lee. Sabe más de mí
         que yo, sí, pero porque lo tengo escrito, no porque me espíe.
 
-        — Un número, no cuatro. Si se quiere precisión, leer el índice del vault esa misma mañana.
+        — La lista está EN pantalla: se recorre con la mano, no se lee entera. Di tres casos y sigue;
+          el resto lo lee quien quiera.
+        — El número se dice UNA vez, en voz alta. Si no se dice, la línea de abajo es decorado.
+        — Si se quiere precisión al milímetro: leer el índice del vault esa misma mañana. El cron no para.
       </aside>
     </section>
 
