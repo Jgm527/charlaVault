@@ -29,12 +29,12 @@ agente necesita para construirla.
 |---|---|---|---|
 | S1 | Hook | `2:00 AM` + `El contexto se agotó.` | tipografía |
 | S2 | Hook | 3 capturas de *rate limit*, misma altura, + `todos tienen un límite` | `recursos/limite_claude.jpg`, `limite_codex.png`, `limite_opencode.webp` |
-| S3 | Qué es | captura del explorador en la raíz del vault + `una carpeta. nada especial.` | **pendiente de capturar** |
+| S3 | Qué es | captura del explorador en la raíz del vault + `una carpeta. nada especial.` | `recursos/vault-raiz.png` |
 | S4 | Qué es | `03-identity/hermes.md` como **extracto**: numeración real, elipsis y `⋯ 56 líneas · 7 secciones`; resaltadas la fuente de verdad y dónde guarda lo aprendido | bloque mono |
 | S5 | Qué es | **Una sola lista con las siete carpetas en orden numérico** (`00-inbox` … `05-logs`), mismo tamaño y una descripción bajo cada nombre. Sin flechas: el orden de búsqueda (identity → projects → knowledge → inbox) se dice en voz alta. En blanco **solo las tres que se comentan** (`01-knowledge`, `02-projects`, `03-identity`); el resto (`00-inbox`, `00-raw`, `04-skills`, `05-logs`) en gris apagado: nombre `#64757f` y descripción `#44515c`, para que el contraste con las tres primeras sea evidente | tipografía mono |
 | S6 | Qué es | `SCHEMA.md` como **extracto** (`⋯ 74 líneas · 6 secciones`) **debajo** de la frase, que es el **titular** de la slide a 104 px: `sin formato, esto es un cajón desastre`. El archivo es la prueba, no el mensaje | bloque mono |
 | S7 | Obsidian | `VAULT = los archivos` / `OBSIDIAN = la ventana` | tipografía |
-| S8 | Obsidian | el grafo a pantalla completa, 4 s, sin texto | **pendiente de capturar** |
+| S8 | Obsidian | el grafo a pantalla completa, 4 s, sin texto | `recursos/vault-grafo.png` |
 | S9 | Discord | `¿qué fue del scraper de Moodle?` | tipografía |
 | S10 | Discord | *(no es slide: es el portátil, Discord en directo)* | — |
 | S11 | Rescate | `El modelo no recordaba nada. El disco sí.` | `data-visibility="hidden"` |

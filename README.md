@@ -21,7 +21,7 @@ servidor y sin conexión: reveal.js y las capturas viven dentro del repo.
 | `charla-memoria-externa/slides-preview/` | las tres direcciones de diseño comparadas |
 | `charla-memoria-externa/vendor/reveal/` | reveal.js 6.0.1 vendorizado (sin CDN) |
 | `charla-memoria-externa/assets/` | la web del proyecto: paleta y estilos |
-| `recursos/` | capturas de límite de uso de Claude, Codex y OpenCode |
+| `recursos/` | capturas de los límites de uso (Claude, Codex, OpenCode), la raíz del vault y el grafo |
 | `AGENTS.md` | excepciones del proyecto a la skill de presentaciones |
 
 ## Herramientas (no versionadas)
@@ -33,5 +33,4 @@ repo a propósito: la skill de presentaciones se instala con
 
 ## Pendiente
 
-- Capturas de S3 (raíz del vault) y S8 (el grafo), que hoy son marcadores punteados.
 - Ensayo cronometrado: objetivo 620 palabras más 40 segundos de demo.

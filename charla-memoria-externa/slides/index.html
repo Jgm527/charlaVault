@@ -79,7 +79,7 @@
   .s3 .row { display: grid; grid-template-columns: 1.05fr .95fr; gap: 90px; align-items: center; }
   .s3 h2 { font-size: 80px; font-weight: 300; letter-spacing: -.02em; margin: 0; line-height: 1.14; }
   .s3 h2 .faint { color: var(--ink-dim); }
-  .s3 .ph { height: 580px; }
+  .s3 .shot { height: 580px; width: auto; border: 1px solid var(--line); justify-self: center; display: block; }
 
   /* S4 · hermes.md */
   .s4 { justify-content: center; }
@@ -118,7 +118,7 @@
 
   /* S8 · grafo */
   .s8 { padding: 0; }
-  .s8 .ph { position: absolute; inset: 0; border: 0; color: rgba(92,200,255,.22); font-size: 22px; }
+  .s8 img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
 
   /* S9 · la pregunta */
   .s9 { justify-content: center; }
@@ -211,8 +211,7 @@
       <div class="frame s3">
         <div class="row">
           <h2>una carpeta.<br /><span class="faint">nada especial.</span></h2>
-          <!-- SUSTITUIR por: <img src="../../recursos/vault-raiz.png" style="height:580px;object-fit:cover;border:1px solid var(--line)"> -->
-          <div class="ph">raíz del vault</div>
+          <img class="shot" src="../../recursos/vault-raiz.png" alt="La raíz del vault en el explorador de Windows" />
         </div>
       </div>
       <aside class="notes">
@@ -221,7 +220,8 @@
         Lo que convierte todo esto en memoria son las reglas que le damos a los agentes para que usen
         estos archivos antes de trabajar.
 
-        — Pendiente: captura del explorador en la raíz del vault, con el panel de carpetas visible.
+        — Captura del explorador en la raíz del vault, con el panel de carpetas visible. Abajo hay siete carpetas
+          con prefijo numérico: el ojo las cuenta antes de que las expliques.
       </aside>
     </section>
 
@@ -350,14 +350,13 @@
     <!-- ================= S8 · EL GRAFO ================= -->
     <section>
       <div class="frame s8">
-        <!-- SUSTITUIR por: <img src="../../recursos/vault-grafo.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"> -->
-        <div class="ph">grafo del vault</div>
+        <img src="../../recursos/vault-grafo.png" alt="El grafo del vault en Obsidian" />
       </div>
       <aside class="notes">
         Cuatro segundos. Ni una palabra encima. Es la prueba visual de que esto tiene estructura y no es
         un cajón.
 
-        — Pendiente: captura del grafo a pantalla completa, el más reciente y con más nodos.
+        — Captura del grafo a pantalla completa. Ni pie de foto ni títulos de slide: solo el grafo.
       </aside>
     </section>
 
