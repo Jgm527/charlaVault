@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charla · Conexiones del vault</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="progress"></div>
+<div class="layout">
+  <aside>
+    <div class="brand">
+      <div class="logo">M</div>
+      <div><h1>Memoria externa</h1><small>Lightning talk · 5 min</small></div>
+    </div>
+    <p class="side-meta">Qué entra, qué procesa<br>y qué sale del disco</p>
+    <nav>
+      <a href="index.html"><span class="num">00</span>Portada</a>
+      <a href="guion.html"><span class="num">01</span>Guion 5:00</a>
+      <a href="opciones.html"><span class="num">02</span>Opciones</a>
+      <a class="active" href="conexiones.html"><span class="num">03</span>Conexiones</a>
+      <a href="demo.html"><span class="num">04</span>Demo</a>
+      <a href="referencia.html"><span class="num">05</span>Referencia</a>
+    </nav>
+    <div class="side-foot">
+      Verificado en <code>D:\Brain</code><br>
+      y en <code>agent-portability.md</code>
+    </div>
+  </aside>
+
+  <main>
+    <header class="page">
+      <div class="kicker">03 · Conexiones</div>
+      <h2>El vault no es una isla: es el destino</h2>
+      <p class="lead">Una memoria que nadie alimenta se queda vacía, y una que no devuelve nada es un cajón. Estas son las bocas de entrada y salida que existen hoy, con lo que hace cada una y lo que merece la pena enseñar en directo.</p>
+    </header>
+
+    <div class="callout">
+      <strong>Regla para los 90 segundos del bloque 5:</strong> una conexión en vivo (Discord) y tres nombradas (Instagram, cron, git). Si intentas enseñar las cuatro, no enseñas ninguna.
+    </div>
+
+    <section class="block" id="mapa">
+      <div class="sec-head"><h2>El mapa en una línea</h2></div>
+      <div class="flow">
+        <div class="flow-row">
+          <div class="node hl"><b>ENTRADA</b><span>Discord · Instagram · web/PDF · vídeo</span></div>
+          <div class="node"><b>INBOX / RAW</b><span>sin clasificar · original inmutable</span></div>
+          <div class="node"><b>CRON</b><span>cada 60 min: sidecar + nota</span></div>
+          <div class="node"><b>NOTAS</b><span>knowledge · projects · logs</span></div>
+          <div class="node"><b>SALIDA</b><span>Discord · PDF · git</span></div>
+        </div>
+      </div>
+      <p class="meta" style="color:var(--dim)">El mismo patrón en todas: <b>entra → se procesa → se documenta → se notifica</b>. Cambia la fuente y el destino, no la arquitectura.</p>
+    </section>
+
+    <section class="block" id="tabla">
+      <div class="sec-head"><h2>Inventario: qué hay conectado de verdad</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Conexión</th><th>Dirección</th><th>Qué hace exactamente</th><th>Dónde acaba</th><th>En escena</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Bot de Discord</b><br><span class="meta">gateway + 3 canales + parche de inbox</span></td>
+              <td><span class="io in">entra</span></td>
+              <td>Mandas un mensaje desde el móvil; el gateway lo escribe como archivo, sin pasar por el agente y sin gastar tokens.</td>
+              <td><code>00-inbox/unprocessed/</code></td>
+              <td><b style="color:var(--green)">Sí: la demo</b></td>
+            </tr>
+            <tr>
+              <td><b>Discord (avisos)</b></td>
+              <td><span class="io out">sale</span></td>
+              <td>Resúmenes y notificaciones del sistema al canal.</td>
+              <td>Canal de Discord</td>
+              <td>Solo se nombra</td>
+            </tr>
+            <tr>
+              <td><b>Instagram (reels)</b></td>
+              <td><span class="io in">entra</span></td>
+              <td>Guardas un reel; se descarga con <code>yt-dlp</code> y se transcribe. No se publica desde el vault.</td>
+              <td><code>00-raw/articles/instagram-reels/</code></td>
+              <td>Solo se nombra</td>
+            </tr>
+            <tr>
+              <td><b>Web, PDF y vídeo</b></td>
+              <td><span class="io in">entra</span></td>
+              <td>Extracción de páginas, OCR de PDFs y descarga de vídeo; cada fuente deja su sidecar.</td>
+              <td><code>00-raw/</code> + <code>*.meta.yaml</code></td>
+              <td>Solo se nombra</td>
+            </tr>
+            <tr>
+              <td><b>Cron <code>brain-raw-ingest</code></b></td>
+              <td><span class="io proc">procesa</span></td>
+              <td>Cada 60 minutos: <code>brain-scan.py</code> detecta fuentes nuevas y <code>brain-extract.py</code> genera sidecar y nota. 149 ejecuciones.</td>
+              <td><code>00-raw/</code> → <code>01-knowledge/</code></td>
+              <td>Solo se nombra (o el sidecar si sobra tiempo)</td>
+            </tr>
+            <tr>
+              <td><b>n8n</b></td>
+              <td><span class="io proc">procesa</span></td>
+              <td>Flujos de proyecto, no del vault entero. El caso vivo es Atlantic Airlines.</td>
+              <td><code>02-projects/</code></td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td><b>Git</b></td>
+              <td><span class="io out">sale</span></td>
+              <td>Commit local al cerrar sesión. 430 commits, sin remoto: versiona, no hace backup.</td>
+              <td>Repositorio del vault</td>
+              <td>Se nombra</td>
+            </tr>
+            <tr>
+              <td><b>Obsidian</b></td>
+              <td><span class="io proc">interfaz</span></td>
+              <td>Grafo, canvas, búsqueda y edición a mano. Sin plugins de comunidad.</td>
+              <td>Todo el vault</td>
+              <td>Sí: el recorrido de carpetas</td>
+            </tr>
+            <tr>
+              <td><b>Spotify</b></td>
+              <td><span class="io in">entra</span> <span class="io out">controla</span></td>
+              <td>Playlists que se analizan y acaban en notas; control de reproducción desde el agente.</td>
+              <td><code>01-knowledge/</code></td>
+              <td>Anécdota, si sobra</td>
+            </tr>
+            <tr>
+              <td><b>Servidor de Minecraft</b></td>
+              <td><span class="io out">controla</span></td>
+              <td>Arranque y parada desde Discord, con aviso y backup.</td>
+              <td><code>02-projects/minecraft-server</code></td>
+              <td>No: es otra charla</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta" style="color:var(--dim);margin-top:8px">Direcciones: <span class="io in">entra</span> añade información · <span class="io proc">procesa</span> la transforma · <span class="io out">sale</span> la devuelve o la versiona.</p>
+    </section>
+
+    <section class="block" id="una-vs-tres">
+      <div class="sec-head"><h2>Qué demuestras y qué solo nombras</h2></div>
+      <div class="split">
+        <div class="card hl"><span class="k">En vivo · 40 s</span>
+          <h3>Discord como entrada</h3>
+          <p>Es la única que necesita demo porque es la única que responde a la pregunta “¿cómo entra algo sin que tú abras un editor?”. Móvil, mensaje, carpeta, sesión nueva.</p>
+          <p style="color:var(--green);font-size:.85rem">Si funciona, has probado captura + persistencia + lectura.</p>
+        </div>
+        <div class="card"><span class="k">Nombradas · 20 s</span>
+          <h3>Instagram, cron, git</h3>
+          <p>Instagram demuestra que el sistema se alimenta de donde ya consumes; el cron, que se procesa solo; git, que hay historial y se puede deshacer.</p>
+          <p style="color:var(--amber);font-size:.85rem">Nunca las enseñes a la vez: tres ventanas en 20 s es ruido.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="patron">
+      <div class="sec-head"><h2>El patrón, en cuatro verbos</h2></div>
+      <div class="grid g2">
+        <div class="card"><span class="k">01</span><h3>Entra</h3>
+          <p>Una idea, un reel, un PDF. Siempre a un sitio concreto y con el mínimo de decisiones: si dudas, va a inbox.</p></div>
+        <div class="card"><span class="k">02</span><h3>Se procesa</h3>
+          <p>El cron o una skill lo convierten en nota con cabecera, enlaces y sidecar. La fuente original no se toca.</p></div>
+        <div class="card"><span class="k">03</span><h3>Se documenta</h3>
+          <p>La nota se enlaza, el log registra la decisión y el índice se actualiza. Sin esto, el sistema no aprende.</p></div>
+        <div class="card"><span class="k">04</span><h3>Se notifica</h3>
+          <p>Un aviso a Discord, un commit, un PDF. La información vuelve a ti o a otro agente; el disco no es un pozo.</p></div>
+      </div>
+      <div class="callout good" style="margin-top:12px">
+        <strong>La frase que se llevan los técnicos:</strong> “Cambia la fuente y el destino, no la arquitectura”. Es la diferencia entre tener diez integraciones y tener un sistema.
+      </div>
+    </section>
+
+    <section class="block" id="veinte-segundos">
+      <div class="sec-head"><h2>Cómo contarlo en 20 segundos</h2></div>
+      <div class="script">
+        <div class="script-body">
+          <p class="say" id="say-conexiones-corto">Entra por Discord desde el móvil, por Instagram cuando guardo un reel, o por un PDF que dejo en raw. Un cron lo convierte en notas cada hora. Y sale por Discord, en un PDF o en un commit. Cuatro pasos siempre: entra, se procesa, se documenta, se notifica.</p>
+          <div class="screen">Úsalo si el bloque de conexiones se alarga y necesitas recuperar 20 segundos.</div>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-conexiones-corto">Copiar</button>
+          <span class="grow">No menciones herramientas que no vayas a defender si te preguntan.</span>
+          <a href="guion.html#conexiones">Volver al guion →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="preguntas">
+      <div class="sec-head"><h2>Si te preguntan por una conexión</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Pregunta</th><th>Respuesta corta</th></tr></thead>
+          <tbody>
+            <tr><td>“¿Y si el bot se cae en directo?”</td><td>“El mensaje sigue en Discord; lo copio a mano. La conexión es comodidad, no dependencia.” Y pasas al plan B.</td></tr>
+            <tr><td>“¿Instagram publica solo?”</td><td>“No. Hoy es una fuente: descargo y transcribo. Publicar sería otra conexión de salida, con el mismo patrón.”</td></tr>
+            <tr><td>“¿Por qué no conectas el correo?”</td><td>“No está conectado. Se podría, pero cada boca nueva hay que mantenerla; prefiero pocas y vivas.”</td></tr>
+            <tr><td>“¿El cron no te rompe las notas?”</td><td>“Raw es inmutable, cada fuente deja sidecar y todo va a git. Si algo sale mal, se ve en el diff.”</td></tr>
+            <tr><td>“¿Cuántas automatizaciones tienes?”</td><td>“Un cron propio, el gateway de Discord, un plugin de Spotify y flujos n8n de proyecto. No docenas: las que uso.”</td></tr>
+            <tr><td>“¿Todo esto es Obsidian?”</td><td>“Obsidian es la interfaz. El sistema es la carpeta, el contrato y las conexiones; funciona aunque cambies de app.”</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="no-contar">
+      <div class="sec-head"><h2>Lo que no se enseña</h2></div>
+      <div class="grid g2">
+        <div class="card"><span class="k">Credenciales</span><h3>El archivo de cookies de Instagram</h3>
+          <p>Es una credencial, no un dato curioso. No lo abras, no lo nombres y no lo enseñes en el explorador.</p></div>
+        <div class="card"><span class="k">Ruido</span><h3>IDs de canales y rutas absolutas</h3>
+          <p>No aportan, envejecen mal y distraen. “El canal de inbox” se entiende mejor que un número de dieciocho dígitos.</p></div>
+        <div class="card"><span class="k">Alcance</span><h3>n8n y Minecraft como si fueran el tema</h3>
+          <p>Son pruebas de amplitud, no el argumento. Una línea y sigues; si engancha, lo dejas para preguntas.</p></div>
+        <div class="card"><span class="k">Promesas</span><h3>“Esto se conectaría con cualquier cosa”</h3>
+          <p>Con el mismo patrón, sí; hoy, no. Di lo que está conectado, no lo que cabría conectar.</p></div>
+      </div>
+    </section>
+
+    <p class="footer">Fuentes: <code>03-identity/agent-portability.md</code> (inventario del 21/11/2026), <code>hermes-bootstrap/config.yaml</code>, <code>04-skills/tools-catalog.md</code>, <code>04-skills/index.md</code>, <code>02-projects/atlantic-airlines-discord-automation.md</code> y el árbol de <code>00-raw/</code>. Si una conexión no aparece aquí, no la anuncies.</p>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

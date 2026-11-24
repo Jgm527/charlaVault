@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charla · Banco de opciones</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="progress"></div>
+<div class="layout">
+  <aside>
+    <div class="brand">
+      <div class="logo">M</div>
+      <div><h1>Memoria externa</h1><small>Lightning talk · 5 min</small></div>
+    </div>
+    <p class="side-meta">Elige y compara<br>Se guarda en tu navegador</p>
+    <nav>
+      <a href="index.html"><span class="num">00</span>Portada</a>
+      <a href="guion.html"><span class="num">01</span>Guion 5:00</a>
+      <a class="active" href="opciones.html"><span class="num">02</span>Opciones</a>
+      <a href="conexiones.html"><span class="num">03</span>Conexiones</a>
+      <a href="demo.html"><span class="num">04</span>Demo</a>
+      <a href="referencia.html"><span class="num">05</span>Referencia</a>
+    </nav>
+    <div class="side-foot">
+      <a href="#hooks">Hooks</a> · <a href="#vault">Vault</a> · <a href="#obsidian">Obsidian</a><br>
+      <a href="#recorridos">Recorridos</a> · <a href="#casos">Casos de uso</a><br>
+      <a href="#conexiones">Conexiones</a> · <a href="#cierres">Cierres</a>
+    </div>
+  </aside>
+
+  <main>
+    <header class="page">
+      <div class="kicker">02 · Opciones</div>
+      <h2>Todo lo que puedes decir, para elegir</h2>
+      <p class="lead">Cada bloque tiene varias versiones. Marca las que te encajen: se guardan en este navegador y puedes filtrar para ver solo tu selección. Las marcadas como <span class="tag g">recomendada</span> son las del guion.</p>
+    </header>
+
+    <div class="selbar">
+      <span class="grow"><b id="selCount">0</b> elegidas · se guardan en este navegador</span>
+      <button class="tool" id="onlySel" aria-pressed="false">Ver solo elegidas</button>
+    </div>
+
+    <!-- ============ HOOKS ============ -->
+    <section class="block" id="hooks">
+      <div class="sec-head"><h2>1 · Hooks de apertura</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">A</span><span class="tag g">en el guion</span><span class="tag w">nuevo</span>
+          <strong>Las 2 de la mañana</strong><button class="pick" data-opt="hook-2am">Elegir</button></div>
+        <p>“Son las dos de la mañana. Llevas cuatro horas con una funcionalidad, por fin funciona… y el chat se para: contexto agotado. Abres otra conversación, otro modelo, y te toca explicar el proyecto entero otra vez: qué hace, qué decidiste, qué probaste. ¿A quién no le ha pasado?”</p>
+        <p class="why"><b>Por qué funciona:</b> escena concreta, dolor compartido y cero jerga. La solución no se anuncia: se cuenta después, cuando el público ya asiente. <b>Riesgo:</b> si te alargas en la anécdota, te come el bloque del vault.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">B</span>
+          <strong>La amnesia</strong><button class="pick" data-opt="hook-a">Elegir</button></div>
+        <p>“Cada mañana abres un chat nuevo y la IA no se acuerda de ti. Ni de ayer, ni de tu proyecto, ni de la decisión del martes. No es culpa del modelo: está diseñado así. La conversación es el único sitio donde vive el contexto, y se borra.”</p>
+        <p class="why"><b>Por qué funciona:</b> todo el mundo lo ha vivido. No requiere contexto previo y presenta el problema antes de la solución.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">C</span><strong>El experimento</strong>
+          <button class="pick" data-opt="hook-b">Elegir</button></div>
+        <p>“Probad esto: cerrad el chat, abrid otro y preguntadle qué hablábamos ayer. No lo sabe. Y no es un bug: es el diseño.”</p>
+        <p class="why"><b>Por qué funciona:</b> convierte al público en sujeto del experimento. <b>Riesgo:</b> en una sala grande nadie lo va a hacer de verdad.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">D</span><strong>La cifra seca</strong>
+          <button class="pick" data-opt="hook-c">Elegir</button></div>
+        <p>“Seis mil novecientas notas. Siete mil cuatrocientas fuentes. Cuatrocientos treinta commits. Todo eso es la memoria de una IA que no recuerda nada entre conversaciones.”</p>
+        <p class="why"><b>Por qué funciona:</b> el contraste número/enunciado genera la pregunta sola. <b>Riesgo:</b> si el público es no técnico, los commits no significan nada.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">E</span><strong>La pregunta sobre tu memoria</strong>
+          <button class="pick" data-opt="hook-d">Elegir</button></div>
+        <p>“¿Dónde vive tu memoria cuando cambias de portátil? La mía, en un disco que cabe en un bolsillo.”</p>
+        <p class="why"><b>Por qué funciona:</b> desplaza el foco de la IA a la persona. Buen gancho si el público no es solo técnico.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">F</span><strong>La confesión</strong>
+          <button class="pick" data-opt="hook-e">Elegir</button></div>
+        <p>“Tengo un problema: le cuento cosas a una IA y al día siguiente se le han olvidado. Así que le puse un disco.”</p>
+        <p class="why"><b>Por qué funciona:</b> humilde y breve; te pone del lado del público. <b>Riesgo:</b> resta autoridad si la charla es en un contexto formal.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">G</span><strong>El contraste económico</strong>
+          <button class="pick" data-opt="hook-f">Elegir</button></div>
+        <p>“Un modelo de diez dólares al mes que se acuerda mejor que uno de doscientos. La diferencia no está en el modelo.”</p>
+        <p class="why"><b>Por qué funciona:</b> rompe la intuición “más caro = mejor”. Muy bueno si hay alguien del sector en la sala.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">H</span><strong>La escena de las 4:00</strong>
+          <button class="pick" data-opt="hook-g">Elegir</button></div>
+        <p>“Son las cuatro de la mañana y mi agente borra todo lo que sabe de mí. A propósito. Y no pasa nada.”</p>
+        <p class="why"><b>Por qué funciona:</b> imagen rara que obliga a escuchar la explicación. <b>Riesgo:</b> suena a que has perdido datos; hay que resolverlo en la frase siguiente.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">I</span><strong>La negación</strong>
+          <button class="pick" data-opt="hook-h">Elegir</button></div>
+        <p>“Esto no va de Obsidian. Va de que una IA pueda recordar mañana lo que aprendió hoy.”</p>
+        <p class="why"><b>Por qué funciona:</b> desactiva la objeción “otro charlando de su app de notas”. <b>Riesgo:</b> empezar negando es más débil que empezar afirmando.</p>
+      </div>
+    </section>
+
+    <!-- ============ DEFINICIONES ============ -->
+    <section class="block" id="definiciones">
+      <div class="sec-head"><h2>2 · Cómo definir memoria externa</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">A</span><span class="tag g">en el guion</span>
+          <strong>Tres capas y el problema de escribir</strong><button class="pick" data-opt="def-a">Elegir</button></div>
+        <p>“Guardar conocimiento fuera del modelo, en un formato que el agente pueda leer, buscar y escribir. Leer es fácil; el problema de ingeniería es escribir: qué se guarda, dónde, con qué formato y cuándo.”</p>
+        <p class="why"><b>Por qué funciona:</b> define y a la vez plantea el reto. Evita que la charla parezca “tengo un buscador”.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">B</span><strong>El sistema de archivos con contrato</strong>
+          <button class="pick" data-opt="def-b">Elegir</button></div>
+        <p>“Memoria externa es un sistema de archivos con un contrato encima. Sin el contrato son archivos; con él, un agente puede escribir hoy y encontrar mañana.”</p>
+        <p class="why"><b>Por qué funciona:</b> para público técnico, “contrato” explica todo en dos palabras. <b>Riesgo:</b> abstracto para audiencia no técnica.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">C</span><strong>La analogía del compañero</strong>
+          <button class="pick" data-opt="def-c">Elegir</button></div>
+        <p>“Un chat es un desconocido muy listo al que le repites tu vida cada mañana. Con memoria externa es un compañero de piso: sabe dónde está todo aunque no se acuerde de la conversación de ayer.”</p>
+        <p class="why"><b>Por qué funciona:</b> humano y memorable. <b>Riesgo:</b> se puede quedar en anécdota si no vuelves al mecanismo.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">D</span><strong>Anticipar la objeción RAG</strong>
+          <button class="pick" data-opt="def-d">Elegir</button></div>
+        <p>“Esto no es un vector store. RAG resuelve leer; aquí el trabajo está en escribir: qué se guarda, con qué formato y con qué reglas. El índice lo mantengo curado, no generado.”</p>
+        <p class="why"><b>Por qué funciona:</b> desarma al técnico que ya está pensando “esto es RAG”. <b>Riesgo:</b> usar “RAG” introduce jerga que el resto no necesita.</p>
+      </div>
+    </section>
+
+    <!-- ============ METÁFORAS ============ -->
+    <section class="block" id="metaforas">
+      <div class="sec-head"><h2>3 · Metáforas (una por bloque, no todas)</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">1</span><span class="tag g">en el guion</span>
+          <strong>El disco de arranque</strong><button class="pick" data-opt="met-1">Elegir</button></div>
+        <p>“Es el disco de arranque de mi identidad digital: la única pieza que necesita el agente para reconstruirse en otro PC.”</p>
+        <p class="why"><b>Sirve para:</b> portabilidad y bootstrap. <b>Cuidado:</b> “identidad digital” suena grandilocuente; dilo sin énfasis.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">2</span><strong>Memento</strong>
+          <button class="pick" data-opt="met-2">Elegir</button></div>
+        <p>“El protagonista de Memento no puede formar recuerdos: se tatúa pistas y hace fotos. Esto es lo mismo, pero las pistas las escribe el agente.”</p>
+        <p class="why"><b>Sirve para:</b> explicar por qué escribe el agente y no tú. <b>Cuidado:</b> si nadie ha visto la película, explica la premisa en una frase.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">3</span><strong>La despensa y la nevera</strong>
+          <button class="pick" data-opt="met-3">Elegir</button></div>
+        <p>“El contexto es la nevera: lo que cabe. El disco es la despensa: no lo ves, pero está etiquetado y bajas a por ello cuando lo necesitas.”</p>
+        <p class="why"><b>Sirve para:</b> distinguir contexto de almacén sin tecnicismos. <b>Cuidado:</b> no abuses de la metáfora alimentaria; una frase y sigues.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">4</span><strong>El cuaderno del detective</strong>
+          <button class="pick" data-opt="met-4">Elegir</button></div>
+        <p>“No guarda conclusiones: guarda pistas con fecha y de dónde salieron. La conclusión se rehace cada vez, pero las pistas no se pierden.”</p>
+        <p class="why"><b>Sirve para:</b> justificar fuentes inmutables y frontmatter. Es la metáfora más fiel al sistema.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">5</span><strong>La biblioteca y la charla</strong>
+          <button class="pick" data-opt="met-5">Elegir</button></div>
+        <p>“Un chat es una charla; esto es la biblioteca. La charla se olvida, la biblioteca se ordena.”</p>
+        <p class="why"><b>Sirve para:</b> cierres y transiciones. Muy corta, casi un eslogan.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">6</span><strong>El peaje de cada sesión</strong>
+          <button class="pick" data-opt="met-6">Elegir</button></div>
+        <p>“Cada sesión paga un peaje de lectura: cuatro pasos antes de responder. Es barato porque el índice está ordenado; sin él, el peaje sería leer siete mil archivos.”</p>
+        <p class="why"><b>Sirve para:</b> explicar por qué existe `index.md`. <b>Cuidado:</b> “peaje” tiene connotación negativa; úsalo como coste consciente.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">7</span><strong>La casa y el trastero</strong>
+          <button class="pick" data-opt="met-7">Elegir</button></div>
+        <p>“La mesa es el contexto: ahí solo cabe lo que estás usando. El trastero es el vault: tiene etiquetas, y sabes a qué caja bajar.”</p>
+        <p class="why"><b>Sirve para:</b> audiencia no técnica, en una frase.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">8</span><strong>El sistema operativo personal</strong>
+          <button class="pick" data-opt="met-8">Elegir</button></div>
+        <p>“No es una bóveda de notas: es un sistema operativo personal. Captura, procesa, almacena y expone servicios.”</p>
+        <p class="why"><b>Sirve para:</b> el cierre, cuando ya has enseñado las piezas. <b>Cuidado:</b> al principio es pretencioso; al final está ganado.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">9</span><strong>La cinta de correr</strong>
+          <button class="pick" data-opt="met-9">Elegir</button></div>
+        <p>“El agente puede correr todo lo que quieras sobre la cinta; si no hay suelo debajo, no avanza. El disco es el suelo.”</p>
+        <p class="why"><b>Sirve para:</b> explicar por qué más herramientas no arreglan la falta de memoria.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">10</span><strong>El git de tu cabeza</strong>
+          <button class="pick" data-opt="met-10">Elegir</button></div>
+        <p>“No versiona tus recuerdos, pero al menos los guarda con fecha y con la posibilidad de volver atrás.”</p>
+        <p class="why"><b>Sirve para:</b> conectar con el público técnico en una línea. <b>Cuidado:</b> el repo no tiene remoto; no lo vendas como backup.</p>
+      </div>
+    </section>
+
+    <!-- ============ RECORRIDOS ============ -->
+    <section class="block" id="recorridos">
+      <div class="sec-head"><h2>4 · Recorrido de las carpetas</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">A</span><span class="tag g">en el guion</span>
+          <strong>Tres preguntas</strong><button class="pick" data-opt="rec-a">Elegir</button></div>
+        <p>“¿Dónde entra lo que no sé? ¿Dónde vive lo que ya sé? ¿Qué debe saber de mí?” — y cada respuesta es una carpeta.</p>
+        <p class="why"><b>Por qué funciona:</b> el público retiene tres preguntas, no ocho nombres. <b>Riesgo:</b> hay que respetar el tiempo: 18 s por pregunta.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">B</span><strong>El viaje de una idea</strong>
+          <button class="pick" data-opt="rec-b">Elegir</button></div>
+        <p>“Esto entra aquí, se convierte en esto, se enlaza con esto y termina citado aquí.” — un solo archivo recorriendo cuatro carpetas.</p>
+        <p class="why"><b>Por qué funciona:</b> es la única versión que no parece un índice. <b>Riesgo:</b> necesita un ejemplo real y preparado.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">C</span><strong>El mapa primero</strong>
+          <button class="pick" data-opt="rec-c">Elegir</button></div>
+        <p>“Todo lo que necesito saber está en este índice de setecientas líneas; ahora abro la carpeta que toca.”</p>
+        <p class="why"><b>Por qué funciona:</b> enseña el índice, que es la pieza que evita duplicados. <b>Riesgo:</b> un índice de 700 líneas no se lee en pantalla; impresiona y aburre a partes iguales.</p>
+      </div>
+    </section>
+
+    <!-- ============ PROTOCOLO ============ -->
+    <section class="block" id="protocolo">
+      <div class="sec-head"><h2>5 · Cómo explicar el arranque y el cierre</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">A</span><span class="tag g">en el guion</span>
+          <strong>4 al entrar, 9 al salir</strong><button class="pick" data-opt="pro-a">Elegir</button></div>
+        <p>“Al arrancar hace cuatro cosas. Al terminar, nueve, y la última es un commit. Siempre.”</p>
+        <p class="why"><b>Por qué funciona:</b> dos números y una columna a cada lado. Es el slide más fácil de recordar.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">B</span><strong>Checklist de despegue y aterrizaje</strong>
+          <button class="pick" data-opt="pro-b">Elegir</button></div>
+        <p>“Un piloto no se fía de la memoria: usa checklist. Mi agente igual: uno para despegar y otro para aterrizar, y el aterrizaje no se da por hecho hasta que está en git.”</p>
+        <p class="why"><b>Por qué funciona:</b> encaja con tu perfil y explica por qué el protocolo es explícito. <b>Riesgo:</b> puede desviar la charla hacia aviación.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">C</span><strong>No recuerda, cumple</strong>
+          <button class="pick" data-opt="pro-c">Elegir</button></div>
+        <p>“No recuerda que tiene un vault: lo tiene escrito en el prompt de identidad, que vive dentro del vault y está versionado. No es memoria, es procedimiento.”</p>
+        <p class="why"><b>Por qué funciona:</b> responde exactamente a la pregunta que todo el mundo tiene. <b>Riesgo:</b> es la versión más honesta y la más seca.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">D</span><strong>La prueba está en el commit</strong>
+          <button class="pick" data-opt="pro-d">Elegir</button></div>
+        <p>“Que el agente diga que ha documentado no vale nada. Vale que haya un commit. Eso es lo que separa un ritual de una promesa.”</p>
+        <p class="why"><b>Por qué funciona:</b> muy técnico y muy defendible. <b>Riesgo:</b> excluye a quien no usa git.</p>
+      </div>
+    </section>
+
+    <!-- ============ CICLO ============ -->
+    <section class="block" id="ciclo">
+      <div class="sec-head"><h2>6 · El ciclo completo</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">A</span><span class="tag g">en el guion</span>
+          <strong>El diagrama del vault</strong><button class="pick" data-opt="cic-a">Elegir</button></div>
+        <p>“Entra, se busca, se trabaja, se documenta, se enlaza, se versiona, y queda disponible para la próxima vez.”</p>
+        <p class="why"><b>Por qué funciona:</b> es tu propio diagrama, ya escrito en <code>vault-assisted-workflow.md</code>. No hay metáfora que defender.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">B</span><strong>Interés compuesto</strong>
+          <button class="pick" data-opt="cic-b">Elegir</button></div>
+        <p>“Cada sesión deja un poco más de interés: una nota, un enlace, un log. Al cabo de seis meses no tienes seis meses de chats; tienes un activo.”</p>
+        <p class="why"><b>Por qué funciona:</b> explica el valor acumulado, no el mecanismo. <b>Riesgo:</b> “activo” puede sonar a startup.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">C</span><strong>La vuelta de tuerca</strong>
+          <button class="pick" data-opt="cic-c">Elegir</button></div>
+        <p>“Cada vuelta aprieta la siguiente: lo que documentas hoy es el contexto que no tienes que reconstruir mañana.”</p>
+        <p class="why"><b>Por qué funciona:</b> cierra el bloque con una idea, no con una lista.</p>
+      </div>
+    </section>
+
+    <!-- ============ DEMOS ============ -->
+    <section class="block" id="demo-ops">
+      <div class="sec-head"><h2>7 · Variantes de demo</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">A</span><span class="tag g">en el guion</span>
+          <strong>Móvil → carpeta → sesión nueva</strong><button class="pick" data-opt="dem-a">Elegir</button></div>
+        <p>Mensaje a <code>#inbox</code>, aparece en <code>00-inbox/unprocessed/</code>, y una sesión nueva lo cita.</p>
+        <p class="why"><b>Prueba:</b> persistencia + captura sin fricción. <b>Riesgo:</b> depende del gateway vivo.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">B</span><strong>El antes y el después</strong>
+          <button class="pick" data-opt="dem-b">Elegir</button></div>
+        <p>Preguntas algo que no está en el vault (no lo sabe), lo guardas, y vuelves a preguntar en la misma sesión. Si lo encuentra, es que leyó el archivo, no que lo recordaba.</p>
+        <p class="why"><b>Prueba:</b> lectura en el momento, sin depender de Discord. <b>Riesgo:</b> más fácil de explicar mal.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">C</span><strong>El PDF y el sidecar</strong>
+          <button class="pick" data-opt="dem-c">Elegir</button></div>
+        <p>Dejas un PDF en <code>00-raw</code> y enseñas el sidecar que generó el cron hace una hora, con su nota atómica derivada.</p>
+        <p class="why"><b>Prueba:</b> automatización real sin móvil ni gateway. <b>Riesgo:</b> hay que haberlo ejecutado antes; no es “en vivo”.</p>
+      </div>
+    </section>
+
+    <!-- ============ CONEXIONES ============ -->
+    <section class="block" id="conexiones">
+      <div class="sec-head"><h2>8 · El resto de automatizaciones</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">A</span><span class="tag g">en el guion</span>
+          <strong>Una línea cada una</strong><button class="pick" data-opt="con-a">Elegir</button></div>
+        <p>“Un cron que convierte fuentes en notas; un resumen de noticias a Discord; un servidor de Minecraft que se enciende desde el móvil; una playlist que se convierte en grafo.”</p>
+        <p class="why"><b>Por qué funciona:</b> demuestra amplitud sin robar tiempo. Cuatro ejemplos, cero detalles.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">B</span><strong>El patrón común</strong>
+          <button class="pick" data-opt="con-b">Elegir</button></div>
+        <p>“Todas hacen lo mismo: entra algo, se procesa, se documenta y se notifica. Cambia la fuente y el destino, no la arquitectura.”</p>
+        <p class="why"><b>Por qué funciona:</b> convierte una lista en un principio. Es la frase que se llevan los técnicos.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">C</span><strong>La anécdota de Minecraft</strong>
+          <button class="pick" data-opt="con-c">Elegir</button></div>
+        <p>“El servidor no arranca al encender el PC: se enciende con un comando desde Discord, avisa, hace backup y se apaga solo si no hay nadie.”</p>
+        <p class="why"><b>Por qué funciona:</b> es lo más divertido y lo más fácil de recordar. <b>Riesgo:</b> engancha y te come 30 s que no tienes.</p>
+      </div>
+    </section>
+
+    <!-- ============ CIERRES ============ -->
+    <section class="block" id="cierres">
+      <div class="sec-head"><h2>9 · Cierres</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">A</span><span class="tag g">en el guion</span>
+          <strong>Disco, contrato, disciplina + deuda</strong><button class="pick" data-opt="cie-a">Elegir</button></div>
+        <p>“No es Obsidian: es un disco, un contrato y disciplina de escritura. Y la deuda, para no venderos humo: no tengo remoto de git y hay claves en el historial.”</p>
+        <p class="why"><b>Por qué funciona:</b> resume y se autocrítica. La honestidad compra credibilidad y preguntas.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">B</span><strong>La pregunta devuelta</strong>
+          <button class="pick" data-opt="cie-b">Elegir</button></div>
+        <p>“No os voy a decir que montéis esto. Solo una pregunta: lo que aprendáis mañana con una IA, ¿dónde va a vivir?”</p>
+        <p class="why"><b>Por qué funciona:</b> deja al público pensando en su caso. <b>Riesgo:</b> no cierra la charla, la abre; necesita una pausa larga.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">C</span><strong>La frase del vault</strong>
+          <button class="pick" data-opt="cie-c">Elegir</button></div>
+        <p>“El conocimiento se guarda siempre en el vault, no en la memoria del agente: el vault viaja en el disco, la memoria no.”</p>
+        <p class="why"><b>Por qué funciona:</b> es literalmente tu frase, y suena a principio, no a conclusión. Ideal si citas la fuente.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">D</span><strong>La casa con goteras</strong>
+          <button class="pick" data-opt="cie-d">Elegir</button></div>
+        <p>“Esto no es un producto: es mi casa. Funciona, y tiene goteras. Pero las goteras se arreglan; la amnesia, no.”</p>
+        <p class="why"><b>Por qué funciona:</b> cierra con imagen y honestidad. <b>Riesgo:</b> demasiado informal en un contexto académico.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">E</span><strong>La invitación mínima</strong>
+          <button class="pick" data-opt="cie-e">Elegir</button></div>
+        <p>“No hace falta un sistema como el mío. Empezad por una carpeta y una regla: si no sabes dónde va, va al inbox.”</p>
+        <p class="why"><b>Por qué funciona:</b> da una acción concreta y barata. Muy bueno si el público quiere probar.</p>
+      </div>
+    </section>
+
+    <!-- ============ VAULT Y OBSIDIAN ============ -->
+    <section class="block" id="vault">
+      <div class="sec-head"><h2>10 · ¿Qué es un vault? (cuatro versiones)</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">A</span><span class="tag g">en el guion</span>
+          <strong>La definición de 20 segundos</strong><button class="pick" data-opt="vault-a">Elegir</button></div>
+        <p>“Una carpeta con archivos de texto en Markdown: notas con una cabecera, enlaces entre ellas y nombres que significan algo. No es una base de datos ni un formato propietario: si desaparece la app, los archivos siguen ahí.”</p>
+        <p class="why"><b>Por qué funciona:</b> objeto antes que concepto. El público puede imaginarse la carpeta. <b>Riesgo:</b> parece demasiado simple; la siguiente frase tiene que decir por qué eso le sirve a una IA.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">B</span><strong>La definición por negación</strong>
+          <button class="pick" data-opt="vault-b">Elegir</button></div>
+        <p>“No es una app, no es una base de datos y no es magia: es una carpeta con texto. Lo único especial es el contrato que hay encima.”</p>
+        <p class="why"><b>Por qué funciona:</b> quita tres objeciones de golpe. <b>Riesgo:</b> empezar negando debilita el arranque.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">C</span><strong>La versión técnica</strong>
+          <button class="pick" data-opt="vault-c">Elegir</button></div>
+        <p>“Un sistema de archivos con frontmatter, wikilinks y git. Las notas son unidades atómicas; los enlaces, el índice; el esquema, el contrato.”</p>
+        <p class="why"><b>Por qué funciona:</b> en una sala técnica, ahorra 30 segundos de explicación. <b>Riesgo:</b> si hay alguien no técnico, te pierdes.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">D</span><strong>El cuaderno compartido</strong>
+          <button class="pick" data-opt="vault-d">Elegir</button></div>
+        <p>“Es un cuaderno donde escribimos los dos: yo a mano cuando quiero, la IA cuando termina una sesión. Ninguno tiene que pedir permiso al otro.”</p>
+        <p class="why"><b>Por qué funciona:</b> explica la edición humana y la escrita por el agente en una imagen. <b>Riesgo:</b> “cuaderno” sugiere algo desordenado; añade “con índice”.</p>
+      </div>
+    </section>
+
+    <section class="block" id="obsidian">
+      <div class="sec-head"><h2>11 · Por qué Obsidian (y por qué no otra cosa)</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">A</span><span class="tag g">en el guion</span>
+          <strong>Dos razones: IA y humano</strong><button class="pick" data-opt="obs-a">Elegir</button></div>
+        <p>“Markdown puro y local: la IA escribe archivos, no llama a una API. Y una interfaz para humanos: abro una nota, la corrijo a mano y la enlazo sin programar. La IA y yo editamos el mismo archivo.”</p>
+        <p class="why"><b>Por qué funciona:</b> responde a la pregunta real (“¿por qué esta app?”) con dos criterios, no con una preferencia. <b>Riesgo:</b> suena a anuncio si no añades la consecuencia: cambiar de agente no cambia el disco.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">B</span><strong>El formato es el contrato</strong>
+          <button class="pick" data-opt="obs-b">Elegir</button></div>
+        <p>“Obsidian es el visor; el formato es el contrato. Si mañana desaparece, los <code>.md</code> siguen ahí y cualquier agente los lee igual.”</p>
+        <p class="why"><b>Por qué funciona:</b> desactiva la objeción “te has atado a una app”. <b>Riesgo:</b> minimiza lo que la interfaz sí aporta; no lo digas con desprecio.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">C</span><strong>Por qué no Notion</strong>
+          <button class="pick" data-opt="obs-c">Elegir</button></div>
+        <p>“Notion me daría mejor interfaz y una API, pero el contenido viviría en su nube. Aquí el archivo es mío, el diff es legible y el agente no necesita adaptador.”</p>
+        <p class="why"><b>Por qué funciona:</b> es la comparación que todo el mundo tiene en la cabeza. <b>Riesgo:</b> parece una guerra de herramientas; dilo como decisión, no como juicio.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">D</span><strong>Lo que Obsidian no es</strong>
+          <button class="pick" data-opt="obs-d">Elegir</button></div>
+        <p>“No es la memoria. Es la ventana. La memoria es la carpeta, el contrato y las conexiones; la app solo me deja mirarla y tocarla.”</p>
+        <p class="why"><b>Por qué funciona:</b> separa el tema (memoria externa) de la herramienta (Obsidian). Es la frase que evita que la charla sea “mi app de notas”.</p>
+      </div>
+    </section>
+
+    <section class="block" id="casos">
+      <div class="sec-head"><h2>12 · Casos de uso para el último bloque</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag a">A</span><span class="tag g">en el guion</span>
+          <strong>Tres antes/después</strong><button class="pick" data-opt="cas-a">Elegir</button></div>
+        <p><b>Retomar:</b> abres un proyecto de hace tres meses y están el estado, la decisión y el pendiente. <b>Decidir:</b> preguntas por qué se eligió algo y hay fecha y fuente. <b>Migrar:</b> cambias de portátil o de agente y el disco viaja.</p>
+        <p class="why"><b>Por qué funciona:</b> cada caso es una promesa comprobable, no una característica. El tercero justifica toda la arquitectura. <b>Riesgo:</b> son tres; si vas justo, deja dos.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">B</span><strong>El día después</strong>
+          <button class="pick" data-opt="cas-b">Elegir</button></div>
+        <p>“Martes, nueve de la mañana: abro el log de ayer, sigo el pendiente, el agente ya sabe qué decidí. No he reconstruido nada.”</p>
+        <p class="why"><b>Por qué funciona:</b> narrativa vívida y cotidiana. <b>Riesgo:</b> necesita un ejemplo real y 40 s no dan para un día entero.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">C</span><strong>La prueba de portabilidad</strong>
+          <button class="pick" data-opt="cas-c">Elegir</button></div>
+        <p>“Este disco arranca el mismo agente en otro portátil, con otro modelo y otro proveedor. La memoria no viaja en la conversación: viaja en la carpeta.”</p>
+        <p class="why"><b>Por qué funciona:</b> es la demostración más fuerte de que el sistema no depende del modelo. <b>Riesgo:</b> pide segunda demo o un clip; no cabe de palabra.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">D</span><strong>Lo que no hace</strong>
+          <button class="pick" data-opt="cas-d">Elegir</button></div>
+        <p>“No piensa por mí, no sustituye leer y no se mantiene solo: si no escribo, se vacía. Es un disco, no un cerebro.”</p>
+        <p class="why"><b>Por qué funciona:</b> la honestidad compra credibilidad y evita preguntas hostiles. <b>Riesgo:</b> cerrar en negativo; después necesitas el callback a las 2:00.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">E</span><strong>La pregunta devuelta</strong>
+          <button class="pick" data-opt="cas-e">Elegir</button></div>
+        <p>“No os voy a decir que montéis esto. Solo una pregunta: lo que aprendáis mañana con una IA, ¿dónde va a vivir?”</p>
+        <p class="why"><b>Por qué funciona:</b> deja al público pensando en su caso. <b>Riesgo:</b> no cierra la charla, la abre; necesita pausa y no admite un “gracias” detrás.</p>
+      </div>
+    </section>
+
+    <!-- ============ FRASES ============ -->
+    <section class="block" id="frases">
+      <div class="sec-head"><h2>13 · Frases sueltas para robar</h2></div>
+      <div class="grid g2">
+        <div class="card"><p>“Leer es la mitad fácil. El trabajo es escribir.”</p></div>
+        <div class="card"><p>“Más contexto no es memoria: es una prórroga.”</p></div>
+        <div class="card"><p>“El modelo olvida; el disco no.”</p></div>
+        <div class="card"><p>“No es un prompt más largo: es un sitio donde escribir.”</p></div>
+        <div class="card"><p>“Documentar no es burocracia: es lo que hace que la próxima sesión empiece en el minuto cinco, no en el cero.”</p></div>
+        <div class="card"><p>“Un sistema personal también tiene deuda técnica.”</p></div>
+        <div class="card"><p>“Si no está en el disco, no ha pasado.”</p></div>
+        <div class="card"><p>“La memoria no se pide: se escribe.”</p></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="sec-head"><h2>Tres combinaciones que funcionan</h2></div>
+      <div class="grid g3">
+        <div class="card"><span class="k">Técnica</span><h3>F + A + D + C + A</h3>
+          <p>Hook económico, definición RAG, recorrido del mapa, protocolo “no recuerda, cumple”, cierre con deuda.</p></div>
+        <div class="card"><span class="k">Divulgativa</span><h3>A + C + A + B + D</h3>
+          <p>Amnesia, definición del compañero, tres preguntas, checklist de avión, cierre de la casa con goteras.</p></div>
+        <div class="card"><span class="k">Con demo larga</span><h3>G + A + A + B + E</h3>
+          <p>Escena de las 4:00, definición breve, tres preguntas, demo del antes/después, invitación mínima.</p></div>
+      </div>
+    </section>
+
+    <p class="footer">La selección se guarda en <code>localStorage</code> de este navegador. No se envía a ningún sitio.</p>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charla · Guion literal 5:00</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="progress"></div>
+<div class="layout">
+  <aside>
+    <div class="brand">
+      <div class="logo">M</div>
+      <div><h1>Memoria externa</h1><small>Lightning talk · 5 min</small></div>
+    </div>
+    <p class="side-meta">Guion literal · versión 2<br>~590 palabras habladas</p>
+    <nav>
+      <a href="index.html"><span class="num">00</span>Portada</a>
+      <a class="active" href="guion.html"><span class="num">01</span>Guion 5:00</a>
+      <a href="opciones.html"><span class="num">02</span>Opciones</a>
+      <a href="conexiones.html"><span class="num">03</span>Conexiones</a>
+      <a href="demo.html"><span class="num">04</span>Demo</a>
+      <a href="referencia.html"><span class="num">05</span>Referencia</a>
+    </nav>
+    <div class="side-foot">
+      Demo dentro del bloque 5.<br>
+      Variantes en <a href="opciones.html">Opciones</a>.
+    </div>
+  </aside>
+
+  <main>
+    <header class="page">
+      <div class="kicker">01 · Guion</div>
+      <h2>La versión que puedes decir tal cual</h2>
+      <p class="lead">Siete bloques, ~590 palabras y 40 segundos de demo. El texto va medido para 145 palabras por minuto; las pausas y la demo ocupan el resto. Cada bloque lleva su slide, lo que se ve y qué recortar si te pasas.</p>
+    </header>
+
+    <div class="callout warn">
+      <strong>Antes de empezar:</strong> ensáyalo dos veces con cronómetro. Si a las 2:25 no estás entrando en conexiones, recorta la cuarta carpeta (skills) y la última frase del esquema. La demo no se recorta: es la prueba de que el disco funciona.
+    </div>
+
+    <section class="block" id="hook">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">0:00–0:35</span>
+          <h3>1 · Hook: las 2 de la mañana</h3>
+          <span class="meta">~86 palabras · 35 s</span>
+        </div>
+        <div class="script-body">
+          <p class="say" id="say-hook">Son las dos de la mañana. Llevas cuatro horas con una funcionalidad, por fin funciona… y el chat se para: contexto agotado. Abres otra conversación, otro modelo, y te toca explicar el proyecto entero otra vez: qué hace, qué decidiste, qué probaste. <span class="act">[pausa]</span> ¿A quién no le ha pasado? El problema no es el modelo: es que la memoria del proyecto vivía en la conversación. Y la conversación se borra. La solución no es un modelo más grande. Es un sitio donde la IA pueda escribir.</p>
+          <div class="screen">EN PANTALLA: <b>“2:00 AM · contexto agotado”</b> y, debajo, en gris: “el proyecto vivía en la conversación”.</div>
+          <div class="slide">
+            <div class="sl">01 · apertura</div>
+            <div class="st">2:00 AM.<br>Se agotó el contexto.</div>
+            <div class="ss">El proyecto vivía en la conversación.<br>Y la conversación se borra.</div>
+          </div>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-hook">Copiar</button>
+          <span class="grow">No expliques todavía qué es un vault: deja que el público asienta.</span>
+          <a href="opciones.html#hooks">9 hooks alternativos →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="vault">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">0:35–1:05</span>
+          <h3>2 · Qué es un vault</h3>
+          <span class="meta">~72 palabras · 30 s</span>
+        </div>
+        <div class="script-body">
+          <p class="say" id="say-vault">La solución tiene un nombre aburrido: memoria externa. En mi caso, un vault. ¿Y qué es un vault? Una carpeta. Dentro, archivos de texto en Markdown: notas con una cabecera, enlaces entre ellas y nombres que significan algo. No es una base de datos ni un formato propietario: si mañana desaparece la aplicación, los archivos siguen ahí. Y eso es lo que lo hace útil para una IA: Markdown es texto plano; cualquier modelo lo lee, lo escribe y lo busca sin adaptadores.</p>
+          <div class="screen">EN PANTALLA: tres palabras grandes — <b>carpeta · Markdown · enlaces</b> — y una tachada: <s>base de datos</s>.</div>
+          <div class="slide">
+            <div class="sl">02 · el objeto</div>
+            <div class="st">Un vault es una carpeta.</div>
+            <div class="ss">Markdown · notas con cabecera · enlaces<br>Texto plano. Sin base de datos. Sin formato propietario.</div>
+          </div>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-vault">Copiar</button>
+          <span class="grow">Si el público es técnico, añade “y está en git” al final. Si no, no lo menciones aún.</span>
+          <a href="opciones.html#vault">5 formas de explicarlo →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="obsidian">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">1:05–1:30</span>
+          <h3>3 · Por qué Obsidian</h3>
+          <span class="meta">~62 palabras · 25 s</span>
+        </div>
+        <div class="script-body">
+          <p class="say" id="say-obsidian">¿Y por qué Obsidian y no otra cosa? Dos razones, ninguna mágica. Una: trabaja con Markdown puro y en local; la IA escribe archivos, no llama a una API. Dos: la interfaz es para humanos. Puedo abrir una nota, corregirla a mano y enlazarla sin saber programar. La IA y yo editamos el mismo archivo. Si mañana cambio de agente, el disco sigue igual.</p>
+          <div class="screen">EN PANTALLA: dos columnas — <b>PARA LA IA</b>: Markdown local, archivos; <b>PARA MÍ</b>: editar a mano, enlazar, ver el grafo.</div>
+          <div class="slide">
+            <div class="sl">03 · la herramienta</div>
+            <div class="row">
+              <div class="col"><b>Para la IA</b><span>Markdown local · escribe archivos, no llama a una API</span></div>
+              <div class="col"><b>Para mí</b><span>editar a mano · enlazar · ver el grafo</span></div>
+            </div>
+            <div class="ss">El mismo archivo para los dos.</div>
+          </div>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-obsidian">Copiar</button>
+          <span class="grow">No defiendas Obsidian como producto: defiéndelo como formato editable.</span>
+          <a href="opciones.html#obsidian">4 formas de justificarlo →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="carpetas">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">1:30–2:25</span>
+          <h3>4 · Las siete carpetas</h3>
+          <span class="meta">~120 palabras · 55 s</span>
+        </div>
+        <div class="script-body">
+          <div id="say-carpetas">
+          <p class="say">Y así está organizado. Siete carpetas, cada una con un trabajo. <span class="act">[abre el explorador]</span></p>
+          <p class="say">Inbox: lo que entra sin clasificar. Cero fricción. Raw: las fuentes originales, inmutables; no se editan, se marcan como procesadas. Knowledge: conceptos atómicos, con cabecera y al menos dos enlaces; es la red. Projects: cada proyecto con su estado, sus decisiones y lo siguiente. Identity: quién soy y cómo debe comportarse el agente; se lee al arrancar. Skills: procedimientos reutilizables, el cómo se hace. Logs: qué pasó en cada sesión, con fecha.</p>
+          <p class="say">Y dos archivos que lo sostienen todo: el esquema, que es el contrato, y el índice, que es el mapa.</p>
+          </div>
+          <div class="screen">EN PANTALLA: siete filas, no un árbol. Cada fila: nombre + una frase de rol. Al final, <code>SCHEMA.md</code> e <code>index.md</code>.</div>
+          <div class="slide">
+            <div class="sl">04 · el mapa</div>
+            <div class="ss" style="line-height:1.9">
+              <b>00-inbox</b> lo que entra sin clasificar<br>
+              <b>00-raw</b> fuentes originales, inmutables<br>
+              <b>01-knowledge</b> conceptos atómicos y enlazados<br>
+              <b>02-projects</b> estado, decisiones, siguiente paso<br>
+              <b>03-identity</b> quién soy y cómo actúa el agente<br>
+              <b>04-skills</b> procedimientos reutilizables<br>
+              <b>05-logs</b> qué pasó, con fecha
+            </div>
+            <div class="ss" style="color:var(--dim)">+ SCHEMA.md (contrato) · index.md (mapa)</div>
+          </div>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-carpetas">Copiar</button>
+          <span class="grow">Siete carpetas en 55 s: no te pares a explicar ninguna. Si te pasas, quita skills.</span>
+          <a href="opciones.html#recorridos">7 recorridos alternativos →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="conexiones">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">2:25–3:55</span>
+          <h3>5 · Conexiones, con la demo dentro</h3>
+          <span class="meta">~120 palabras + 40 s de demo · 90 s</span>
+        </div>
+        <div class="script-body">
+          <div id="say-conexiones">
+          <p class="say">Pero un vault parado es un archivador. Lo que lo convierte en memoria es cómo entra y cómo sale la información.</p>
+          <p class="say">Entra por Discord: mando una idea desde el móvil y el bot la deja en inbox. Eso es lo que voy a enseñar ahora.</p>
+          <p class="say"><span class="act">[DEMO — 40 s: móvil → enviar → refrescar la carpeta → sesión nueva → “¿qué idea te mandé hace un rato por Discord?”]</span></p>
+          <p class="say">Entra también de Instagram: guardo un reel, lo descargo y se transcribe a raw. Entra una web, un PDF, un vídeo. Y lo que entra se procesa: un cron cada hora convierte fuentes en notas. Eso no lo hago yo.</p>
+          <p class="say">Sale por el camino inverso: un resumen a Discord, un borrador, un PDF para presentar. Y todo se versiona en git: cuatrocientos treinta commits. El disco no se actualiza solo, pero se puede deshacer.</p>
+          <p class="say">El patrón es siempre el mismo: entra, se procesa, se documenta, se notifica. Cambia la fuente y el destino, no la arquitectura.</p>
+          </div>
+          <div class="screen">EN PANTALLA durante el bloque: el mapa <b>ENTRADA → INBOX → CRON → NOTAS → SALIDA</b>, con Discord resaltado. Durante la demo, solo la frase: <b>“El modelo no recordaba nada. El disco sí.”</b></div>
+          <div class="slide">
+            <div class="sl">05 · las conexiones</div>
+            <div class="ss" style="font-family:var(--mono);font-size:.7rem;color:#dff3ff;line-height:1.9">
+              ENTRADA&nbsp; Discord · Instagram · web/PDF · vídeo<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+              INBOX / RAW&nbsp; →&nbsp; CRON cada hora&nbsp; →&nbsp; NOTAS<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+              SALIDA&nbsp;&nbsp; Discord · PDF · git
+            </div>
+            <div class="ss" style="color:var(--dim)">entra → procesa → documenta → notifica</div>
+          </div>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-conexiones">Copiar</button>
+          <span class="grow">La demo va aquí, no en un bloque aparte. Mientras refresca la carpeta, nombra Instagram y el cron: ganas 8 s.</span>
+          <a href="conexiones.html">Mapa completo →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="casos">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">3:55–4:35</span>
+          <h3>6 · Casos de uso</h3>
+          <span class="meta">~78 palabras · 40 s</span>
+        </div>
+        <div class="script-body">
+          <p class="say" id="say-casos">¿Y para qué sirve esto? Tres casos concretos.</p>
+          <p class="say">Uno: retomo un proyecto de hace tres meses y no releo nada. Abro su nota y están el estado, la decisión y el pendiente.</p>
+          <p class="say">Dos: pregunto por qué elegimos algo y la respuesta tiene fecha y fuente. No la reconstruyo de memoria.</p>
+          <p class="say">Tres: me cambio de portátil, o de agente, y el disco viaja conmigo. El modelo cambia; la memoria no.</p>
+          <div class="screen">EN PANTALLA: tres tarjetas — <b>RETOMAR</b>, <b>DECIDIR</b>, <b>MIGRAR</b> — con una línea cada una. Nada más.</div>
+          <div class="slide">
+            <div class="sl">06 · el valor</div>
+            <div class="row">
+              <div class="col"><b>Retomar</b><span>meses después, sin releer</span></div>
+              <div class="col"><b>Decidir</b><span>con fecha y fuente</span></div>
+              <div class="col"><b>Migrar</b><span>el disco viaja; el modelo no</span></div>
+            </div>
+            <div class="ss" style="color:var(--dim)">El sistema guarda; esto es lo que devuelve.</div>
+          </div>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-casos">Copiar</button>
+          <span class="grow">Elige dos si vas justo: retomar y migrar son los que más se recuerdan.</span>
+          <a href="opciones.html#casos">5 casos de uso desarrollados →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="cierre">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">4:35–5:00</span>
+          <h3>7 · Cierre: vuelta a las 2:00</h3>
+          <span class="meta">~52 palabras · 25 s</span>
+        </div>
+        <div class="script-body">
+          <p class="say" id="say-cierre">Volvamos a las dos de la mañana. El contexto se agota; el disco no. No es Obsidian: es un disco, un contrato y la disciplina de escribir. La memoria de una IA no se arregla con un prompt más largo. Se arregla con un sitio donde escribir. Gracias.</p>
+          <div class="screen">EN PANTALLA: <b>“El contexto se agota.<br>El disco no.”</b> y debajo, pequeño: “un disco · un contrato · disciplina de escribir”.</div>
+          <div class="slide">
+            <div class="sl">07 · cierre</div>
+            <div class="st">El contexto se agota.<br>El disco no.</div>
+            <div class="ss" style="color:var(--dim)">un disco · un contrato · disciplina de escribir</div>
+          </div>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-cierre">Copiar</button>
+          <span class="grow">No digas “¿preguntas?”. Di “gracias” y espera dos segundos.</span>
+          <a href="opciones.html#cierres">5 cierres alternativos →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="sec-head"><h2>Denominadores comunes</h2></div>
+      <div class="grid g2">
+        <div class="card"><span class="k">Ritmo</span><h3>145 palabras por minuto</h3>
+          <p>Con demo, baja a 130. Si te oyes acelerar, es que el bloque anterior se alargó: corta, no corras.</p></div>
+        <div class="card"><span class="k">Transiciones</span><h3>Cuatro frases puente</h3>
+          <p>“La solución tiene un nombre aburrido.” · “¿Y por qué Obsidian?” · “Pero un vault parado es un archivador.” · “¿Y para qué sirve esto?” Cada una abre un bloque sin anunciarlo.</p></div>
+        <div class="card"><span class="k">Si falla la demo</span><h3>Misma frase, otro soporte</h3>
+          <p>“Os enseño lo que pasó esta mañana” y usas la grabación o el log. No pidas perdón dos veces.</p></div>
+        <div class="card"><span class="k">Si te sobra tiempo</span><h3>Un dato, no una sección</h3>
+          <p>El cron: 149 ejecuciones, una cada hora. Se dice en 8 s y refuerza que el sistema trabaja solo.</p></div>
+      </div>
+    </section>
+
+    <p class="footer">Guion calculado sobre 5:00 con demo de 40 s. Cifras de noviembre de 2026; no uses las de <code>hermes-complete-guide.md</code>, que son de julio. Detalle de cada conexión en <a href="conexiones.html">Conexiones</a>.</p>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charla · Demo de la conexión Discord</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="progress"></div>
+<div class="layout">
+  <aside>
+    <div class="brand">
+      <div class="logo">M</div>
+      <div><h1>Memoria externa</h1><small>Lightning talk · 5 min</small></div>
+    </div>
+    <p class="side-meta">Demo dentro del bloque 5<br>40 segundos, 3 pasos</p>
+    <nav>
+      <a href="index.html"><span class="num">00</span>Portada</a>
+      <a href="guion.html"><span class="num">01</span>Guion 5:00</a>
+      <a href="opciones.html"><span class="num">02</span>Opciones</a>
+      <a href="conexiones.html"><span class="num">03</span>Conexiones</a>
+      <a class="active" href="demo.html"><span class="num">04</span>Demo</a>
+      <a href="referencia.html"><span class="num">05</span>Referencia</a>
+    </nav>
+    <div class="side-foot">
+      Regla: si falla, no se improvisa.<br>
+      Se cambia de soporte.
+    </div>
+  </aside>
+
+  <main>
+    <header class="page">
+      <div class="kicker">04 · Demo</div>
+      <h2>La demo no es un truco: es una conexión</h2>
+      <p class="lead">Cae en el minuto 2:25, justo cuando acabas de decir “entra por Discord”. No demuestras Obsidian ni Discord: demuestras que un mensaje del móvil se convierte en un archivo y que una sesión nueva, sin contexto, lo encuentra.</p>
+    </header>
+
+    <div class="callout">
+      <strong>Dónde encaja:</strong> es la prueba de la primera boca de entrada del mapa. Por eso va <em>dentro</em> del bloque de conexiones y no después: el público ya sabe qué es inbox y por qué eso importa.
+    </div>
+
+    <section class="block" id="pasos">
+      <div class="sec-head"><h2>Los tres pasos (40 s)</h2></div>
+      <ol class="steps">
+        <li><strong>Móvil → <code>#inbox</code></strong> (12 s). Mensaje ya escrito, solo pulsas enviar. Sin agente: el gateway lo guarda en <code>00-inbox/unprocessed/</code>.</li>
+        <li><strong>Explorador → refrescar</strong> (8 s). El archivo aparece en la carpeta que el público acaba de ver. Aquí no hables: deja que se vea.</li>
+        <li><strong>Sesión nueva → preguntar</strong> (20 s). Que lo encuentre y lo cite. Esta es la tesis; el resto es preparación.</li>
+      </ol>
+      <div class="callout good" style="margin-top:12px">
+        <strong>Frase de cierre de la demo:</strong> “El modelo no recordaba nada. El disco sí.” Pausa. Y vuelves a las conexiones con “y lo que entra se procesa…”.
+      </div>
+    </section>
+
+    <section class="block" id="textos">
+      <div class="sec-head"><h2>Textos exactos</h2></div>
+      <div class="grid g2">
+        <div class="card"><span class="k">Mensaje al canal</span>
+          <h3>Qué envías desde el móvil</h3>
+          <p class="say" id="msg-demo" style="font-size:.95rem">idea: probar un resumen diario de los papers que guardo en raw</p>
+          <button class="copy" data-copy="#msg-demo">Copiar mensaje</button>
+          <p style="font-size:.82rem;color:var(--dim)">Elige algo que no exista ya en el vault: si la idea ya está, la respuesta puede venir del índice y la demo pierde fuerza.</p></div>
+        <div class="card"><span class="k">Pregunta al agente</span>
+          <h3>Qué dices en la sesión nueva</h3>
+          <p class="say" id="q-demo" style="font-size:.95rem">¿Qué idea te mandé hace un rato por Discord?</p>
+          <button class="copy" data-copy="#q-demo">Copiar pregunta</button>
+          <p style="font-size:.82rem;color:var(--dim)">No digas “busca en el vault”: entonces demuestras que obedece, no que recuerda. Deja que lo haga solo.</p></div>
+      </div>
+    </section>
+
+    <section class="block" id="voz">
+      <div class="sec-head"><h2>Qué dices mientras pasa</h2></div>
+      <div class="script">
+        <div class="script-body">
+          <p class="say"><b>Antes:</b> “Entra por Discord: mando una idea desde el móvil y el bot la deja en inbox. Eso es lo que voy a enseñar ahora.”</p>
+          <p class="say"><b>Mientras refresca:</b> “Esta carpeta es la misma que habéis visto hace un minuto. Sin agente, sin tokens: el gateway solo escribe el archivo.”</p>
+          <p class="say"><b>Después:</b> “El modelo no recordaba nada. El disco sí.”</p>
+          <div class="screen">Si el refresco tarda: “mientras aparece, esto es la diferencia entre capturar y clasificar: aquí no se decide nada todavía”.</div>
+        </div>
+        <div class="script-foot">
+          <span class="grow">Guion completo del bloque en <a href="guion.html#conexiones">Guion → Conexiones</a>.</span>
+          <a href="conexiones.html">Mapa de conexiones →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="checklist">
+      <div class="sec-head"><h2>Checklist previo (5 minutos antes)</h2></div>
+      <ul class="checklist">
+        <li><input type="checkbox"> Gateway vivo: <code>hermes gateway status</code> o <code>systemctl --user status hermes-gateway</code></li>
+        <li><input type="checkbox"> El bot responde en el canal correcto (no en un DM ni en otro servidor)</li>
+        <li><input type="checkbox"> Vault montado donde el agente lo espera (en la máquina del agente, no en la del proyector)</li>
+        <li><input type="checkbox"> <code>00-inbox/unprocessed/</code> abierta en el explorador y vacía</li>
+        <li><input type="checkbox"> Mensaje ya escrito en el móvil, sin enviar</li>
+        <li><input type="checkbox"> Terminal con una sesión nueva preparada (sin historial)</li>
+        <li><input type="checkbox"> Grabación de 30 s accesible en el escritorio, por si acaso</li>
+        <li><input type="checkbox"> Fuente del portátil al 150–180 % para que el móvil no haga falta en cámara</li>
+        <li><input type="checkbox"> Comprobado el tono de la sesión nueva (la config trae una personalidad distinta a la documentada)</li>
+        <li><input type="checkbox"> Silenciadas las notificaciones del portátil y del móvil</li>
+        <li><input type="checkbox"> Ninguna pestaña con cookies, claves o IDs de canales a la vista</li>
+      </ul>
+    </section>
+
+    <section class="block" id="planb">
+      <div class="sec-head"><h2>Plan B, en escalera</h2></div>
+      <div class="grid g3">
+        <div class="card hl"><span class="k">Nivel 1</span><h3>Directo</h3>
+          <p>Móvil + explorador + sesión nueva. 40 s. Es lo que quieres.</p></div>
+        <div class="card"><span class="k">Nivel 2</span><h3>Grabación</h3>
+          <p>Clip de 30 s con los tres pasos. Dices la misma frase: “el modelo no recordaba nada, el disco sí”. Nadie nota la diferencia.</p></div>
+        <div class="card"><span class="k">Nivel 3</span><h3>Narrado</h3>
+          <p>Sin pantalla: “esto lo hice esta mañana, y pasó esto”. Y usas el log o una nota como prueba escrita.</p></div>
+      </div>
+      <div class="callout warn" style="margin-top:12px">
+        <strong>Nunca:</strong> depurar en directo. Si el gateway no responde, no abras logs delante del público. Cambia de nivel y sigue.
+      </div>
+    </section>
+
+    <section class="block" id="fallos">
+      <div class="sec-head"><h2>Fallos conocidos y qué hacer</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Síntoma</th><th>Causa probable</th><th>Qué haces en directo</th></tr></thead>
+          <tbody>
+            <tr><td>El mensaje no aparece en la carpeta</td><td>Gateway caído o canal mal configurado</td><td>Nivel 2: grabación, sin comentar el fallo</td></tr>
+            <tr><td>Aparece pero la sesión no lo encuentra</td><td>Vault no montado en la máquina del agente</td><td>Nivel 3 y usas el log como prueba</td></tr>
+            <tr><td>El bot contesta en otro canal</td><td>Parche de inbox apuntando a otro ID</td><td>No lo arregles en vivo: pasa al nivel 2</td></tr>
+            <tr><td>Tarda más de 10 s en refrescar</td><td>Escritura del gateway o caché del explorador</td><td>Habla mientras: “esto es la diferencia entre capturar y clasificar”</td></tr>
+            <tr><td>El agente contesta con otro tono</td><td>Personalidad de la config distinta a la documentada</td><td>Ignora y sigue; no comentes la config en público</td></tr>
+            <tr><td>La carpeta tiene archivos viejos</td><td><code>unprocessed</code> no está vacía</td><td>Vacíala antes; si no, el “antes/después” se pierde</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="despues">
+      <div class="sec-head"><h2>Qué NO hacer</h2></div>
+      <div class="grid g2">
+        <div class="card"><span class="k">No</span><h3>Enseñar el móvil en mano temblando</h3>
+          <p>Móvil apoyado o en el atril; si puedes, duplica la pantalla del teléfono. El texto tiene que leerse desde la última fila.</p></div>
+        <div class="card"><span class="k">No</span><h3>Explicar Discord</h3>
+          <p>El canal es un medio, no el tema. “Lo mando desde el móvil” y punto.</p></div>
+        <div class="card"><span class="k">No</span><h3>Decir “ahora debería…”</h3>
+          <p>Si algo no sale, no narres la expectativa. Cambia de soporte y sigue.</p></div>
+        <div class="card"><span class="k">No</span><h3>Alargar la demo</h3>
+          <p>Máximo 50 s. Si funciona, se corta antes de que el público se aburra de mirar una terminal.</p></div>
+      </div>
+    </section>
+
+    <p class="footer">La demo no prueba que el sistema sea bueno: prueba que una conexión persiste. Esa es la única afirmación que necesitas defender en 40 segundos.</p>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

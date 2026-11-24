@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charla · Guion v3 — diapositivas, problemas y opinión</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="progress"></div>
+<div class="layout">
+  <aside>
+    <div class="brand">
+      <div class="logo">M</div>
+      <div><h1>Memoria externa</h1><small>Lightning talk · v3</small></div>
+    </div>
+    <p class="side-meta">Guion del 24/11/2026<br>Texto hablado literal + 11 slides</p>
+    <nav>
+      <a href="index.html"><span class="num">00</span>Portada</a>
+      <a href="guion.html"><span class="num">01</span>Guion 5:00</a>
+      <a href="opciones.html"><span class="num">02</span>Opciones</a>
+      <a href="conexiones.html"><span class="num">03</span>Conexiones</a>
+      <a href="demo.html"><span class="num">04</span>Demo</a>
+      <a href="referencia.html"><span class="num">05</span>Referencia</a>
+      <a class="active" href="guion-v3.html"><span class="num">06</span>Guion v3</a>
+    </nav>
+    <nav style="margin-top:14px;border-top:1px solid var(--line-soft);padding-top:12px">
+      <a href="#hook"><span class="num">1</span>Hook</a>
+      <a href="#que-es"><span class="num">2</span>Qué es</a>
+      <a href="#obsidian"><span class="num">3</span>Obsidian</a>
+      <a href="#discord"><span class="num">4</span>Discord</a>
+      <a href="#otras"><span class="num">5</span>Otras piezas</a>
+      <a href="#cierre"><span class="num">6</span>Cierre</a>
+      <a href="#mapa"><span class="num">→</span>Mapa de slides</a>
+      <a href="#problemas"><span class="num">→</span>Problemas</a>
+      <a href="#opinion"><span class="num">→</span>Opinión</a>
+      <a href="#checklist"><span class="num">→</span>Checklist</a>
+    </nav>
+    <div class="side-foot">
+      6 partes · 11 diapositivas<br>
+      ~740 palabras ≈ 6:00 con demo
+    </div>
+  </aside>
+
+  <main>
+    <header class="page">
+      <div class="kicker">06 · Guion v3</div>
+      <h2>El guion, sus diapositivas y lo que le falla</h2>
+      <p class="lead">Tu texto hablado va tal cual lo escribiste: solo corregí <em>lightning</em>, <em>harness</em>, <em>Moodle</em> y <em>Obsidian</em>. Todo lo que es mío está marcado como <b>nota</b> o vive en las secciones de diapositivas, problemas y opinión.</p>
+    </header>
+
+    <div class="callout bad">
+      <strong>Lo primero que hay que decidir:</strong> esto dura <b>~6:00</b>, no 5:00. Son ~740 palabras (5:20 a 140 ppm) más la espera real del bot. Si el hueco es de 5 minutos, recorta antes de ensayar: en <a href="#problemas">Problemas → 1</a> tienes el minuto exacto que sobra y de dónde quitarlo.
+    </div>
+
+    <section class="block">
+      <div class="sec-head"><h2>Ficha rápida</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Parte</th><th>Minutos</th><th>Palabras</th><th>Slides</th></tr></thead>
+          <tbody>
+            <tr><td>1 · Hook</td><td class="num">0:00–0:50</td><td class="num">~95 + chiste</td><td class="num">2</td></tr>
+            <tr><td>2 · Qué es</td><td class="num">0:50–2:35</td><td class="num">~245</td><td class="num">3</td></tr>
+            <tr><td>3 · Obsidian</td><td class="num">2:35–3:20</td><td class="num">~110</td><td class="num">2</td></tr>
+            <tr><td>4 · Discord (demo)</td><td class="num">3:20–4:35</td><td class="num">~100 + espera</td><td class="num">1 (+1 rescate)</td></tr>
+            <tr><td>5 · Otras piezas</td><td class="num">4:35–5:40</td><td class="num">~150</td><td class="num">2</td></tr>
+            <tr><td>6 · Cierre</td><td class="num">5:40–6:00</td><td class="num">~45</td><td class="num">1</td></tr>
+            <tr><td><b>Total</b></td><td class="num"><b>~6:00</b></td><td class="num"><b>~740</b></td><td class="num"><b>11</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ PARTE 1 ============ -->
+    <section class="block" id="hook">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">0:00–0:50</span>
+          <h3>1 · Hook</h3>
+          <span class="meta">~95 palabras + chiste</span>
+        </div>
+        <div class="script-body">
+          <p class="say" id="say-1">Son las 2 de la mañana, llevas 3 horas trabajando, le preguntas algo a tu modelo, pero te responde con que has alcanzado el límite, te vas a otro modelo, pero, ahora tienes que explicarle otra vez todo tu proyecto y en lo que estabas trabajando, escribiéndole el mismo contexto que ya le habías dicho al otro hace unas horas. ¿A quién no le ha pasado? El problema no es el modelo, el problema es que no se acuerda de nada, y no se acuerda porque no tiene dónde.</p>
+          <p class="say act">[nota — el chiste, opcional] …como somos pobres no tenemos más límites. <em>Decidir según el ambiente. Ver Problemas → 2.</em></p>
+
+          <h4>Diapositivas</h4>
+
+          <div class="slide">
+            <div class="sl">S1 · portada · 0:00</div>
+            <div class="st">2:00 AM</div>
+            <div class="ss">El contexto se agotó.</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Fondo negro y nada más: ni tu nombre, ni logo, ni «lightning talk». <b>Nota:</b> tarda 3-4 segundos en hablar; que el público lea la hora antes de que empieces.</p>
+
+          <div class="slide">
+            <div class="sl">S2 · el muro · 0:20</div>
+            <div class="st" style="font-size:clamp(.9rem,1.6vw,1.15rem);color:var(--muted);font-weight:600">[ 3-4 capturas de rate limit, recortadas ]</div>
+            <div class="ss">todos tienen un límite</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Claude, ChatGPT, Copilot, Gemini: solo la frase del límite. <b class="bad">Antes de proyectar:</b> tapa correos, nombres de cuenta, avatares y planes. Una captura con tu email en pantalla es el peor fallo posible de la charla y no se arregla en directo.</p>
+
+          <p><b>Sin slide para el chiste.</b> Un chiste con diapositiva va más lento y parece preparado. Si sale, sale hablado, con la S2 aún en pantalla.</p>
+
+          <div class="callout warn">
+            <strong>Notas de sala:</strong> la frase que hay que clavar es «no se acuerda porque no tiene dónde». Pausa antes: es la tesis y vuelve en el cierre. Y «¿a quién no le ha pasado?» invita a un silencio incómodo; mejor «esto nos ha pasado a todos», levantas la mano tú primero. Si quieres interacción real: «¿quién ha pagado un plan solo por no esperar?».
+          </div>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-1">Copiar</button>
+          <span class="grow">No expliques todavía qué es un vault: deja que el público asienta.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PARTE 2 ============ -->
+    <section class="block" id="que-es">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">0:50–2:35</span>
+          <h3>2 · Qué es</h3>
+          <span class="meta">~245 palabras · la parte que sostiene la charla</span>
+        </div>
+        <div class="script-body">
+          <div id="say-2">
+            <p class="say">Esto de aquí es una carpeta, con archivos de texto <code>.md</code>, nada especial. Lo que convierte todo esto en memoria son las reglas que le damos a los agentes para que usen estos archivos antes de trabajar. En mi caso se llama <code>hermes.md</code> porque es el harness que utilizo, pero se puede incluir en <code>AGENTS.md</code> o en cualquier otro archivo siempre y cuando lo enrutéis al modelo.</p>
+            <p class="say">En este <code>hermes.md</code> tiene estipulado que lo que hay en el vault es una fuente de la verdad, tiene definido un orden de búsqueda por prioridades en el que accede primero a identidad, luego a proyectos y por último a conocimiento. También hay un <code>SCHEMA.md</code> en el que se definen las reglas de cómo se deben tomar las notas, su formato. Sin esto el sistema crecería sin criterio, sería un cajón desastre, no una memoria organizada. Gracias a esto nunca le tengo que explicar quién soy, cómo responderme ni pegar el contexto exacto del proyecto en el que esté trabajando. Está escrito y lo lee.</p>
+          </div>
+
+          <h4>Diapositivas</h4>
+
+          <div class="slide">
+            <div class="sl">S3 · la carpeta · 0:50</div>
+            <div class="st">una carpeta. nada especial.</div>
+            <div class="ss">[ captura del explorador en la raíz del vault ]</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Aquí <b>no</b> abras Obsidian todavía. La primera impresión tiene que ser «esto es aburrido», porque el asombro viene después.</p>
+
+          <div class="slide">
+            <div class="sl">S4 · el contrato con el agente · 1:15</div>
+            <div class="st" style="font-size:clamp(.85rem,1.5vw,1rem)">no es la carpeta. son las reglas.</div>
+            <div class="ss" style="font-family:var(--mono);font-size:.66rem;line-height:1.9;color:#dff3ff">
+              hermes.md<br>
+              · el vault es la fuente de verdad<br>
+              · orden: identidad → proyectos → conocimiento<br>
+              · toda respuesta sustancial se documenta
+            </div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Zoom a 3 líneas, no el archivo entero. Si proyectas 200 líneas, el público deja de leer.</p>
+
+          <div class="slide">
+            <div class="sl">S5 · el orden de búsqueda · 1:50</div>
+            <div class="st" style="font-size:clamp(.85rem,1.5vw,1.05rem)">03-identity → 02-projects → 01-knowledge</div>
+            <div class="ss">por eso no le explico quién soy<br>00-inbox · 04-skills · 05-logs</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Es el gráfico más explicativo de toda la charla. Si vas justo de tiempo, S4 y S5 pueden ser la misma slide.</p>
+
+          <div class="slide">
+            <div class="sl">S6 · SCHEMA.md, el otro contrato · 2:15</div>
+            <div class="st" style="font-size:clamp(.85rem,1.5vw,1rem)">sin formato, esto es un cajón desastre</div>
+            <div class="row">
+              <div class="col"><b>frontmatter</b><span>title · created · updated · type · tags</span></div>
+              <div class="col"><b>2 wikilinks</b><span>una nota no es una isla</span></div>
+            </div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Cierra el bloque con tu frase. Es la que contesta «¿y por qué no lo guardo todo en Notion?» sin que nadie pregunte.</p>
+
+          <h4>Otras diapositivas que podrías meter aquí</h4>
+          <div class="grid g2">
+            <div class="card"><span class="k">1 · la más rentable</span><h3>Una nota real completa</h3>
+              <p>Frontmatter + enlaces + fecha. Es la prueba de que el contrato se cumple, no solo se escribe.</p></div>
+            <div class="card"><span class="k">2</span><h3><code>index.md</code></h3>
+              <p>El mapa maestro con una frase por página. Impresiona por volumen y explica por qué el agente no duplica notas.</p></div>
+            <div class="card"><span class="k">3</span><h3>La skill de tomar notas</h3>
+              <p>«El cómo, escrito una vez y reutilizado». Refuerza el argumento de las reglas. <b>No la pongas si no la vas a mencionar:</b> una slide que no se comenta distrae.</p></div>
+            <div class="card"><span class="k">4</span><h3>Un commit o el log del día</h3>
+              <p>«Lo que no se documenta, no ha pasado.» Fuerte, pero es material del final, no del bloque 2.</p></div>
+          </div>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-2">Copiar</button>
+          <span class="grow">245 palabras y 1:45 para un concepto de 40 s. Si recortas, recorta aquí, nunca del hook.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PARTE 3 ============ -->
+    <section class="block" id="obsidian">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">2:35–3:20</span>
+          <h3>3 · Obsidian</h3>
+          <span class="meta">~110 palabras</span>
+        </div>
+        <div class="script-body">
+          <p class="say" id="say-3">Hay que diferenciar 2 cosas: el vault y Obsidian. El vault es la carpeta, los archivos, la información; Obsidian simplemente se usa como un visor, una interfaz sencilla para ver notas de forma gráfica a través del grafo o crear y editar las existentes. Nada más. Se podría usar Visual Studio o Notepad, cualquier cosa que abra un <code>.md</code> sirve para lo mismo, pero Obsidian tiene sus ventajas, como poder ver grafos, y añadir otras utilidades en forma de extensiones.</p>
+
+          <h4>Diapositivas</h4>
+
+          <div class="slide">
+            <div class="sl">S7 · la diferencia · 2:35</div>
+            <div class="row">
+              <div class="col"><b>VAULT = los archivos</b><span>la carpeta, la información</span></div>
+              <div class="col"><b>OBSIDIAN = la ventana</b><span>editar, enlazar, ver el grafo</span></div>
+            </div>
+            <div class="ss">si mañana desaparece Obsidian, la memoria sigue ahí</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Esta slide desactiva la objeción «esto es un anuncio de Obsidian». Ponla antes de que la piensen.</p>
+
+          <div class="slide">
+            <div class="sl">S8 · el grafo · 2:55</div>
+            <div class="st" style="font-size:clamp(.9rem,1.6vw,1.1rem);color:var(--muted)">[ el grafo a pantalla completa, sin texto ]</div>
+            <div class="ss">4 segundos y fuera</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">El grafo es bonito y no significa nada: si te quedas, el público empieza a buscar sus propias notas ahí dentro.</p>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-3">Copiar</button>
+          <span class="grow">Si hay que recortar 1:00, este bloque baja a 20 s: quita Visual Studio/Notepad.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PARTE 4 ============ -->
+    <section class="block" id="discord">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">3:20–4:35</span>
+          <h3>4 · Discord (la demo)</h3>
+          <span class="meta">~100 palabras + 30-60 s de espera</span>
+        </div>
+        <div class="script-body">
+          <div id="say-4">
+            <p class="say">Pero ¿cómo se usa todo esto? Vamos con algo más práctico. Tengo en Discord un bot conectado con Hermes: él lee el vault y responde. Vamos a preguntarle algo sencillo. Hace tiempo hice un scraper de Moodle y no sé del todo qué fue de él, vamos a preguntarle.</p>
+            <p class="say act">[preguntas en Discord y esperas]</p>
+            <p class="say act">(mientras está pensando)</p>
+            <p class="say">Que sepáis que esta charla me ha costado 2 euros, cabrones. No tenía pensado pagar nada de IA este mes, pero para enseñaros esto hubo que aflojar.</p>
+            <p class="say act">(cuando responde)</p>
+            <p class="say">Mirad lo que ha devuelto. Todo eso lo hicimos hace 6 meses y ni me acordaba de cómo está implementado, pero ahí está todo bien documentado.</p>
+          </div>
+
+          <h4>Diapositivas</h4>
+
+          <div class="slide">
+            <div class="sl">S9 · la pregunta, escrita · 3:20</div>
+            <div class="st" style="font-size:clamp(.95rem,1.8vw,1.3rem)">¿qué fue del scraper de Moodle?</div>
+            <div class="ss">hace 6 meses</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Sirve para dos cosas: el público lee la pregunta mientras tú escribes en Discord, y si el audio de la sala es malo, la pregunta sigue entendiéndose.</p>
+
+          <div class="callout">
+            <strong>S10 · no es una slide: es el portátil.</strong> Durante la demo <b>no cambies de diapositiva</b>. El proyector se queda en Discord, con el zoom alto para que el mensaje se lea. Cada salto de slide durante la espera rompe la ilusión de «esto está pasando ahora».
+          </div>
+
+          <div class="slide" style="border-color:rgba(255,122,122,.35)">
+            <div class="sl">S11 · rescate · oculta al final</div>
+            <div class="st">El modelo no recordaba nada.<br>El disco sí.</div>
+            <div class="ss">solo si falla</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Si el bot no contesta, pasas a la grabación de 30 s y dejas esta slide puesta mientras hablas. <b>No se depura en directo.</b></p>
+
+          <div class="callout bad">
+            <strong>El chiste depende de la latencia.</strong> Si el bot contesta en 8 segundos, te lo comes con patatas. Dilo <b>justo antes de pulsar enviar</b>, no mientras esperas: así está garantizado y no depende de nada.
+          </div>
+          <div class="callout warn">
+            <strong>Riesgo concreto para mañana:</strong> tu informe del vault (23/11) marcaba <b>borrados sin commitear en el scraper de Moodle</b> y su <code>.env</code> trackeado. Si la nota que responde está entre lo borrado, la demo falla por una razón tuya. Pruébalo esta noche, en el canal real, con la frase exacta.
+          </div>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-4">Copiar</button>
+          <span class="grow">Si contesta rápido, la frase que cierra es la tuya: «todo eso lo hicimos hace 6 meses».</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PARTE 5 ============ -->
+    <section class="block" id="otras">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">4:35–5:40</span>
+          <h3>5 · Otras herramientas <span class="meta">(retitular: «No es una herramienta»)</span></h3>
+          <span class="meta">~150 palabras</span>
+        </div>
+        <div class="script-body">
+          <p class="say" id="say-5">Esto no es una herramienta, es una combinación de 4 piezas: un agente, una carpeta, un visor y un canal de comunicación. En cada casilla se puede poner una cosa y el sistema sigue funcionando. Puedes cambiar el vault a otro, y te responderá de otra forma totalmente diferente; se puede hasta hacer un vault por proyecto para tener todo bien separado, y que se use automáticamente al trabajar en ese proyecto.</p>
+          <p class="say">Lo llevo usando durante el último año y medio: se acuerda de todo, cómo está montado mi servidor de Minecraft, mis playlists analizadas de Spotify, descargas de Moodle, temario de clase, proyectos personales, todo. Sabe más de mí que yo. Lo que más me sorprendió últimamente fue justo lo de Moodle: el scraper llevaba hecho 6 meses y ni me acordaba, le pregunté por él porque lo volví a necesitar el mes pasado y lo encontró en 2 segundos, documentado y listo para usar, incluso con detalles de implementación de los que ni me acordaba. No es un backup, es mejor: esto te devuelve el porqué, tus decisiones pasadas y otras consideraciones.</p>
+
+          <h4>Diapositivas</h4>
+
+          <div class="slide">
+            <div class="sl">S12 · las piezas · 4:35 · todo el bloque</div>
+            <div class="st" style="font-size:clamp(.85rem,1.5vw,1.05rem)">AGENTE · CARPETA · VISOR · CANAL</div>
+            <div class="ss" style="color:#ffe3ab">+ REGLAS en el centro</div>
+            <div class="ss">cambia cualquier casilla → sigue funcionando</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Es la slide que convierte anécdotas en arquitectura, y la que la gente fotografía. Que se quede en pantalla todo el bloque. <b>Con «REGLAS» en el centro corriges la contradicción con la parte 2</b> (ver Problemas → 3).</p>
+
+          <div class="slide">
+            <div class="sl">S13 · los recibos · 5:10</div>
+            <div class="st" style="font-size:clamp(.75rem,1.3vw,.95rem);font-family:var(--mono)">1 año y medio · 6.943 notas · 7.459 fuentes · 430 commits</div>
+            <div class="ss" style="color:#eaf2fb">no es un backup: te devuelve el porqué</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Elige <b>uno</b> y dilo en voz alta; los demás son decorado para quien mire de cerca. La lista de casos (Minecraft, Spotify, Moodle, temario) <b>no va escrita</b>: si está escrita, el público lee en vez de escucharte.</p>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-5">Copiar</button>
+          <span class="grow">Dices «se acuerda de todo» cinco veces con palabras distintas. El público solo retiene una: la de Moodle.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PARTE 6 ============ -->
+    <section class="block" id="cierre">
+      <div class="script">
+        <div class="script-head">
+          <span class="time">5:40–6:00</span>
+          <h3>6 · Cierre</h3>
+          <span class="meta">~45 palabras</span>
+        </div>
+        <div class="script-body">
+          <p class="say" id="say-6">Ahora son las 2 de la mañana y sé que el problema no es el modelo, era que no se acordaba. El contexto se agota, el disco no.</p>
+
+          <div class="slide">
+            <div class="sl">S14 · cierre · 5:40</div>
+            <div class="st">El contexto se agota.<br>El disco no.</div>
+            <div class="ss" style="color:var(--dim)">gracias</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--muted)">Misma tipografía y mismo negro que la S1, para que el círculo se cierre sin explicarlo. <b>No digas «¿preguntas?»</b>: di «gracias» y aguanta dos segundos de silencio.</p>
+        </div>
+        <div class="script-foot">
+          <button class="copy" data-copy="#say-6">Copiar</button>
+          <span class="grow">No añadas nada después de esta frase. Ni «y eso es todo», ni una slide de agradecimientos.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MAPA ============ -->
+    <section class="block" id="mapa">
+      <div class="sec-head"><h2>Mapa de diapositivas</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>#</th><th>Parte</th><th>Contenido</th><th>En pantalla</th></tr></thead>
+          <tbody>
+            <tr><td class="num">S1</td><td>Hook</td><td><code>2:00 AM</code> / <code>El contexto se agotó.</code></td><td class="num">0:00–0:20</td></tr>
+            <tr><td class="num">S2</td><td>Hook</td><td>Collage de <em>rate limits</em> + «todos tienen un límite»</td><td class="num">0:20–0:50</td></tr>
+            <tr><td class="num">S3</td><td>Qué es</td><td>Explorador en la raíz del vault</td><td class="num">0:50–1:15</td></tr>
+            <tr><td class="num">S4</td><td>Qué es</td><td><code>hermes.md</code> con 3 líneas resaltadas</td><td class="num">1:15–1:50</td></tr>
+            <tr><td class="num">S5</td><td>Qué es</td><td><code>identidad → proyectos → conocimiento</code></td><td class="num">1:50–2:15</td></tr>
+            <tr><td class="num">S6</td><td>Qué es</td><td><code>SCHEMA.md</code> + nota con frontmatter y wikilinks</td><td class="num">2:15–2:35</td></tr>
+            <tr><td class="num">S7</td><td>Obsidian</td><td><code>VAULT = archivos</code> / <code>OBSIDIAN = ventana</code></td><td class="num">2:35–3:20</td></tr>
+            <tr><td class="num">S8</td><td>Obsidian</td><td>El grafo, sin texto</td><td class="num">4 s</td></tr>
+            <tr><td class="num">S9</td><td>Discord</td><td><code>¿qué fue del scraper de Moodle?</code></td><td class="num">3:20–3:35</td></tr>
+            <tr><td class="num">—</td><td>Discord</td><td><b>Discord en directo</b></td><td class="num">3:35–4:20</td></tr>
+            <tr><td class="num">S11</td><td>Rescate</td><td><code>El modelo no recordaba nada. El disco sí.</code></td><td class="num">solo si falla</td></tr>
+            <tr><td class="num">S12</td><td>Otras</td><td>4 cajas (+ reglas en el centro)</td><td class="num">4:35–5:10</td></tr>
+            <tr><td class="num">S13</td><td>Otras</td><td><code>1 año y medio · 6.943 notas · 430 commits</code></td><td class="num">5:10–5:40</td></tr>
+            <tr><td class="num">S14</td><td>Cierre</td><td><code>El contexto se agota.</code> / <code>El disco no.</code></td><td class="num">5:40–6:00</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout good" style="margin-top:12px">
+        <strong>Regla de construcción:</strong> ninguna slide con más de 12 palabras, salvo S4 y S6, que son capturas y se perdonan porque <em>son</em> el argumento.
+      </div>
+    </section>
+
+    <!-- ============ PROBLEMAS ============ -->
+    <section class="block" id="problemas">
+      <div class="sec-head"><h2>Problemas que le veo</h2></div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag r">duración</span><strong>1 · Dura ~6:00, no 5:00</strong></div>
+        <p>~740 palabras a 140 ppm son 5:20, más 30-60 s de espera real del bot. Si el hueco es de 5 minutos, te comes el cierre, que es lo mejor que tienes escrito.</p>
+        <p class="why"><b>Recorte de 1:00 sin perder nada:</b> Obsidian a 20 s (quita Visual Studio/Notepad) · fusiona S4 y S5 en una sola slide (−25 s) · en la parte 5 deja dos casos en vez de cinco · si aun así vas justo, <b>elimina el chiste</b>: es lo único que no sostiene nada.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag w">el chiste</span><strong>2 · Los 2 euros tienen tres filos</strong></div>
+        <p><b>Contradice tu propia cifra:</b> en tu <code>config.yaml</code> el modelo son ~10 $/mes. «No tenía pensado pagar nada de IA este mes» solo es verdad si los 2 € fueron una cuenta aparte; si alguien te conoce, se ríe <em>de</em> la frase y no <em>con</em> ella.</p>
+        <p><b>«Cabrones»</b> funciona con amigos y puede caer mal en un auditorio mixto o con profesorado delante. Versión neutra: «esta charla me ha costado dos euros; los mejores dos euros del mes».</p>
+        <p class="why"><b>Y depende del tiempo de respuesta:</b> si tarda 6 segundos no hay hueco. Dilo <em>antes</em> de enviar, no durante la espera.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag r">el más serio</span><strong>3 · La parte 5 se contradice con la parte 2</strong></div>
+        <p>En la parte 2 dices que <b>lo que convierte la carpeta en memoria son las reglas</b> (<code>hermes.md</code> + <code>SCHEMA.md</code>). En la parte 5 dices que son <b>4 piezas: agente, carpeta, visor y canal</b>… y las reglas desaparecen. Es justo tu tesis.</p>
+        <p class="why"><b>Arreglo:</b> <code>REGLAS</code> en el centro de las cuatro cajas (2 segundos, refuerza el bloque 2), o decir «4 piezas <em>y un contrato</em>». Y matiza: «cambias el vault y cambias el contrato, y el resto sigue» — si no, te lo pillan en preguntas.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">título</span><strong>4 · «Otras herramientas» no describe lo que cuenta</strong></div>
+        <p>Hace esperar un catálogo (Notion, Logseq, RAG…) y lo que cuentas es que <b>no es una herramienta</b>.</p>
+        <p class="why"><b>Retitula:</b> «No es una herramienta: son cuatro piezas». Más largo y mejor.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag r">demo</span><strong>5 · La demo de Moodle es el mayor riesgo, y mañana es tarde</strong></div>
+        <p>Tu informe marcaba <b>borrados sin commitear en el scraper de Moodle</b> y el <code>.env</code> trackeado. Si la nota que responde está entre lo borrado, falla por una razón tuya. Compruébalo esta noche, en el canal real.</p>
+        <p class="why"><b>Y</b> la pregunta tiene que ser la misma palabra por palabra · <b>y</b> ten la grabación de 30 s con el resultado bueno ya guardado: el público no distingue una grabación de un directo, sí distingue 40 s de silencio.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag w">preguntas</span><strong>6 · «Está escrito y lo lee» no explica cómo</strong></div>
+        <p>Dices «siempre y cuando lo enrutéis al modelo» y ahí te salvas, pero un técnico levantará la mano: <em>¿cómo lo enruta, si el modelo no tiene acceso a nada?</em> Tu propia nota decía que el punto de inyección no estaba verificado (<code>prefill_messages_file</code> vacío; la copia del config es un respaldo).</p>
+        <p class="why"><b>Respuesta de una frase:</b> «va en el archivo de identidad que el agente carga al arrancar; en otros agentes es <code>AGENTS.md</code>. No es magia: es un archivo que se lee antes de trabajar».</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">proporción</span><strong>7 · La parte 2 es la mitad de la charla</strong></div>
+        <p>245 palabras y 1:45 para un concepto que se puede decir en 40 s. No es un error de contenido, es de proporción: el hook y el cierre son los dos momentos emocionales y duran 70 s en total.</p>
+        <p class="why"><b>Si recortas, recorta aquí, no en el hook.</b></p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag">datos</span><strong>8 · Falta un número</strong></div>
+        <p>Toda la charla es cualitativa hasta la parte 5. Un dato temprano —«6.943 notas»— compra credibilidad antes de la demo y hace que la demo parezca consecuencia y no truco.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag w">privacidad</span><strong>9 · «Sabe más de mí que yo»</strong></div>
+        <p>Es la frase más humana del guion y funciona… hasta que alguien piensa «¿y dónde está todo eso?». Añade seis palabras: <b>«todo eso está en local; el modelo solo ve lo que lee»</b>. Te quita el resquicio de «esto es un problema de privacidad» sin romper el chiste.</p>
+      </div>
+
+      <div class="option">
+        <div class="opt-head"><span class="tag g">no tocar</span><strong>10 · El cierre</strong></div>
+        <p>«El contexto se agota, el disco no» es la mejor línea del guion. No añadas nada después: ni «y eso es todo», ni «¿preguntas?», ni una slide de agradecimientos. Negro, la frase, gracias, dos segundos.</p>
+      </div>
+    </section>
+
+    <!-- ============ OPINIÓN ============ -->
+    <section class="block" id="opinion">
+      <div class="sec-head"><h2>Mi opinión</h2></div>
+      <p class="lead">Esta versión es mejor que la anterior en lo que importa: <b>la demo ha dejado de ser un número de magia y es el centro del relato</b>. Y has encontrado el argumento que faltaba, el que hace que esto no sea «mi Obsidian»: <em>no es un backup, te devuelve el porqué</em>. Eso es lo que se llevará la gente.</p>
+      <p class="lead">Lo que le falta es <b>disciplina de proporción</b>. Ahora mismo tiene tres partes emocionales (hook, demo, cierre) y, en medio, 3 minutos de inventario: qué es, Obsidian, cuatro piezas. Ese inventario no tiene tensión: es correcto y es necesario, pero no emociona. Si recortas 60 segundos, recórtalos ahí, nunca del hook ni del cierre.</p>
+
+      <div class="grid g2" style="margin-top:16px">
+        <div class="card hl"><span class="k">cambio 1</span><h3><code>REGLAS</code> en el centro de las cajas</h3>
+          <p>Hoy tu tesis está en la parte 2 y tu diapositiva más memorable la omite. Es el arreglo de dos segundos con más impacto de toda la lista.</p></div>
+        <div class="card hl"><span class="k">cambio 2</span><h3>El chiste, antes de enviar</h3>
+          <p>No porque sea malo, sino porque tal como está depende de que el bot tarde. Que dependa de ti, no de la latencia.</p></div>
+      </div>
+
+      <div class="quote" style="margin-top:16px">
+        La parte 5 dice «se acuerda de todo» cinco veces con palabras distintas. Es verdad y es tu mejor prueba, pero el público solo retiene una. Elige la de Moodle —la que además demuestras en directo— y deja las demás como coletilla, no como lista. Minecraft y Spotify son para las preguntas, no para los 40 segundos que tienes.
+      </div>
+    </section>
+
+    <!-- ============ CHECKLIST ============ -->
+    <section class="block" id="checklist">
+      <div class="sec-head"><h2>Checklist de esta noche (no de mañana)</h2></div>
+      <ul class="checklist">
+        <li><input type="checkbox"> Preguntar lo de Moodle en el canal real, con la frase exacta, y ver que la nota existe y responde bien.</li>
+        <li><input type="checkbox"> Grabar ese intercambio en 30 s y dejarlo en el escritorio.</li>
+        <li><input type="checkbox"> Comprobar que <code>00-inbox/unprocessed/</code> está como esperas y el gateway vivo.</li>
+        <li><input type="checkbox"> Tapar correos, nombres de cuenta y avatares en las capturas de <em>rate limits</em>.</li>
+        <li><input type="checkbox"> Construir S1 y S14 juntas: misma tipografía, mismo negro.</li>
+        <li><input type="checkbox"> Cronometrar una pasada con la versión recortada. Si pasa de 5:10, quitas el chiste.</li>
+      </ul>
+    </section>
+
+    <p class="footer">Página autocontenida, sin CDN. Guion literal del 24/11/2026; cifras del vault (<code>index.md</code>, <code>00-raw/</code>, <code>git log</code>) verificadas el 23/11/2026. Versión en texto plano: <code>guion-v3.md</code>.</p>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

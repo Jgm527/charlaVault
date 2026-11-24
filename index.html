@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brain + Hermes — Workflow, conexiones y calidad de vida</title>
+<style>
+  :root{
+    --bg:#0b0f14;
+    --bg-2:#111722;
+    --panel:#141c27;
+    --panel-2:#18212e;
+    --line:#243140;
+    --line-soft:#1c2634;
+    --text:#e6edf5;
+    --muted:#93a3b8;
+    --dim:#6b7c92;
+    --accent:#5cc8ff;
+    --accent-2:#7c9cff;
+    --green:#57d9a3;
+    --amber:#ffc861;
+    --red:#ff7a7a;
+    --purple:#b58cff;
+    --radius:14px;
+    --mono:"Fira Code","Cascadia Code",Consolas,"Courier New",monospace;
+    --sans:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:radial-gradient(1200px 600px at 85% -10%,#152233 0%,var(--bg) 55%) fixed;
+    color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.65;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{font-family:var(--mono);font-size:.86em;background:#0a1018;border:1px solid var(--line-soft);
+       padding:.12em .38em;border-radius:6px;color:#bfe3ff;white-space:nowrap}
+  pre{font-family:var(--mono);font-size:.82rem;line-height:1.55;background:#080d14;border:1px solid var(--line);
+      border-radius:var(--radius);padding:18px 20px;overflow:auto;color:#c9d7e6;margin:0}
+  h1,h2,h3,h4{line-height:1.25;margin:0}
+  h2{font-size:1.55rem;letter-spacing:-.01em}
+  h3{font-size:1.08rem;margin-top:26px;color:#dce8f6}
+  h4{font-size:.95rem;margin-top:18px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+  p{margin:.7em 0}
+  ul,ol{margin:.6em 0;padding-left:1.3em}
+  li{margin:.35em 0}
+  strong{color:#fff}
+  em{color:#cddcee}
+  hr{border:0;border-top:1px solid var(--line-soft);margin:26px 0}
+
+  /* progress */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:60}
+
+  /* layout */
+  .layout{display:grid;grid-template-columns:290px minmax(0,1fr);min-height:100vh}
+  aside{
+    position:sticky;top:0;height:100vh;overflow:auto;padding:26px 20px 40px;
+    background:linear-gradient(180deg,#0d131b 0%,#0a0f16 100%);border-right:1px solid var(--line-soft);
+  }
+  .brand{display:flex;gap:12px;align-items:center;margin-bottom:6px}
+  .logo{
+    width:38px;height:38px;border-radius:11px;flex:0 0 auto;
+    background:conic-gradient(from 210deg,#5cc8ff,#7c9cff,#b58cff,#57d9a3,#5cc8ff);
+    display:grid;place-items:center;font-weight:800;color:#07111c;font-size:1.05rem;
+  }
+  .brand h1{font-size:1rem;letter-spacing:-.01em}
+  .brand small{display:block;color:var(--dim);font-size:.72rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+  .side-meta{font-size:.76rem;color:var(--dim);margin:10px 0 16px;line-height:1.5}
+  .search{position:relative;margin-bottom:18px}
+  .search input{
+    width:100%;background:#0a1018;border:1px solid var(--line);border-radius:10px;
+    color:var(--text);padding:10px 12px 10px 34px;font-family:var(--sans);font-size:.85rem;outline:none;
+  }
+  .search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(92,200,255,.12)}
+  .search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);opacity:.5}
+  nav a{
+    display:block;padding:7px 10px;border-radius:8px;color:var(--muted);font-size:.86rem;
+    border-left:2px solid transparent;margin:1px 0;
+  }
+  nav a:hover{background:#131c27;color:#dfeaf7;text-decoration:none}
+  nav a.active{background:rgba(92,200,255,.09);border-left-color:var(--accent);color:#eaf6ff;font-weight:600}
+  nav .num{display:inline-block;width:1.6em;color:var(--dim);font-variant-numeric:tabular-nums}
+  .side-foot{font-size:.72rem;color:#56677c;border-top:1px solid var(--line-soft);margin-top:22px;padding-top:14px}
+
+  main{padding:44px clamp(20px,5vw,64px) 90px;max-width:1150px}
+  section{scroll-margin-top:24px;margin-bottom:56px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--line-soft);padding-bottom:12px;margin-bottom:22px}
+  .sec-kicker{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.12em}
+  .sec-head h2{flex:1}
+
+  /* hero */
+  .hero{
+    border:1px solid var(--line);border-radius:20px;padding:34px 34px 28px;
+    background:linear-gradient(135deg,rgba(92,200,255,.08),rgba(124,156,255,.03) 45%,transparent 70%),var(--panel);
+    position:relative;overflow:hidden;
+  }
+  .hero:after{content:"";position:absolute;inset:auto -80px -120px auto;width:320px;height:320px;
+    background:radial-gradient(circle,rgba(124,156,255,.18),transparent 65%);pointer-events:none}
+  .tagline{font-family:var(--mono);color:var(--accent);font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;margin-bottom:10px}
+  .hero h2{font-size:clamp(1.7rem,3.2vw,2.45rem);letter-spacing:-.025em}
+  .hero .lead{color:#b9c9dc;max-width:70ch;margin-top:12px;font-size:1.02rem}
+  .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .pill{font-size:.74rem;border:1px solid var(--line);background:#0d151f;color:var(--muted);
+        padding:4px 10px;border-radius:999px;font-family:var(--mono)}
+  .pill.accent{border-color:rgba(92,200,255,.35);color:#bfe6ff;background:rgba(92,200,255,.08)}
+
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:26px}
+  .metric{background:#0c141d;border:1px solid var(--line-soft);border-radius:12px;padding:14px 16px}
+  .metric b{display:block;font-size:1.5rem;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:#fff}
+  .metric span{font-size:.75rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+
+  /* generic components */
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line-soft);border-radius:var(--radius);padding:18px 20px}
+  .card h3{margin:0 0 8px;font-size:1rem}
+  .card p{margin:.35em 0;color:#b8c8da;font-size:.92rem}
+  .card ul{margin:.4em 0 0;padding-left:1.15em}
+  .card li{font-size:.9rem;color:#b8c8da}
+  .card .k{font-family:var(--mono);font-size:.72rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:6px}
+  .card.hl{border-color:rgba(92,200,255,.28);background:linear-gradient(160deg,rgba(92,200,255,.06),transparent 55%),var(--panel)}
+
+  .callout{border-left:3px solid var(--accent);background:rgba(92,200,255,.055);border-radius:0 12px 12px 0;
+           padding:14px 18px;color:#c3d4e6;font-size:.93rem}
+  .callout.warn{border-left-color:var(--amber);background:rgba(255,200,97,.06)}
+  .callout.danger{border-left-color:var(--red);background:rgba(255,122,122,.06)}
+  .callout.good{border-left-color:var(--green);background:rgba(87,217,163,.06)}
+  .callout strong{color:#fff}
+
+  .tablewrap{overflow:auto;border:1px solid var(--line-soft);border-radius:12px}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:560px}
+  thead th{background:#0d151f;color:var(--muted);text-align:left;font-weight:600;font-size:.74rem;
+           text-transform:uppercase;letter-spacing:.07em;padding:10px 14px;border-bottom:1px solid var(--line)}
+  tbody td{padding:10px 14px;border-bottom:1px solid #1a2431;color:#c2d1e2;vertical-align:top}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover td{background:#101924}
+  td.num{font-variant-numeric:tabular-nums;white-space:nowrap;color:#dbe8f6}
+
+  .steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  .steps li{counter-increment:s;position:relative;padding:10px 14px 10px 46px;background:#0e1620;
+            border:1px solid var(--line-soft);border-radius:10px;font-size:.9rem;color:#c2d1e2}
+  .steps li:before{content:counter(s);position:absolute;left:12px;top:50%;transform:translateY(-50%);
+    width:22px;height:22px;border-radius:50%;background:rgba(92,200,255,.14);color:var(--accent);
+    display:grid;place-items:center;font-family:var(--mono);font-size:.72rem;border:1px solid rgba(92,200,255,.28)}
+
+  .risk{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 18px;border:1px solid var(--line-soft);
+        border-radius:12px;background:var(--panel);margin-bottom:10px}
+  .risk .idx{font-family:var(--mono);color:var(--red);font-size:.95rem;padding-top:2px}
+  .risk h3{margin:0 0 4px;font-size:.97rem}
+  .risk p{margin:0;color:#b6c6d8;font-size:.9rem}
+  .risk .fix{display:block;margin-top:7px;color:var(--green);font-size:.84rem}
+
+  .quote{border-left:3px solid var(--purple);padding:6px 0 6px 18px;color:#d7cbf2;font-style:italic}
+  .footer{color:var(--dim);font-size:.8rem;border-top:1px solid var(--line-soft);padding-top:18px}
+  .no-results{display:none;padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+
+  .topbar{display:none}
+  @media (max-width:920px){
+    .layout{grid-template-columns:1fr}
+    aside{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line-soft);padding:18px}
+    aside nav{display:none}
+    aside.open nav{display:block}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+    .topbar button{background:#101a25;color:var(--text);border:1px solid var(--line);border-radius:9px;
+      padding:8px 12px;font-size:.82rem;cursor:pointer}
+    main{padding:24px 18px 60px}
+    .hero{padding:24px}
+  }
+  @media print{
+    aside,#progress,.search,.topbar{display:none!important}
+    .layout{display:block}
+    body{background:#fff;color:#111;font-size:11pt}
+    main{max-width:none;padding:0}
+    .hero,.card,.metric,.risk,.tablewrap,.callout{background:#fff!important;border-color:#ccc!important;color:#111!important}
+    .hero .lead,.card p,.card li,.risk p,tbody td{color:#222!important}
+    h2,h3,strong,.metric b{color:#000!important}
+    section{page-break-inside:avoid}
+    a{color:#0645ad}
+    pre{background:#f5f5f5;color:#111;border-color:#ddd}
+    code{background:#f2f2f2;color:#111;border-color:#ddd}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div class="layout">
+  <aside id="sidebar">
+    <div class="topbar">
+      <div class="brand" style="margin:0">
+        <div class="logo">B</div>
+        <div><h1>Brain + Hermes</h1><small>Informe</small></div>
+      </div>
+      <button id="menuBtn" type="button" aria-expanded="false">Menú</button>
+    </div>
+
+    <div class="brand">
+      <div class="logo">B</div>
+      <div>
+        <h1>Brain + Hermes</h1>
+        <small>Workflow &amp; sistema</small>
+      </div>
+    </div>
+    <p class="side-meta">Revisión de <code>D:\Brain</code><br>23/11/2026 · estado documentado</p>
+
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Buscar en el informe…" autocomplete="off" aria-label="Buscar">
+    </div>
+
+    <nav id="nav">
+      <a href="#s1"><span class="num">01</span>Qué es Brain</a>
+      <a href="#s2"><span class="num">02</span>Estructura y volumen</a>
+      <a href="#s3"><span class="num">03</span>Convenciones</a>
+      <a href="#s4"><span class="num">04</span>Workflow con Hermes</a>
+      <a href="#s5"><span class="num">05</span>Todo lo conectado</a>
+      <a href="#s6"><span class="num">06</span>Calidad de vida</a>
+      <a href="#s7"><span class="num">07</span>Frágil / pendiente</a>
+      <a href="#s8"><span class="num">08</span>Resumen</a>
+      <a href="#s9"><span class="num">09</span>Fuentes</a>
+    </nav>
+
+    <div class="side-foot">
+      7.459 archivos en <code>00-raw</code><br>
+      183 skills · 430 commits<br>
+      Sin remoto de git
+    </div>
+  </aside>
+
+  <main>
+    <section id="s0">
+      <div class="hero">
+        <div class="tagline">Informe de sistema · 23/11/2026</div>
+        <h2>Brain + Hermes: el sistema operativo personal</h2>
+        <p class="lead">Un vault Obsidian en un disco externo que hace de memoria, un agente que lo lee antes de responder, un cron que convierte fuentes crudas en conocimiento atómico cada hora y una capa de automatizaciones reales alrededor.</p>
+        <div class="pillrow">
+          <span class="pill accent">Obsidian + Markdown</span>
+          <span class="pill">WSL2 Ubuntu</span>
+          <span class="pill">Hermes Agent</span>
+          <span class="pill">deepseek-v4-flash</span>
+          <span class="pill">Discord</span>
+          <span class="pill">Minecraft on-demand</span>
+          <span class="pill">n8n</span>
+          <span class="pill">Spotify</span>
+          <span class="pill">Git local</span>
+        </div>
+        <div class="metrics">
+          <div class="metric"><b>6.943</b><span>páginas declaradas</span></div>
+          <div class="metric"><b>183</b><span>skills activas</span></div>
+          <div class="metric"><b>7.459</b><span>archivos en 00-raw</span></div>
+          <div class="metric"><b>430</b><span>commits</span></div>
+          <div class="metric"><b>143</b><span>sidecars de ingesta</span></div>
+          <div class="metric"><b>468</b><span>mods en el servidor</span></div>
+        </div>
+      </div>
+      <div class="callout warn" style="margin-top:16px">
+        <strong>Alcance y límite.</strong> Revisión de <code>D:\Brain</code> (<code>index.md</code>, <code>SCHEMA.md</code>, 30 logs, <code>hermes-bootstrap/</code>, <code>04-skills/</code>, proyectos y scripts). La máquina de revisión tiene WSL con Debian y docker-desktop, <strong>no</strong> la Ubuntu donde vive <code>~/.hermes</code>: esto es el estado <strong>documentado en la bóveda</strong>, no una inspección del runtime en vivo.
+      </div>
+    </section>
+
+    <section id="s1" data-search>
+      <div class="sec-head"><span class="sec-kicker">01</span><h2>Qué es Brain</h2></div>
+      <p>Brain no es una libreta: es <strong>el disco de arranque de la identidad digital</strong>. Vive en un disco externo (<code>D:\Brain</code> en Windows, <code>/mnt/d/Brain</code> en WSL), viaja entre PCs y es la única pieza que Hermes necesita para reconstruirse.</p>
+
+      <h3>Las tres capas (<code>vault-assisted-workflow</code>)</h3>
+      <pre>Captura         →  00-inbox/ (ideas) · 00-raw/ (fuentes inmutables) · #inbox de Discord
+Procesamiento   →  Hermes + skills: busca contexto, investiga, trabaja, documenta
+Conocimiento    →  01-knowledge/ · 02-projects/ · 04-skills/ · index.md · git</pre>
+
+      <p style="margin-top:16px">El principio rector está en <code>03-identity/hermes.md</code>: <strong>el vault es la fuente de verdad</strong>; se prefiere información existente antes que inventar, y toda respuesta sustancial se documenta.</p>
+      <p class="quote">“El conocimiento se guarda SIEMPRE en el vault, no en la memoria interna del agente — el vault viaja en el disco D:, la memoria no.” — <code>03-identity/user.md</code></p>
+    </section>
+
+    <section id="s2" data-search>
+      <div class="sec-head"><span class="sec-kicker">02</span><h2>Estructura y volumen real</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Carpeta</th><th>Contenido</th><th>Ficheros</th></tr></thead>
+          <tbody>
+            <tr><td><code>00-inbox/</code></td><td>Ideas sin clasificar, scripts del servidor, Europass, diseños</td><td class="num">38</td></tr>
+            <tr><td><code>00-raw/</code></td><td>Fuentes originales (artículos, papers, PDFs, Atlantic Airlines, reels)</td><td class="num">7.459</td></tr>
+            <tr><td><code>01-knowledge/concepts</code></td><td>Conceptos técnicos (Java, SQL, redes, ATC-79, GNÓTHI, Minecraft…)</td><td class="num">611</td></tr>
+            <tr><td><code>01-knowledge/entities</code></td><td>Herramientas, tecnologías, mods, buques, canciones</td><td class="num">2.965</td></tr>
+            <tr><td><code>01-knowledge/comparisons</code></td><td>Comparativas (PS Vita, homebrew 3DS, SaaS, salas)</td><td class="num">5</td></tr>
+            <tr><td><code>02-projects/</code></td><td>17+ proyectos vivos (Maneva, GNÓTHI, ATC-79, Losy, airshow-map…)</td><td class="num">650</td></tr>
+            <tr><td><code>03-identity/</code></td><td>Perfil de usuario + 1.574 artistas + portabilidad del agente</td><td class="num">1.585</td></tr>
+            <tr><td><code>04-skills/</code></td><td>Catálogos + espejo de skills + skills legacy</td><td class="num">1.088</td></tr>
+            <tr><td><code>05-logs/</code></td><td>Un log por día/mes desde 2026-05-08 hasta 2026-11-21</td><td class="num">30</td></tr>
+            <tr><td><code>hermes-bootstrap/</code></td><td>Sistema portable de reinstalación</td><td class="num">72</td></tr>
+            <tr><td><code>sql/</code></td><td>DDL y seed del leaderboard de ATC-79</td><td class="num">2</td></tr>
+            <tr><td><code>index.md</code></td><td>Índice maestro: 710 líneas, declara 6.943 páginas</td><td class="num">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px"><strong>Git:</strong> 430 commits, rama <code>master</code>, <strong>sin remoto configurado</strong>. Hay cambios sin commitear (<code>.obsidian/*</code>, notas de Minecraft, borrados del scraper de Moodle).</p>
+    </section>
+
+    <section id="s3" data-search>
+      <div class="sec-head"><span class="sec-kicker">03</span><h2>Convenciones que sostienen todo</h2></div>
+      <p style="color:var(--muted)"><code>SCHEMA.md</code> define el contrato de la bóveda:</p>
+      <div class="grid g2">
+        <div class="card"><span class="k">Frontmatter</span><h3>Metadatos obligatorios</h3>
+          <p><code>title</code>, <code>created</code>, <code>updated</code>, <code>type</code> (concept / entity / comparison / project / log / raw / identity), <code>tags</code>, <code>confidence</code> opcional y <code>sources</code> opcional.</p></div>
+        <div class="card"><span class="k">Taxonomía</span><h3>Tags por familias</h3>
+          <p>Tecnología, herramientas/ecosistema, dominio intelectual y meta. Nada de tags inventados por nota.</p></div>
+        <div class="card"><span class="k">Grafo</span><h3>Mínimo 2 wikilinks</h3>
+          <p>Cada nota de conocimiento enlaza al menos con dos notas; al editar se actualiza <code>updated:</code>.</p></div>
+        <div class="card"><span class="k">Inmutabilidad</span><h3>00-raw no se toca</h3>
+          <p>Las fuentes originales nunca se modifican. El procesado se marca con un sidecar <code>.meta.yaml</code>.</p></div>
+        <div class="card"><span class="k">Umbral</span><h3>Cuándo crear página</h3>
+          <p>Solo si el tema es central o aparece en 2+ fuentes; si ya existe, se añade; se divide a partir de ~200 líneas.</p></div>
+        <div class="card"><span class="k">Nombres</span><h3>Minúsculas con guiones</h3>
+          <p><code>llm-agents.md</code>, nunca <code>LLM Agents.md</code>. <code>.gitattributes</code> fuerza LF y marca binarios; <code>.gitignore</code> excluye JARs, ZIPs, ISO, binarios de Minecraft y vídeos/imágenes de reels.</p></div>
+      </div>
+    </section>
+
+    <section id="s4" data-search>
+      <div class="sec-head"><span class="sec-kicker">04</span><h2>Workflow real con Hermes</h2></div>
+
+      <h3>4.1 · Stack de ejecución</h3>
+      <pre>Windows 11
+└── WezTerm (Tokyo Night, FiraCode Nerd Font, opacidad 0.92, WSL por defecto)
+    └── WSL2 Ubuntu (systemd=true, usuario javier)
+        ├── Hermes Agent en ~/.hermes/
+        │   ├── config.yaml      (modelo, toolsets, memoria, cron…)
+        │   ├── .env             (API keys y tokens)
+        │   ├── skills/          (183 activas, 26 categorías)
+        │   ├── scripts/         (brain-scan.py, brain-extract.py)
+        │   ├── cron/jobs.json   (brain-raw-ingest)
+        │   ├── memories/        (MEMORY.md + USER.md)
+        │   ├── SOUL.md          (personalidad: "Hermes")
+        │   └── kanban.db, sessions/
+        ├── hermes-gateway.service (systemd --user, linger activo)
+        └── /mnt/d/Brain         (el vault)</pre>
+      <p>Modelo y proveedor: <strong><code>deepseek-v4-flash</code> vía <code>opencode-go</code></strong> (<code>https://opencode.ai/zen/go/v1</code>, modo <code>chat_completions</code>), ~10 $/mes. <code>config.yaml</code> fija 90 turnos máximos, timeouts de gateway de 1.800 s, compresión de contexto al 50 % con ratio 0,2 y protección de los últimos 20 mensajes.</p>
+
+      <h3>4.2 · Protocolo de arranque de cada sesión</h3>
+      <p>Documentado en <code>hermes-complete-guide.md</code>; es literalmente lo primero que hace Hermes:</p>
+      <ol class="steps">
+        <li><strong>Verificar que <code>/mnt/d/Brain</code> está montado</strong> — si no, avisa antes de nada.</li>
+        <li><strong>Leer <code>03-identity/user.md</code></strong> — contexto completo del usuario.</li>
+        <li><strong>Consultar <code>index.md</code></strong> — qué existe ya, para no duplicar.</li>
+        <li>Buscar en orden: <code>03-identity</code> → <code>02-projects</code> → <code>01-knowledge</code> → <code>00-inbox</code>.</li>
+      </ol>
+
+      <h3>4.3 · Protocolo obligatorio al terminar (9 pasos)</h3>
+      <ol class="steps">
+        <li>Fuentes externas → <code>00-raw/articles/</code> o <code>00-raw/papers/</code></li>
+        <li>Conceptos nuevos → <code>01-knowledge/concepts/</code></li>
+        <li>Entidades nuevas → <code>01-knowledge/entities/</code></li>
+        <li>Comparativas → <code>01-knowledge/comparisons/</code></li>
+        <li>Si toca un proyecto → actualizar <code>02-projects/</code></li>
+        <li>Si aprendió algo del usuario → actualizar <code>03-identity/user.md</code></li>
+        <li>Entrada en <code>05-logs/YYYY-MM-log.md</code></li>
+        <li>Añadir las notas nuevas a <code>index.md</code></li>
+        <li><code>git add -A &amp;&amp; git commit -m "session: …"</code></li>
+      </ol>
+      <div class="callout good" style="margin-top:14px"><strong>Consecuencia práctica:</strong> una sesión de chat no se pierde. El log de octubre documenta decisiones, bugs, lecciones y pendientes del despliegue on-demand con un nivel de detalle que un chat normal jamás conservaría.</div>
+
+      <h3>4.4 · Memoria y personalidad</h3>
+      <div class="grid g3">
+        <div class="card"><span class="k">Memoria</span><h3>Dos capas con límite</h3>
+          <p><code>MEMORY.md</code> (2,2 KB) + <code>USER.md</code> (1,4 KB); límites de 2.200 y 1.375 caracteres, <em>nudge</em> cada 10 turnos y flush mínimo a los 6. Guarda preferencias y hechos del entorno, no progreso de tareas.</p></div>
+        <div class="card"><span class="k">Personalidad</span><h3>SOUL.md</h3>
+          <p>667 B que definen al “Hermes” directo y técnico.</p></div>
+        <div class="card"><span class="k">Estilo</span><h3>Sin relleno</h3>
+          <p>Directo y técnico, sin mencionar qué skill usa, en español, proponiendo mejoras al vault.</p></div>
+      </div>
+
+      <h3>4.5 · Sistema de skills</h3>
+      <ul>
+        <li><strong>183 skills activas</strong> en 26 categorías (medido el 21/11 en <code>agent-portability.md</code>), 72 archivadas, 0 duplicados, todo kebab-case.</li>
+        <li><strong>131 son puramente procedimentales + CLI</strong> (yt-dlp, ffmpeg, gh, python, git) → portables tal cual; 52 mencionan tools de Hermes; 23 tienen rutas <code>~/.hermes</code>; 79 descripciones pasan de 200 caracteres.</li>
+        <li><strong>Skills custom propias:</strong> <code>raw-ingest</code>, <code>vault-document-decisions</code>, <code>vault-health</code>, <code>vault-concept-splitting</code>, <code>spotify-playlist-analyzer</code>, <code>lyrics-fetching</code>, <code>project-exposition-presentations</code>, <code>revealjs-presentations</code>, <code>skill-creator</code>, <code>hermes-replication</code>, <code>maneva-protocol</code>.</li>
+        <li><strong>Regla de carga:</strong> si una skill es relevante aunque sea parcialmente, se carga y se sigue; si al usarla está desactualizada, <strong>se parchea en el momento</strong>; si una tarea compleja (5+ tool calls) revela un workflow no trivial, se ofrece guardarlo como skill.</li>
+        <li><strong>Meta-skill <code>skill-creator</code></strong> con evals, comparador, grader y viewer: las skills no son texto muerto, se miden.</li>
+      </ul>
+
+      <h3>4.6 · Catálogo de tools reales</h3>
+      <p><code>04-skills/tools-catalog.md</code> documenta los toolsets: <code>hermes-cli</code> (terminal, read/write/patch/search), <code>web</code>, <code>browser</code> (Chrome headless con snapshot, click, type, consola, visión), <code>file</code>, <code>image_gen</code>, <code>kanban</code>, <code>skills</code>, <code>spotify</code>, <code>memory</code>, <code>session_search</code>, <code>todo</code>, <code>send_message</code>, <code>delegate_task</code>, <code>clarify</code>, <code>tts</code>, <code>cronjob</code>, <code>vision_analyze</code>, <code>execute_code</code>.</p>
+      <p>Capacidades declaradas y usadas: investigación con extracción de páginas bloqueadas (403/paywall/WAF), descarga de vídeo/audio, transcripción, OCR, generación de imágenes, presentaciones Reveal, Excalidraw, GitHub (PR/issues/review/releases), subagentes en paralelo, scraping autenticado, DevOps con systemd/cron/webhooks, Office (docx/xlsx/pptx), PDF, email, Linear, monitor de precios, pentesting con Strix y las 50 skills de marketing/negocio.</p>
+
+      <h3>4.7 · Delegación, kanban, voz y compresión</h3>
+      <div class="grid g2">
+        <div class="card"><span class="k">Delegación</span><h3>Subagentes aislados</h3><ul><li>Hasta 3 hijos concurrentes, profundidad 1</li><li>50 iteraciones, timeout 600 s</li><li>Herencia de MCP toolsets</li></ul></div>
+        <div class="card"><span class="k">Kanban</span><h3>Board multi-agente</h3><ul><li>Dispatcher cada 60 s</li><li><code>heartbeat</code> y bloqueo con input humano</li></ul></div>
+        <div class="card"><span class="k">Voz</span><h3>STT + TTS</h3><ul><li>faster-whisper local (<code>base</code>)</li><li>Edge TTS <code>en-US-AriaNeural</code></li><li>Grabación con <code>Ctrl+B</code>, detección de silencio</li></ul></div>
+        <div class="card"><span class="k">Contexto</span><h3>Compresión y curator</h3><ul><li>Comprime al 50 %, ratio 0,2, protege 20 mensajes</li><li>Curator semanal: archiva a 30 días, borra a 90, backup de 5</li><li>Aprobaciones manuales (60 s) y Tirith activo</li></ul></div>
+      </div>
+    </section>
+
+    <section id="s5" data-search>
+      <div class="sec-head"><span class="sec-kicker">05</span><h2>Todo lo que está conectado</h2></div>
+
+      <h3>5.1 · Discord de Hermes — Piano Táctico</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Canal</th><th>ID</th><th>Comportamiento</th></tr></thead>
+          <tbody>
+            <tr><td><code>#general</code></td><td><code>1509282750631514264</code></td><td>Responde a todo, crea hilo automático</td></tr>
+            <tr><td><code>#inbox</code></td><td><code>1509286280662355999</code></td><td><strong>Bypass total del agente:</strong> guarda texto/adjuntos en <code>00-inbox/unprocessed/</code> con cero tokens</td></tr>
+            <tr><td><code>#notificaciones</code></td><td><code>1509282838451847191</code></td><td>Solo lectura, destino de cron</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul style="margin-top:12px">
+        <li>Bot <strong>Hermes#6795</strong>, owner <code>883351748939505674</code>, <code>require_mention: false</code> en general e inbox.</li>
+        <li>Gateway como <strong>systemd --user</strong> (<code>hermes-gateway.service</code>), arranque automático con <code>loginctl enable-linger</code>.</li>
+        <li><strong>Pitfall documentado y corregido:</strong> los canales deben ir por <strong>ID numérico</strong>; con nombres se descartaban todos los mensajes en silencio.</li>
+        <li><strong>Text batching:</strong> agrupa los chunks de 2.000 caracteres de Discord; <code>HERMES_DISCORD_TEXT_BATCH_DELAY_SECONDS=0</code> lo desactiva.</li>
+        <li><strong>El parche del inbox es manual</strong> y hay que replicarlo tras reinstalar (<code>gateway/platforms/discord.py</code>).</li>
+      </ul>
+
+      <h3>5.2 · Pipeline de ingestión automática</h3>
+      <pre>Dejas un archivo en 00-raw/  (o lo mandas a #inbox)
+        ↓
+cron brain-raw-ingest  (cada 60 min, --no-agent, deliver local)
+        ↓
+brain-scan.py  → detecta archivos SIN sidecar .meta.yaml
+                 clasifica image/pdf/text/binary, calcula sha256 de cabecera
+        ↓
+skill brain-vault/raw-ingest
+   PDF   → brain-extract.py (pymupdf, página a página)
+   Imagen→ vision tool
+   Texto → lectura directa (utf-8 / latin-1 / utf-16)
+        ↓
+notas atómicas en 01-knowledge/ + sidecar [archivo].meta.yaml
+        ↓
+nunca se reprocesa</pre>
+      <ul style="margin-top:12px">
+        <li><strong>143 sidecars</strong> ya generados en <code>00-raw/</code>.</li>
+        <li>El sidecar es el marcador de “procesado”; el escaneo ignora <code>.meta.yaml</code>, ocultos y basura del sistema.</li>
+        <li><strong>Tirith</strong> bloquea el cron si el prompt ensamblado contiene patrones destructivos (<code>rm -rf /…</code>) — incluso dentro de bloques de código markdown. Eso mantuvo el cron muerto desde el 9 de mayo hasta que se documentó y se reescribió la skill.</li>
+        <li>Test manual: <code>python3 ~/.hermes/scripts/brain-scan.py</code>.</li>
+      </ul>
+
+      <h3>5.3 · Bot de Discord del servidor Losy</h3>
+      <p>Independiente de Hermes. Python + discord.py en el portátil-servidor (<code>piano@192.168.0.5</code>, systemd <code>discord-bot.service</code>), hablando con Minecraft por <strong>RCON en 127.0.0.1:25575</strong>.</p>
+      <div class="grid g2">
+        <div class="card hl"><span class="k">Chat y avisos</span><h3>Minecraft ↔ Discord</h3><ul>
+          <li>Chat bidireccional (filtra <code>/</code>, limpia prefijos de rango FTB)</li>
+          <li>Embeds de conexión/desconexión, logros, muertes y estado</li>
+          <li>Convención de colores: verde/rojo = estado, azul/gris = jugadores, naranja/cian = backups, amarillo = logros, morado = muertes</li>
+        </ul></div>
+        <div class="card"><span class="k">Comandos</span><h3>Slash commands</h3><ul>
+          <li><code>/online</code>, <code>/status</code> (TPS vía Spark, RAM y uptime de <code>/proc</code>)</li>
+          <li><code>/anunciar</code>, <code>/whitelist</code>, <code>/start</code>, <code>/close</code></li>
+          <li><strong>Whitelist por reacción ✅</strong> con toggle: quitar la reacción revoca, expulsa del juego y retira el rol</li>
+        </ul></div>
+        <div class="card"><span class="k">Ciclo de vida</span><h3>Modo on-demand (27/10)</h3><ul>
+          <li>El Java no arranca al boot; <code>/start</code> lo levanta (3-6 min con 468 mods)</li>
+          <li><code>/close</code>: cuenta atrás de 60 s dentro del juego, <code>save-all</code>, <code>stop</code> graceful y fallback a <code>systemctl stop</code></li>
+          <li>Auto-cierre por inactividad a los 30 min con 0 jugadores, aviso ⏲️</li>
+        </ul></div>
+        <div class="card"><span class="k">Robustez</span><h3>Vigilante y permisos</h3><ul>
+          <li>Vigilante de estado cada 30 s, solo emite en cambio real (lock antiduplicados), se sincroniza sin emitir al arrancar</li>
+          <li>Lector de log tolerante a 2/3/4 prefijos <code>[...]</code> — antes descartaba joins en silencio</li>
+          <li><code>/start</code> y <code>/close</code> solo rol <strong>Minecraft Verificado</strong> + canal <code>#mc-info</code>; sudoers NOPASSWD limitado a <code>systemctl start|stop minecraft</code></li>
+        </ul></div>
+      </div>
+
+      <h3>5.4 · Servidor Minecraft Losy</h3>
+      <ul>
+        <li>Portátil i5-1135G7 / 16 GB como servidor dedicado en Ubuntu Server nativo (dual boot), tapa cerrada con override de <code>logind</code> y <code>conservation_mode</code>.</li>
+        <li><strong>Forge 1.20.1</strong>, 492 mods cliente / 468 servidor, pack cerrado el 04/08; mundo de <strong>47 GB</strong> migrado por rsync; pregeneración completa de 19 dimensiones (overworld 667.755 chunks, nether 1.002.001, End 769.129).</li>
+        <li><strong>FTB Ranks + FTB Essentials:</strong> 4 rangos automáticos por playtime, kit inicial, warps, <code>/rtp</code>.</li>
+        <li><strong>Knightmare's Shop:</strong> 1.116 items en 9 categorías, compra/venta verificadas (sustituyó a SDMShop, cuyo formato NBT se descifró antes).</li>
+        <li><strong>Web:</strong> Astro + Tailwind en Vercel, landing de una pantalla, catálogo de 494 mods generado desde la propia wiki del vault (<code>generate-mods-data.mjs</code>), descargas por Google Drive. BlueMap se quitó (50 GB de render).</li>
+      </ul>
+      <div class="card" style="margin-top:12px"><span class="k">Backup diario · 9:00</span><h3>Doble modo</h3>
+        <p><strong>Servidor arriba:</strong> aviso en juego, parada graceful, <code>tar --zstd</code> de <code>world</code> + <code>config</code> + <code>server.properties</code>, rearranque.</p>
+        <p><strong>Servidor parado:</strong> copia offline silenciosa, sin tocar servicios.</p>
+        <p>Rotación a 2 copias, limpieza de logs &gt;7 días y crash-reports &gt;30 días, flag <code>/tmp/mc-backup-running</code> con <code>trap</code> de limpieza, embeds 💾/✅ por webhook. Hooks: <code>aviso-inicio</code> deshabilitado (mentía con el <code>Done</code> viejo del log), <code>aviso-apagado</code> se mantiene (el 🔴 real al apagar el portátil). <code>bootfix-losy.sh</code> y <code>desplegar-losy.sh</code> cubren diagnóstico, limpieza de <code>Wants/Requires</code>, <code>visudo -c</code> y checklist post-deploy.</p>
+      </div>
+
+      <h3>5.5 · n8n Cloud — Atlantic Airlines</h3>
+      <p>Workflow <code>ahCudNQyQXRunJkr</code>, activo, todos los días a las 09:00: <strong>Schedule → RSS (aviation24.be, 5 noticias) → Code (monta el texto) → HTTP a OpenCode/Gemini → webhook de Discord</strong> en <code>#comunicados-externos</code>. Está exportado en la raíz del vault (<code>atlantic-airlines-n8n-workflow.json</code>), con la API key y la URL del webhook como placeholders.</p>
+
+      <h3>5.6 · Spotify</h3>
+      <p>Plugin propio de ~3.400 líneas y 8 familias de tools (<code>search</code>, <code>playback</code>, <code>playlists</code>, <code>library</code>, <code>devices</code>, <code>queue</code>, <code>albums</code>). La skill <code>spotify-playlist-analyzer</code> convierte una playlist en un grafo del vault: canciones en <code>entities/songs/</code>, artistas en <code>03-identity/artists/</code>, géneros en <code>concepts/genres/</code>, con letras, traducciones EN/ES y audio features. Resultado actual: <strong>2.359 canciones analizadas, 1.574 artistas, 1.116+ con perfil</strong>.</p>
+
+      <h3>5.7 · Instagram / reels</h3>
+      <p>Pipeline ya probado (09/06): <code>yt-dlp --cookies</code> + <code>gallery-dl</code>, 4-10 frames por vídeo, OCR con tesseract, metadata y notas. En <code>00-raw/articles/instagram-reels/2026-08-29/</code> hay <strong>86 documentos, 16 carpetas con OCR, metadata JSON y 4 repos de skills originales</strong> (marketing, emilkowalski, remotion, strix). Sin cuenta de agente: usa las cookies del usuario, que caducan ~48 h.</p>
+
+      <h3>5.8 · Otros conectados</h3>
+      <div class="grid g2">
+        <div class="card"><span class="k">Obsidian</span><h3>Core, sin plugins</h3><p>Solo plugins core (sync, bases, daily notes, templates, canvas, properties, graph, backlinks, outline, word count, file recovery). <strong>Cero plugins de comunidad</strong> — el vault está deliberadamente “a pelo”.</p></div>
+        <div class="card"><span class="k">Infra y datos</span><h3>Vercel · Drive · Supabase · Moodle</h3><p>Google Drive para el modpack, Vercel para la web, Supabase/n8n en Maneva, Moodle con scraper propio (sesión HTTP + API REST), PostgreSQL/MongoDB en Atlantic Airlines y ATC-79.</p></div>
+        <div class="card"><span class="k">Portabilidad</span><h3>Bus de agente</h3><p><code>D:\Brain\agent\</code> como fuente de verdad con <code>AGENTS.md</code>, skills planas, <code>env.example</code> y <code>sync.sh</code>; <code>~/.agents/skills</code> lo leen OpenCode y Gemini gratis, Claude Code por symlinks, Codex por AGENTS.md. Export revisable de 13,4 MB / 1.261 archivos, con secretos excluidos.</p></div>
+        <div class="card"><span class="k">Git</span><h3>Versionado local</h3><p>430 commits en <code>master</code>, sin remoto. El vault se versiona como conocimiento, pero el historial no sale del disco externo.</p></div>
+      </div>
+    </section>
+
+    <section id="s6" data-search>
+      <div class="sec-head"><span class="sec-kicker">06</span><h2>Calidad de vida construida</h2></div>
+      <div class="grid g2">
+        <div class="card hl"><span class="k">En Hermes</span><h3>Bootstrap de un comando</h3>
+          <p>Reconstruye todo el entorno en un PC nuevo: detecta el vault, configura WSL, PATH y dependencias, instala Hermes, restaura <code>config.yaml</code> (con backup), crea <code>.env</code> interactivo pidiendo cada key con explicación de dónde sacarla, copia skills y scripts, crea el cron y ejecuta <code>hermes doctor --fix</code>. El <code>.ps1</code> instala además WSL, WezTerm y 18 variantes de FiraCode.</p></div>
+        <div class="card"><span class="k">En Hermes</span><h3>Idempotencia</h3><p>No sobreescribe config, no re-pide keys ya puestas y verifica 0 errores al final. Repetir el bootstrap no rompe nada.</p></div>
+        <div class="card"><span class="k">En Hermes</span><h3>Contexto domado</h3><p>Memoria con límites de caracteres (no se infla), compresión automática, curator que archiva skills muertas, checkpoints, guardrails de tool-loop con avisos y parada dura.</p></div>
+        <div class="card"><span class="k">En Hermes</span><h3>Sesiones y voz</h3><p>Sesiones buscables (<code>session_search</code>), logs de trayectoria, TTS/STT y personalidades múltiples.</p></div>
+        <div class="card"><span class="k">En el vault</span><h3>Índice y auditoría</h3><ul>
+          <li><code>index.md</code> como catálogo maestro con resumen de una línea por página — evita duplicados</li>
+          <li><code>vault-health</code>: wikilinks rotos, huérfanos, ghost artifacts y conteos desfasados</li>
+          <li><code>vault-concept-splitting</code>: no crear monolitos</li>
+          <li><code>vault-document-decisions</code>: lo no documentado se considera trabajo perdido</li>
+        </ul></div>
+        <div class="card"><span class="k">En el vault</span><h3>Captura y memoria</h3><ul>
+          <li>Logs con decisión, motivación, verificación, bugs, lecciones, pendientes y “cómo volver atrás”</li>
+          <li><code>00-inbox</code> como buffer sin fricción y <code>#inbox</code> de Discord como entrada desde el móvil sin gastar tokens</li>
+          <li><code>.gitignore</code>/<code>.gitattributes</code> afinados para no inflar el repo ni romper entre Windows y WSL</li>
+          <li>Pitfalls reales documentados: IDs de canal, Tirith, <code>UnboundLocalError</code> en <code>on_ready</code>, sync de comandos, WiFi vs servidor, cookies de Instagram</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section id="s7" data-search>
+      <div class="sec-head"><span class="sec-kicker">07</span><h2>Frágil o pendiente</h2></div>
+
+      <div class="risk"><div class="idx">01</div><div>
+        <h3>Secretos dentro del repo</h3>
+        <p><code>hermes-bootstrap/.env.template</code> contiene una API key y un token de Discord reales; <code>00-inbox/backup.sh</code> lleva la contraseña de RCON en claro; <code>instagram-cookies.txt</code> está en la raíz; y <code>02-projects/moodle-scraper/.env</code> aparece trackeado en <code>git status</code>.</p>
+        <span class="fix">→ Están en el historial de git: rotarlos es más urgente que borrarlos.</span></div></div>
+
+      <div class="risk"><div class="idx">02</div><div>
+        <h3>El espejo de skills está desfasado</h3>
+        <p><code>04-skills/system/</code> tiene 112 skills frente a las 183 reales (faltan 115, sobran 44). <code>04-skills/index.md</code> todavía habla de 110.</p>
+        <span class="fix">→ La fuente de verdad es <code>~/.hermes/skills</code>, no el vault. Falta un rsync automático.</span></div></div>
+
+      <div class="risk"><div class="idx">03</div><div>
+        <h3>No hay remoto de git</h3>
+        <p>430 commits viven solo en el disco externo: si ese disco muere, se pierde el historial (el markdown sigue ahí, pero sin versiones).</p>
+        <span class="fix">→ Añadir remoto privado y push periódico desde el cron.</span></div></div>
+
+      <div class="risk"><div class="idx">04</div><div>
+        <h3>El índice miente en los números</h3>
+        <p>Declara 6.943 páginas, hay ~6.900 ficheros en total, y arrastra líneas corruptas (<code>||</code>, <code>|-</code>) y enlaces a notas que ya no existen.</p>
+        <span class="fix">→ Pasar <code>vault-health</code> con más frecuencia y regenerar conteos.</span></div></div>
+
+      <div class="risk"><div class="idx">05</div><div>
+        <h3>Parche del inbox y hooks manuales</h3>
+        <p>Tras reinstalar, el bootstrap no restaura el parche de <code>discord.py</code> ni los hooks <code>aviso-*</code>. Es el punto donde una migración “funciona” pero pierde una función silenciosa.</p>
+        <span class="fix">→ Incluirlos en el bootstrap o en un script de post-instalación.</span></div></div>
+
+      <div class="risk"><div class="idx">06</div><div>
+        <h3>Puertos abiertos a la LAN</h3>
+        <p>RCON y 25565 estaban abiertos a la LAN (22/25565/25575) según el log del 27/10; el firewall quedó pendiente.</p>
+        <span class="fix">→ ufw cerrando 25565/25575 a la LAN manteniendo 22/SSH.</span></div></div>
+
+      <div class="risk"><div class="idx">07</div><div>
+        <h3>Cookies de Instagram caducas</h3>
+        <p>Caducan en ~48 h y el pipeline falla en silencio; la propia nota de cuentas de plataforma lo identifica como el freno real.</p>
+        <span class="fix">→ Alerta explícita (Discord) cuando el worker falla por sesión caducada.</span></div></div>
+
+      <div class="risk"><div class="idx">08</div><div>
+        <h3>Ruido en la raíz</h3>
+        <p><code>Sin título.canvas</code> vacío y el JSON de n8n suelto en la raíz rompen la convención de nombres del propio <code>SCHEMA.md</code>.</p>
+        <span class="fix">→ Mover el JSON a <code>02-projects/</code> y borrar el canvas vacío.</span></div></div>
+    </section>
+
+    <section id="s8" data-search>
+      <div class="sec-head"><span class="sec-kicker">08</span><h2>Resumen en una frase</h2></div>
+      <div class="hero" style="padding:26px 28px">
+        <p class="lead" style="margin:0">Tienes un <strong>sistema operativo personal</strong>, no una bóveda de notas: captura sin fricción, un agente que lee tu perfil antes de responder, un cron que convierte <code>00-raw</code> en conocimiento atómico cada hora, documentación obligatoria con commit, y una capa de automatizaciones reales (Discord, Minecraft on-demand con backups, n8n, Spotify, Moodle) gobernada desde un disco que viaja contigo.</p>
+        <p class="lead" style="margin-top:14px">Lo que le falta para ser sólido no es más funcionalidad: es <strong>sacar los secretos del repo, ponerle remoto a git y automatizar la resincronización de skills</strong>.</p>
+      </div>
+    </section>
+
+    <section id="s9" data-search>
+      <div class="sec-head"><span class="sec-kicker">09</span><h2>Fuentes inspeccionadas</h2></div>
+      <div class="grid g2">
+        <div class="card"><span class="k">Raíz</span><h3>Estructura</h3><p><code>index.md</code> · <code>SCHEMA.md</code> · <code>.gitignore</code> · <code>.gitattributes</code></p></div>
+        <div class="card"><span class="k">Identidad</span><h3>Hermes y usuario</h3><p><code>hermes.md</code> · <code>hermes-complete-guide.md</code> · <code>user.md</code> · <code>agent-portability.md</code></p></div>
+        <div class="card"><span class="k">Conocimiento</span><h3>Conceptos y entidades</h3><p><code>hermes-bootstrap</code> · <code>hermes-discord-config</code> · <code>hermes-discord-gateway</code> · <code>hermes-cron-tirith-security</code> · <code>vault-assisted-workflow</code> · <code>hermes-discord-bot</code></p></div>
+        <div class="card"><span class="k">Skills</span><h3>Catálogos y espejo</h3><p><code>04-skills/index.md</code> · <code>skills-catalog.md</code> · <code>tools-catalog.md</code> · <code>hermes-bootstrap/skills/**</code></p></div>
+        <div class="card"><span class="k">Bootstrap</span><h3>Instalación portable</h3><p><code>config.yaml</code> · <code>.env.template</code> · <code>hermes-bootstrap.ps1</code> · <code>hermes-bootstrap.sh</code> · <code>wsl.conf</code> · <code>.wezterm.lua</code> · <code>brain-scan.py</code> · <code>brain-extract.py</code></p></div>
+        <div class="card"><span class="k">Servidor</span><h3>Minecraft / Losy</h3><p><code>bot.py</code> · <code>backup.sh</code> · <code>bootfix-losy.sh</code> · <code>desplegar-losy.sh</code> · <code>discord-bot.service</code> · <code>minecraft.service</code> · <code>minecraft-server-overview.md</code></p></div>
+        <div class="card"><span class="k">Proyectos</span><h3>Automatizaciones</h3><p><code>atlantic-airlines-discord-automation.md</code> · <code>cuentas-plataformas-agentes-ia.md</code> · <code>atlantic-airlines-n8n-workflow.json</code></p></div>
+        <div class="card"><span class="k">Historial</span><h3>Logs y git</h3><p><code>05-logs/index.md</code> · logs 2026-06 a 2026-11 · <code>git log</code> / <code>git status</code> · <code>.obsidian/*</code></p></div>
+      </div>
+    </section>
+
+    <p class="footer">Generado el 23/11/2026 a partir de la bóveda <code>D:\Brain</code>. Documento autocontenido: sin CDN, sin fuentes externas, sin scripts de terceros.</p>
+  </main>
+</div>
+
+<div class="no-results" id="noResults">Sin resultados para esa búsqueda.</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- barra de progreso ---- */
+  var bar = document.getElementById('progress');
+  function updateBar(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  document.addEventListener('scroll', updateBar, {passive:true});
+  updateBar();
+
+  /* ---- scrollspy ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var i = sections.indexOf(e.target);
+        if (i < 0) return;
+        links.forEach(function(l){ l.classList.remove('active'); });
+        links[i].classList.add('active');
+      });
+    }, {rootMargin:'-15% 0px -70% 0px', threshold:0});
+    sections.forEach(function(s){ if (s) io.observe(s); });
+  }
+
+  /* ---- buscador ---- */
+  var q = document.getElementById('q');
+  var main = document.querySelector('main');
+  var noRes = document.getElementById('noResults');
+  var allSections = Array.prototype.slice.call(document.querySelectorAll('main section[data-search]'));
+
+  function normalize(s){
+    return (s || '').toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  }
+
+  function runSearch(){
+    var term = normalize(q.value.trim());
+    if (!term) {
+      allSections.forEach(function(s){ s.style.display = ''; });
+      links.forEach(function(l){ l.parentNode.style.display=''; });
+      noRes.style.display = 'none';
+      return;
+    }
+    var visible = 0;
+    allSections.forEach(function(s){
+      var hit = normalize(s.textContent).indexOf(term) !== -1;
+      s.style.display = hit ? '' : 'none';
+      if (hit) visible++;
+    });
+    /* reflejar en la navegación */
+    links.forEach(function(l){
+      var target = document.querySelector(l.getAttribute('href'));
+      l.style.display = (target && target.style.display !== 'none') ? '' : 'none';
+    });
+    noRes.style.display = visible ? 'none' : 'block';
+  }
+  q.addEventListener('input', runSearch);
+  q.addEventListener('search', runSearch);
+
+  /* ---- menú móvil ---- */
+  var menuBtn = document.getElementById('menuBtn');
+  var sidebar = document.getElementById('sidebar');
+  menuBtn.addEventListener('click', function(){
+    var open = sidebar.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.forEach(function(l){
+    l.addEventListener('click', function(){
+      if (window.innerWidth <= 920) sidebar.classList.remove('open');
+    });
+  });
+
+  /* ---- atajos ---- */
+  document.addEventListener('keydown', function(e){
+    if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+    if (e.key === 'Escape' && document.activeElement === q) { q.value=''; runSearch(); q.blur(); }
+  });
+})();
+</script>
+</body>
+</html>

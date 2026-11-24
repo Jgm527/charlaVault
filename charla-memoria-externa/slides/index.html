@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Memoria externa · 5 minutos</title>
+
+<!-- Motor vendorizado: sin CDN, sin fuentes web -->
+<link rel="stylesheet" href="../vendor/reveal/dist/reset.css" />
+<link rel="stylesheet" href="../vendor/reveal/dist/reveal.css" />
+
+<style>
+  /* TEMA */
+  :root {
+    --bg: #0b0f14;
+    --ink: #e8eef5;
+    --ink-mid: #c9d6e2;
+    --ink-dim: #7f8f9f;
+    --accent: #5cc8ff;
+    --line: #1e2a35;
+    --mono: "Cascadia Code", Consolas, "Courier New", monospace;
+    --sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+
+  /* BASE */
+  html, body, .reveal-viewport { background: var(--bg); }
+  .reveal { font-family: var(--sans); color: var(--ink); font-weight: 400; }
+  .reveal .slides { text-align: left; }
+  .reveal .slides section { height: 1080px; overflow: hidden; background: var(--bg); }
+  .reveal .progress, .reveal .controls, .reveal .slide-number { display: none; }
+
+  .frame {
+    position: absolute; inset: 0;
+    padding: 110px 170px;
+    display: flex; flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  /* ROLES TIPOGRÁFICOS: máquina (mono) · voz (300) · remate (800) */
+  .mono { font-family: var(--mono); }
+  .voz { font-weight: 300; letter-spacing: -.012em; }
+  .remate { font-weight: 800; letter-spacing: -.04em; }
+
+  /* El indicador de contexto: firma del mazo */
+  .gauge { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,.07); }
+  .gauge span { display: block; height: 100%; width: 8%; background: var(--accent); opacity: .8; }
+
+  .cursor {
+    display: inline-block; background: var(--accent);
+    animation: blink 1.06s steps(1, end) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+
+  .ph {
+    border: 2px dashed rgba(92,200,255,.28);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 22px; letter-spacing: .2em;
+    text-transform: uppercase; color: rgba(92,200,255,.45);
+  }
+
+  /* S1 · portada */
+  .s1 { justify-content: center; }
+  .clock { font-family: var(--mono); font-size: 240px; line-height: .9; letter-spacing: -.055em; color: #f2f7fb; margin: 0; }
+  .clock .ampm { font-size: 62px; letter-spacing: .26em; color: var(--ink-dim); margin-left: 34px; vertical-align: 26px; }
+  .clock .cursor { width: 10px; height: 172px; margin-left: 14px; vertical-align: -12px; }
+  .s1 .rule { width: 172px; height: 3px; background: var(--accent); opacity: .85; margin: 84px 0 62px; }
+  .s1 .lede { font-size: 84px; font-weight: 300; letter-spacing: -.012em; color: var(--ink-mid); margin: 0; }
+
+  /* S2 · el muro (una grande + dos bandas, sin recortes) */
+  .s2 { justify-content: center; gap: 56px; }
+  .wall { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 24px; height: 620px; }
+  .wall img { width: 100%; height: 100%; object-fit: contain; object-position: center; border: 1px solid var(--line); display: block; background: #070a0e; }
+  .wall img.big { grid-row: span 2; }
+  .s2 .claim { font-size: 64px; font-weight: 300; letter-spacing: -.015em; margin: 0; color: var(--ink); }
+
+  /* S3 · una carpeta */
+  .s3 { justify-content: center; }
+  .s3 .row { display: grid; grid-template-columns: 1.05fr .95fr; gap: 90px; align-items: center; }
+  .s3 h2 { font-size: 80px; font-weight: 300; letter-spacing: -.02em; margin: 0; line-height: 1.14; }
+  .s3 h2 .faint { color: var(--ink-dim); }
+  .s3 .ph { height: 580px; }
+
+  /* S4 · hermes.md */
+  .s4 { justify-content: center; }
+  .file-head { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; font-family: var(--mono); font-size: 26px; color: var(--ink-dim); letter-spacing: .06em; }
+  .file-head i { width: 12px; height: 12px; border: 1px solid var(--line); border-radius: 50%; display: inline-block; }
+  .code { font-family: var(--mono); font-size: 40px; line-height: 1.5; margin: 0; }
+  .code .ln { display: block; width: max-content; max-width: 100%; padding: 12px 30px 12px 40px; color: #7f909f; }
+  .code .ln.hi { color: #eef5fb; background: rgba(92,200,255,.08); box-shadow: inset 3px 0 0 var(--accent); }
+  .code .ln .arrow { color: var(--accent); }
+  .code .ln .n { display: inline-block; width: 74px; text-align: right; margin-right: 26px; color: #3f4d5a; }
+  .code .ln.gap { color: #35424e; }
+  .file-head .count { margin-left: auto; color: #4a5a68; letter-spacing: 0; }
+
+  /* S5 · la estructura entera: la ruta de búsqueda arriba, el resto atenuado abajo */
+  .s5 { justify-content: center; }
+  .map { display: flex; flex-direction: column; }
+  .row5 { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; }
+  .row5 .k { font-family: var(--mono); font-size: 58px; line-height: 1.12; letter-spacing: -.025em; color: var(--ink); }
+  .row5 .d { font-size: 25px; font-weight: 300; color: var(--ink-dim); }
+  /* Las carpetas de las que no hablamos: mismo tamaño, sin flecha y bien apagadas */
+  .row5.muted .k { color: #64757f; }
+  .row5.muted .d { color: #44515c; }
+
+  /* S6 · schema */
+  .s6 { justify-content: center; gap: 52px; }
+  .s6 .code { font-size: 34px; }
+  .s6 .format { font-size: 48px; font-weight: 300; letter-spacing: -.015em; color: var(--ink-mid); margin: 0; }
+  .s6 .format b { font-family: var(--mono); font-weight: 400; color: var(--accent); }
+
+  /* S7 · vault vs obsidian */
+  .s7 { justify-content: center; }
+  .row7 { display: grid; grid-template-columns: 320px 1fr; align-items: baseline; gap: 50px; padding: 54px 0; border-top: 1px solid var(--line); }
+  .row7:last-child { border-bottom: 1px solid var(--line); }
+  .row7 .k { font-family: var(--mono); font-size: 50px; color: var(--accent); letter-spacing: .04em; }
+  .row7 .v { font-size: 84px; font-weight: 300; letter-spacing: -.02em; color: var(--ink); }
+
+  /* S8 · grafo */
+  .s8 { padding: 0; }
+  .s8 .ph { position: absolute; inset: 0; border: 0; color: rgba(92,200,255,.22); font-size: 22px; }
+
+  /* S9 · la pregunta */
+  .s9 { justify-content: center; }
+  .prompt { font-family: var(--mono); font-size: 78px; letter-spacing: -.02em; color: #f2f7fb; margin: 0; }
+  .prompt .cursor { width: 8px; height: 62px; margin-left: 12px; vertical-align: -6px; }
+
+  /* S11 · rescate */
+  .s11 { justify-content: center; }
+  .s11 .a { font-size: 76px; font-weight: 300; letter-spacing: -.015em; color: var(--ink-dim); margin: 0 0 14px; }
+  .s11 .b { font-size: 76px; font-weight: 300; letter-spacing: -.015em; color: #f2f7fb; margin: 0; }
+
+  /* S12 · cuatro piezas */
+  .s12 { padding: 130px 150px; }
+  .grid12 { position: relative; width: 100%; height: 100%; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; }
+  .links { position: absolute; inset: 0; width: 100%; height: 100%; stroke: var(--line); stroke-width: 1.5; }
+  /* position + z-index: sin esto el SVG absoluto se pinta ENCIMA de los nodos */
+  .node { position: relative; z-index: 1; background: var(--bg); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 54px; font-weight: 300; color: #dbe6f0; }
+  .links { z-index: 0; }
+  .node.n1 { grid-area: 1 / 1; } .node.n2 { grid-area: 1 / 3; }
+  .node.n3 { grid-area: 3 / 1; } .node.n4 { grid-area: 3 / 3; }
+  .hub { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--bg); border: 1px solid rgba(92,200,255,.6); color: var(--accent); font-family: var(--mono); font-size: 42px; letter-spacing: .26em; text-indent: .26em; padding: 44px 64px; white-space: nowrap; }
+
+  /* S13 · el número */
+  .s13 { justify-content: center; }
+  .big { font-size: 146px; font-weight: 300; letter-spacing: -.035em; line-height: 1.05; color: var(--ink); margin: 0; }
+  .big .num { font-variant-numeric: tabular-nums; color: var(--accent); }
+
+  /* S14 · cierre */
+  .s14 { justify-content: center; }
+  .s14 .above { font-size: 96px; font-weight: 300; letter-spacing: -.015em; color: var(--ink-dim); margin: 0 0 56px; }
+  .s14 .full { font-size: 146px; font-weight: 800; letter-spacing: -.04em; color: #f2f7fb; margin: 0; line-height: 1.12; }
+  .s14 .dot { color: var(--accent); }
+
+  /* NOTAS: no se ven al proyectar */
+  .reveal aside.notes { font-family: var(--sans); font-size: 20px; line-height: 1.55; }
+</style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ================= S1 · HOOK ================= -->
+    <section>
+      <div class="frame s1">
+        <h1 class="clock">2:00<span class="ampm">AM</span><span class="cursor"></span></h1>
+        <div class="rule"></div>
+        <p class="lede">El contexto se agotó.</p>
+        <div class="gauge"><span></span></div>
+      </div>
+      <aside class="notes">
+        Son las 2 de la mañana, llevas 3 horas trabajando, le preguntas algo a tu modelo, pero te responde
+        con que has alcanzado el límite, te vas a otro modelo, pero, ahora tienes que explicarle otra vez
+        todo tu proyecto y en lo que estabas trabajando, escribiéndole el mismo contexto que ya le habías
+        dicho al otro hace unas horas.
+
+        El problema no es el modelo. El problema es que no se acuerda de nada. Y no se acuerda porque no
+        tiene dónde.
+
+        — Cero prisa en la primera frase: deja que se lea la hora.
+      </aside>
+    </section>
+
+    <!-- ================= S2 · EL MURO ================= -->
+    <section>
+      <div class="frame s2">
+        <div class="wall">
+          <img class="big" src="../../recursos/limite_claude.jpg" alt="Límite alcanzado en Claude" />
+          <img src="../../recursos/limite_codex.png" alt="Límite alcanzado en Codex" />
+          <img src="../../recursos/limite_opencode.webp" alt="Límite alcanzado en OpenCode" />
+        </div>
+        <p class="claim">todos tienen un límite</p>
+      </div>
+      <aside class="notes">
+        ¿A quién no le ha pasado? Este muro lo hemos visto todos: Claude, Codex, OpenCode. Y Copilot,
+        y ChatGPT, y el que venga. Todos tienen un límite.
+
+        Coña opcional, sin slide: «como somos pobres no tenemos más límites». Si el ambiente no está
+        para bromas, se salta sin más: la frase de arriba ya sostiene la slide.
+
+        — ANTES de proyectar: comprobar que en los tres recortes no se ve ningún correo ni avatar.
+      </aside>
+    </section>
+
+    <!-- ================= S3 · UNA CARPETA ================= -->
+    <section>
+      <div class="frame s3">
+        <div class="row">
+          <h2>una carpeta.<br /><span class="faint">nada especial.</span></h2>
+          <!-- SUSTITUIR por: <img src="../../recursos/vault-raiz.png" style="height:580px;object-fit:cover;border:1px solid var(--line)"> -->
+          <div class="ph">raíz del vault</div>
+        </div>
+      </div>
+      <aside class="notes">
+        Esto de aquí es una carpeta, con archivos de texto .md, nada especial.
+
+        Lo que convierte todo esto en memoria son las reglas que le damos a los agentes para que usen
+        estos archivos antes de trabajar.
+
+        — Pendiente: captura del explorador en la raíz del vault, con el panel de carpetas visible.
+      </aside>
+    </section>
+
+    <!-- ================= S4 · HERMES.MD ================= -->
+    <section>
+      <div class="frame s4">
+        <div class="file-head"><i></i> 03-identity/hermes.md <span class="count">⋯ 56 líneas · 7 secciones</span></div>
+        <div class="code">
+          <span class="ln"><span class="n">1</span># Hermes System</span>
+          <span class="ln gap"><span class="n">⋯</span></span>
+          <span class="ln hi"><span class="n">7</span>- El vault es la fuente de verdad</span>
+          <span class="ln gap"><span class="n">⋯</span></span>
+          <span class="ln hi"><span class="n">33</span>- Guarda aprendizajes en:</span>
+          <span class="ln hi"><span class="n">34</span>  - /03-identity/user.md</span>
+          <span class="ln"><span class="n">37</span>## Estilo de respuesta</span>
+        </div>
+      </div>
+      <aside class="notes">
+        En mi caso se llama hermes.md porque es el harness que utilizo, pero se puede incluir en AGENTS.md
+        o en cualquier otro archivo siempre y cuando lo enrutéis al modelo.
+
+        En este hermes.md tiene estipulado que lo que hay en el vault es una fuente de la verdad, y tiene
+        definido un orden de búsqueda por prioridades: accede primero a identidad, luego a proyectos y por
+        último a conocimiento.
+      </aside>
+    </section>
+
+    <!-- ================= S5 · ORDEN ================= -->
+    <section>
+      <div class="frame s5">
+        <div class="map">
+          <div class="row5 muted">
+            <span class="k">00-inbox</span>
+            <span class="d">ideas sin clasificar</span>
+          </div>
+          <div class="row5 muted">
+            <span class="k">00-raw</span>
+            <span class="d">fuentes originales, inmutables</span>
+          </div>
+          <div class="row5">
+            <span class="k">01-knowledge</span>
+            <span class="d">conceptos y entidades</span>
+          </div>
+          <div class="row5">
+            <span class="k">02-projects</span>
+            <span class="d">trabajo activo</span>
+          </div>
+          <div class="row5">
+            <span class="k">03-identity</span>
+            <span class="d">perfil y preferencias</span>
+          </div>
+          <div class="row5 muted">
+            <span class="k">04-skills</span>
+            <span class="d">procesos que uso</span>
+          </div>
+          <div class="row5 muted">
+            <span class="k">05-logs</span>
+            <span class="d">una entrada por sesión</span>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        Ese orden es lo que hace que no tenga que explicarle quién soy, cómo responderme, ni pegarle el
+        contexto exacto del proyecto en el que esté trabajando. Está escrito y lo lee.
+
+        — Si alguien pregunta cómo se enruta: va en el archivo de identidad que el agente carga al
+          arrancar; en otros agentes es AGENTS.md.
+        — Dato: el archivo lista CUATRO prioridades (la cuarta es /00-inbox). El guion dice tres; si
+          quieres ser exacto, añade la bandeja de entrada al decirlo.
+        — La slide enseña el vault entero en orden numérico, sin flechas: es la estructura, no un
+          diagrama. El ORDEN DE BÚSQUEDA lo dices tú en voz alta: identity, projects, knowledge y por
+          último inbox. Si no lo dices, la slide no lo cuenta.
+        — En blanco solo las TRES que comentas: identity, projects y knowledge. Las cuatro atenuadas
+          (00-inbox, 00-raw, 04-skills, 05-logs) son las que no mencionas; están ahí para que, si
+          alguien duda, pregunte en vez de suponer que el vault tiene tres carpetas.
+        — 00-inbox es la cuarta prioridad en hermes.md pero no la dices: si la mencionas, quítale el
+          atenuado a esa fila y añádela a la frase.
+      </aside>
+    </section>
+
+    <!-- ================= S6 · SCHEMA ================= -->
+    <section>
+      <div class="frame s6">
+        <div class="file-head"><i></i> SCHEMA.md <span class="count">⋯ 74 líneas · 6 secciones</span></div>
+        <div class="code">
+          <span class="ln hi"><span class="n">36</span>title: Título</span>
+          <span class="ln hi"><span class="n">39</span>type: concept | entity | comparison | project | log | raw | identity</span>
+          <span class="ln"><span class="n">40</span>tags: [tag1, tag2]</span>
+          <span class="ln gap"><span class="n">⋯</span></span>
+          <span class="ln hi"><span class="n">63</span>Mínimo 2 [[wikilinks]] por nota</span>
+          <span class="ln"><span class="n">65</span>00-raw/ es inmutable</span>
+        </div>
+        <p class="format">sin formato, esto es un cajón desastre</p>
+      </div>
+      <aside class="notes">
+        También hay un SCHEMA.md en el que se definen las reglas de cómo se deben tomar las notas, su
+        formato. Sin esto el sistema crecería sin criterio: sería un cajón desastre, no una memoria
+        organizada.
+
+        — Es un extracto de 74 líneas: además del frontmatter define la estructura de carpetas, la
+          taxonomía de tags y las convenciones. No es solo el encabezado.
+      </aside>
+    </section>
+
+    <!-- ================= S7 · VAULT VS OBSIDIAN ================= -->
+    <section>
+      <div class="frame s7">
+        <div class="row7"><span class="k">VAULT</span><span class="v">los archivos</span></div>
+        <div class="row7"><span class="k">OBSIDIAN</span><span class="v">la ventana</span></div>
+      </div>
+      <aside class="notes">
+        Hay que diferenciar 2 cosas: el vault y Obsidian. El vault es la carpeta, los archivos, la
+        información. Obsidian simplemente se usa como un visor, una interfaz sencilla para ver notas de
+        forma gráfica a través del grafo o crear y editar las existentes. Nada más.
+
+        Se podría usar Visual Studio o Notepad: cualquier cosa que abra un .md sirve para lo mismo. Pero
+        Obsidian tiene sus ventajas, como poder ver grafos, y añadir otras utilidades en forma de
+        extensiones.
+
+        — 20 segundos, no más: esto es una objeción que se adelanta, no un bloque.
+      </aside>
+    </section>
+
+    <!-- ================= S8 · EL GRAFO ================= -->
+    <section>
+      <div class="frame s8">
+        <!-- SUSTITUIR por: <img src="../../recursos/vault-grafo.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"> -->
+        <div class="ph">grafo del vault</div>
+      </div>
+      <aside class="notes">
+        Cuatro segundos. Ni una palabra encima. Es la prueba visual de que esto tiene estructura y no es
+        un cajón.
+
+        — Pendiente: captura del grafo a pantalla completa, el más reciente y con más nodos.
+      </aside>
+    </section>
+
+    <!-- ================= S9 · LA PREGUNTA ================= -->
+    <section>
+      <div class="frame s9">
+        <p class="prompt">¿qué fue del scraper de Moodle?<span class="cursor"></span></p>
+      </div>
+      <aside class="notes">
+        Pero ¿cómo se usa todo esto? Vamos con algo más práctico. Tengo en Discord un bot conectado con
+        Hermes: él lee el vault y responde. Vamos a preguntarle algo sencillo. Hace tiempo hice un scraper
+        de Moodle y no sé del todo qué fue de él.
+
+        — El chiste de los 2 € va AQUÍ, antes de pulsar enviar: «esta charla me ha costado 2 euros».
+          Versión neutra: «los mejores dos euros del mes». Nunca durante la espera.
+        — Al enviar: NO cambiar de slide. Si tarda, se comenta lo que se está viendo.
+        — Si falla: pasar a la grabación de 30 s y, si hace falta, a S11. Nunca depurar en directo.
+      </aside>
+    </section>
+
+    <!-- ================= S11 · RESCATE (oculta) ================= -->
+    <section data-visibility="hidden">
+      <div class="frame s11">
+        <p class="a">El modelo no recordaba nada.</p>
+        <p class="b">El disco sí.</p>
+      </div>
+      <aside class="notes">
+        Solo si la demo falla. Se dice la frase, se pasa a la grabación y se sigue con la parte 5 sin
+        volver a mencionar el fallo.
+
+        — No se recorre en el orden normal: es una slide de emergencia.
+      </aside>
+    </section>
+
+    <!-- ================= S12 · CUATRO PIEZAS ================= -->
+    <section>
+      <div class="frame s12">
+        <div class="grid12">
+          <svg class="links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <line x1="16.6" y1="16.6" x2="50" y2="50" vector-effect="non-scaling-stroke" />
+            <line x1="83.3" y1="16.6" x2="50" y2="50" vector-effect="non-scaling-stroke" />
+            <line x1="16.6" y1="83.3" x2="50" y2="50" vector-effect="non-scaling-stroke" />
+            <line x1="83.3" y1="83.3" x2="50" y2="50" vector-effect="non-scaling-stroke" />
+          </svg>
+          <div class="node n1">un agente</div>
+          <div class="node n2">una carpeta</div>
+          <div class="node n3">un visor</div>
+          <div class="node n4">un canal</div>
+          <div class="hub fragment">REGLAS</div>
+        </div>
+      </div>
+      <aside class="notes">
+        Esto no es una herramienta, es una combinación de 4 piezas: un agente, una carpeta, un visor y un
+        canal de comunicación.
+
+        (CLIC: aparece REGLAS) Y las reglas, que es lo que las une. En cada casilla se puede poner otra
+        cosa y el sistema sigue funcionando: puedes cambiar el vault por otro y te responderá de otra
+        forma totalmente diferente; se puede hasta hacer un vault por proyecto para tenerlo todo separado.
+
+        — Si se dice «cambia cualquier casilla» sin nombrar las reglas, la slide contradice la parte 2.
+      </aside>
+    </section>
+
+    <!-- ================= S13 · EL NÚMERO ================= -->
+    <section>
+      <div class="frame s13">
+        <p class="big">casi <span class="num">7.000</span> notas</p>
+        <div class="gauge"><span></span></div>
+      </div>
+      <aside class="notes">
+        Lo llevo usando durante el último año y medio. Se acuerda de todo: cómo está montado mi servidor
+        de Minecraft, mis playlists analizadas de Spotify, descargas de Moodle, temario de clase,
+        proyectos personales.
+
+        Y ojo con la frase fácil: todo eso está en local; el modelo solo ve lo que lee. Sabe más de mí
+        que yo, sí, pero porque lo tengo escrito, no porque me espíe.
+
+        — Un número, no cuatro. Si se quiere precisión, leer el índice del vault esa misma mañana.
+      </aside>
+    </section>
+
+    <!-- ================= S14 · CIERRE ================= -->
+    <section>
+      <div class="frame s14">
+        <p class="above">El contexto se agota.</p>
+        <p class="full">El disco no<span class="dot">.</span></p>
+        <div class="gauge"><span style="width:0"></span></div>
+      </div>
+      <aside class="notes">
+        Ahora son las 2 de la mañana y sé que el problema no es el modelo: era que no se acordaba.
+
+        El contexto se agota, el disco no.
+
+        — Silencio después. Nada de «¿preguntas?», nada de slide de gracias.
+      </aside>
+    </section>
+
+  </div>
+</div>
+
+<script src="../vendor/reveal/dist/reveal.js"></script>
+<script src="../vendor/reveal/dist/plugin/notes.js"></script>
+<script>
+  Reveal.initialize({
+    width: 1920, height: 1080, margin: 0, center: false,
+    controls: false, progress: false, hash: true, slideNumber: false,
+    transition: 'fade', transitionSpeed: 'fast',
+    pdfSeparateFragments: false,
+    plugins: [ RevealNotes ],
+  });
+</script>
+</body>
+</html>

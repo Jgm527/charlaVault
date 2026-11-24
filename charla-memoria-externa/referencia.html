@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charla · Referencia y cifras</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="progress"></div>
+<div class="layout">
+  <aside>
+    <div class="brand">
+      <div class="logo">M</div>
+      <div><h1>Memoria externa</h1><small>Lightning talk · 5 min</small></div>
+    </div>
+    <p class="side-meta">Cifras, hechos<br>y preguntas difíciles</p>
+    <nav>
+      <a href="index.html"><span class="num">00</span>Portada</a>
+      <a href="guion.html"><span class="num">01</span>Guion 5:00</a>
+      <a href="opciones.html"><span class="num">02</span>Opciones</a>
+      <a href="conexiones.html"><span class="num">03</span>Conexiones</a>
+      <a href="demo.html"><span class="num">04</span>Demo</a>
+      <a class="active" href="referencia.html"><span class="num">05</span>Referencia</a>
+    </nav>
+    <div class="side-foot">
+      Verificado en <code>D:\Brain</code><br>
+      23/11/2026
+    </div>
+  </aside>
+
+  <main>
+    <header class="page">
+      <div class="kicker">05 · Referencia</div>
+      <h2>Lo que puedes afirmar y lo que no</h2>
+      <p class="lead">Todo lo de esta página está leído en el vault, en el <code>config.yaml</code> del bootstrap o en el inventario de portabilidad. Si un dato no aparece aquí, no lo pongas en un slide.</p>
+    </header>
+
+    <div class="callout bad">
+      <strong>Cuidado con el manual.</strong> <code>hermes-complete-guide.md</code> es de julio de 2026 y dice “~36 skills” y “~4000 páginas”. Hoy son 183 skills y 6.943 páginas declaradas. Mezclar las dos fuentes es la forma más fácil de que te pillen.
+    </div>
+
+    <section class="block">
+      <div class="sec-head"><h2>Cifras seguras</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Dato</th><th>Valor</th><th>Fuente</th></tr></thead>
+          <tbody>
+            <tr><td>Páginas declaradas</td><td class="num">6.943</td><td><code>index.md</code></td></tr>
+            <tr><td>Fuentes crudas</td><td class="num">7.459</td><td><code>00-raw/</code></td></tr>
+            <tr><td>Commits</td><td class="num">430</td><td><code>git log</code></td></tr>
+            <tr><td>Sidecars de ingesta</td><td class="num">143</td><td><code>00-raw/**/*.meta.yaml</code></td></tr>
+            <tr><td>Skills activas</td><td class="num">183</td><td><code>agent-portability.md</code></td></tr>
+            <tr><td>Cron jobs propios</td><td class="num">1</td><td><code>brain-raw-ingest</code>, cada 60 min</td></tr>
+            <tr><td>Ejecuciones de ese cron</td><td class="num">149</td><td><code>agent-portability.md</code></td></tr>
+            <tr><td>Canales del bot de Discord</td><td class="num">3</td><td><code>agent-portability.md</code></td></tr>
+            <tr><td>Coste del modelo</td><td class="num">~10 $/mes</td><td><code>config.yaml</code> + informe</td></tr>
+            <tr><td>Plugins de comunidad en Obsidian</td><td class="num">0</td><td>informe</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:.85rem;color:var(--muted)">Si solo dices tres: 6.943 notas, 7.459 fuentes, 430 commits. El resto distrae. El “149 ejecuciones” solo si hablas del cron.</p>
+    </section>
+
+    <section class="block">
+      <div class="sec-head"><h2>Hechos verificados que sostienen la charla</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Afirmación</th><th>Dónde está</th></tr></thead>
+          <tbody>
+            <tr><td>El prompt de identidad está escrito en segunda persona y vive en el vault</td><td><code>03-identity/hermes.md</code></td></tr>
+            <tr><td>Protocolo de arranque: montar disco → leer <code>user.md</code> → consultar <code>index.md</code></td><td><code>hermes-complete-guide.md</code> §1</td></tr>
+            <tr><td>Protocolo de cierre: 9 pasos, el último <code>git commit</code></td><td><code>hermes-complete-guide.md</code> §3</td></tr>
+            <tr><td>La sesión se resetea a las 4:00 y tras 24 h de inactividad</td><td><code>hermes-bootstrap/config.yaml</code> → <code>session_reset</code></td></tr>
+            <tr><td>El gateway de Discord tiene 3 canales y un parche de inbox en <code>discord.py</code></td><td><code>agent-portability.md</code> §1</td></tr>
+            <tr><td>El cron <code>brain-raw-ingest</code> corre cada 60 min con <code>brain-scan.py</code> y <code>brain-extract.py</code></td><td><code>agent-portability.md</code> §1</td></tr>
+            <tr><td>Los reels de Instagram se descargan con yt-dlp y se transcriben</td><td><code>agent-portability.md</code> §2 · <code>00-raw/articles/instagram-reels/</code></td></tr>
+            <tr><td>Hay un flujo n8n de proyecto (Atlantic Airlines)</td><td><code>atlantic-airlines-n8n-workflow.json</code></td></tr>
+            <tr><td>El plugin de Spotify es propio; las playlists se analizan</td><td><code>agent-portability.md</code> · skill <code>spotify-playlist-analyzer</code></td></tr>
+            <tr><td>Memoria con topes: 2.200 y 1.375 caracteres</td><td><code>config.yaml</code> → <code>memory</code></td></tr>
+            <tr><td>Compresión al 50 %, ratio 0,2, protege 20 mensajes</td><td><code>config.yaml</code> → <code>compression</code></td></tr>
+            <tr><td>90 turnos máximo por ejecución</td><td><code>config.yaml</code> → <code>agent.max_turns</code></td></tr>
+            <tr><td>El ciclo está escrito como “Ciclo completo”, con 8 pasos</td><td><code>01-knowledge/concepts/vault-assisted-workflow.md</code></td></tr>
+            <tr><td>Contrato: frontmatter obligatorio, 2 wikilinks, <code>00-raw</code> inmutable</td><td><code>SCHEMA.md</code></td></tr>
+            <tr><td>Sin remoto de git y con secretos en el historial</td><td><code>git log</code> / informe §7</td></tr>
+            <tr><td><code>00-inbox/unprocessed/</code> estaba vacía el 23/11</td><td>explorador de archivos</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn" style="margin-top:12px">
+        <strong>Lo único que no está verificado:</strong> el punto exacto de inyección del protocolo. <code>config.yaml</code> no tiene una clave que apunte a <code>hermes.md</code> y <code>prefill_messages_file</code> está vacío; la copia del config es además un respaldo, no la viva. Antes de afirmarlo, compara <code>~/.hermes/SOUL.md</code> con <code>03-identity/hermes.md</code>.
+      </div>
+      <div class="callout" style="margin-top:10px">
+        <strong>Matiz sobre Instagram:</strong> está como <em>fuente</em> (descarga y transcripción de reels). No hay publicación automática desde el vault. Si te preguntan, dilo así; prometer una conexión que no existe es la forma más rápida de perder credibilidad.
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="sec-head"><h2>Preguntas difíciles (y respuestas cortas)</h2></div>
+      <div class="grid g2">
+        <div class="card"><span class="k">Pregunta</span><h3>“¿Esto no es RAG?”</h3>
+          <p>“RAG resuelve leer. Aquí el trabajo está en escribir: qué se guarda, con qué formato y con qué regla. Y el índice lo mantengo curado, no generado.”</p></div>
+        <div class="card"><span class="k">Pregunta</span><h3>“¿Por qué Obsidian y no Notion?”</h3>
+          <p>“Porque el formato es mío: Markdown en disco. Notion me da una API y una interfaz mejores, pero el contenido vive en su nube. Aquí lo lee cualquier agente sin adaptador y el diff es legible.”</p></div>
+        <div class="card"><span class="k">Pregunta</span><h3>“¿Y si Obsidian desaparece mañana?”</h3>
+          <p>“Sigo teniendo los <code>.md</code>. Obsidian es el visor, no la memoria. Puedo abrirlos con cualquier editor y el agente no nota la diferencia.”</p></div>
+        <div class="card"><span class="k">Pregunta</span><h3>“¿Instagram está automatizado?”</h3>
+          <p>“Como fuente: guardo un reel, se descarga y se transcribe a raw. Publicar no; eso sería otra conexión de salida, con el mismo patrón.”</p></div>
+        <div class="card"><span class="k">Pregunta</span><h3>“¿Y si el agente no sigue el protocolo?”</h3>
+          <p>“No hay garantía, hay verificación: el chequeo del disco es lo primero, y el commit es la prueba de que la escritura ocurrió. Lo que no se commitea, no ha pasado.”</p></div>
+        <div class="card"><span class="k">Pregunta</span><h3>“¿No se llena de basura?”</h3>
+          <p>“Hay umbral: solo se crea página si el tema es central o sale en dos fuentes; se añade a lo existente; y un chequeo de salud audita enlaces rotos y huérfanos.”</p></div>
+        <div class="card"><span class="k">Pregunta</span><h3>“¿Cuánto cuesta?”</h3>
+          <p>“Diez dólares al mes de modelo y un disco. Lo caro no es la infraestructura: es la disciplina de documentar.”</p></div>
+        <div class="card"><span class="k">Pregunta</span><h3>“¿Y la privacidad?”</h3>
+          <p>“Todo vive en local salvo lo que pasa por el modelo. Y tengo una deuda real: hay claves en el historial de git; lo correcto es rotarlas y sacarlas.”</p></div>
+        <div class="card"><span class="k">Pregunta</span><h3>“¿Sirve para un equipo?”</h3>
+          <p>“Hoy es personal. El contrato sí escala; el ritual de cierre, no: cada persona tendría que firmar el mismo compromiso.”</p></div>
+        <div class="card"><span class="k">Pregunta</span><h3>“¿No es mucho trabajo?”</h3>
+          <p>“El agente escribe, no yo. Mi trabajo es la regla; el suyo, cumplirla. Y si un día no la cumple, se ve en el commit.”</p></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="sec-head"><h2>Qué no contar (y por qué)</h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Dato</th><th>Por qué fuera</th></tr></thead>
+          <tbody>
+            <tr><td>El archivo de cookies de Instagram</td><td>Es una credencial, no una curiosidad; y no se enseña ni se nombra</td></tr>
+            <tr><td>IDs numéricos de los canales de Discord</td><td>No aportan y ensucian; además son semi-sensibles</td></tr>
+            <tr><td>468 mods, 47 GB de mundo, pregeneración de chunks</td><td>Es otra charla; roba el foco del tema</td></tr>
+            <tr><td>183 skills, 26 categorías</td><td>Número que impresiona y no se retiene</td></tr>
+            <tr><td>Compresión 50 % / ratio 0,2 / 20 mensajes</td><td>Detalle de implementación del agente</td></tr>
+            <tr><td>Detalles internos de los flujos n8n</td><td>Solo si el público es del proyecto; si no, ruido</td></tr>
+            <tr><td>Tirith y el bloqueo del cron</td><td>Anécdota buena para preguntas, no para 5 minutos</td></tr>
+            <tr><td>Nombres de proyectos personales (Maneva, GNÓTHI, ATC-79)</td><td>Solo si el público los conoce; si no, ruido</td></tr>
+            <tr><td>Rutas absolutas del disco</td><td>Envejecen y no aportan; “en el vault” se entiende igual</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="sec-head"><h2>Checklist de los días previos</h2></div>
+      <div class="grid g2">
+        <div class="card"><span class="k">24 h antes</span><h3>Ensayo con cronómetro</h3>
+          <ul>
+            <li>Dos pasadas completas, una sin demo.</li>
+            <li>Grabar la demo de 40 s y guardarla en el escritorio.</li>
+            <li>Probar el bot en el canal correcto, no en un DM.</li>
+            <li>Comparar <code>SOUL.md</code> con <code>hermes.md</code>.</li>
+            <li>Decidir qué cifra dices de viva voz (6.943, 7.459 o 430).</li>
+          </ul></div>
+        <div class="card"><span class="k">5 min antes</span><h3>Preflight</h3>
+          <ul>
+            <li>Gateway vivo y vault montado.</li>
+            <li><code>unprocessed/</code> vacía y abierta.</li>
+            <li>Mensaje escrito en el móvil, sin enviar.</li>
+            <li>Sesión nueva preparada y notificaciones silenciadas.</li>
+            <li>Ninguna pestaña con cookies, claves o IDs a la vista.</li>
+            <li>Zoom del terminal al 150 % o más.</li>
+          </ul></div>
+      </div>
+    </section>
+
+    <p class="footer">Fuentes leídas: <code>index.md</code>, <code>SCHEMA.md</code>, <code>03-identity/hermes.md</code>, <code>03-identity/hermes-complete-guide.md</code>, <code>03-identity/agent-portability.md</code>, <code>01-knowledge/concepts/vault-assisted-workflow.md</code>, <code>05-logs/2026-11-log.md</code>, <code>hermes-bootstrap/config.yaml</code> y <code>git log</code>.</p>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

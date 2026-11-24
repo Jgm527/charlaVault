@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dirección B · El muro — memoria externa</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: #07080a;
+    color: #cfd6de;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    padding: 3rem 2rem 5rem;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+
+  /* ---------- ficha ---------- */
+  .sheet {
+    display: flex; gap: 3rem; justify-content: space-between; align-items: flex-end;
+    flex-wrap: wrap; border-bottom: 1px solid #1c2027; padding-bottom: 1.5rem; margin-bottom: 2.4rem;
+  }
+  .kicker {
+    font-family: "Cascadia Code", Consolas, monospace; font-size: .7rem; letter-spacing: .22em;
+    text-transform: uppercase; color: #6f7c8b; margin: 0 0 .9rem;
+  }
+  .sheet h1 { font-size: 1.9rem; font-weight: 600; letter-spacing: -.02em; margin: 0 0 .6rem; color: #eef2f6; }
+  .why { margin: 0; max-width: 50ch; color: #93a0ae; font-size: .95rem; line-height: 1.55; }
+  .meta { min-width: 230px; }
+  .sw { display: flex; gap: .5rem; margin: 0 0 .7rem; }
+  .chip { width: 2.1rem; height: 2.1rem; border-radius: 50%; border: 1px solid #2b313a; }
+  .meta p { font-family: "Cascadia Code", Consolas, monospace; font-size: .7rem; line-height: 1.7; color: #7d8b99; margin: 0; }
+
+  .frame { margin: 0 0 2.8rem; }
+  .cap {
+    display: flex; gap: .8rem; align-items: baseline; margin-bottom: .7rem;
+    font-family: "Cascadia Code", Consolas, monospace; font-size: .7rem; letter-spacing: .12em;
+    text-transform: uppercase; color: #6f7c8b;
+  }
+  .cap b { color: #9fb0c0; font-weight: 400; }
+  .cap .note { text-transform: none; letter-spacing: 0; color: #5d6875; font-size: .7rem; }
+  .foot { display: flex; gap: 1.4rem; justify-content: space-between; flex-wrap: wrap;
+          border-top: 1px solid #1c2027; padding-top: 1.2rem;
+          font-family: "Cascadia Code", Consolas, monospace; font-size: .7rem; color: #6f7c8b; }
+  .foot a { color: #f5a524; text-decoration: none; }
+  .foot a:hover { text-decoration: underline; }
+
+  /* ---------- lienzo 16:9 escalable ---------- */
+  .stage {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    container-type: inline-size;
+    overflow: hidden;
+    outline: 1px solid #242a33;
+    border-radius: 3px;
+  }
+
+  /* ================= DIRECCIÓN B ================= */
+  .b { background: #14171c; color: #eef1f4; }
+  .b .mono { font-family: "Cascadia Code", Consolas, monospace; }
+
+  /* S1 / portada */
+  .b-s1 { display: flex; flex-direction: column; justify-content: center; padding: 0 9cqw; }
+  .b-alert {
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 1.45cqw; letter-spacing: .22em; text-transform: uppercase;
+    color: #f5a524; border-left: 3px solid #f5a524; padding-left: 1.3cqw;
+    margin: 0 0 5.4cqw; width: fit-content;
+  }
+  .b-clock {
+    font-size: 14cqw; font-weight: 800; letter-spacing: -.045em; line-height: .84;
+    color: #f7f8fa; margin: 0;
+  }
+  .b-clock .ampm { font-size: .23em; font-weight: 700; letter-spacing: .16em; color: #f5a524; margin-left: .55em; vertical-align: .95em; }
+  .b-lede { font-size: 4.8cqw; font-weight: 600; letter-spacing: -.018em; line-height: 1.15; color: #dfe4ea; margin: 5.2cqw 0 0; }
+  .b-lede em { font-style: normal; color: #f5a524; }
+  .b-gauge { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #2a313a; }
+  .b-gauge span { display: block; height: 100%; width: 8%; background: #f5a524; }
+
+  /* S12 / las reglas envuelven las cuatro piezas */
+  .b-s12 { padding: 7.5cqw; display: flex; }
+  .b-frame {
+    position: relative; flex: 1;
+    border: 2px solid #f5a524; border-radius: 2px;
+    padding: 6.4cqw 3.4cqw 3.4cqw;
+  }
+  .b-tag {
+    position: absolute; top: 0; left: 3.4cqw; transform: translateY(-50%);
+    background: #14171c; color: #f5a524; padding: 0 1.4cqw;
+    font-size: 2.1cqw; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  }
+  .b-grid {
+    height: 100%; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+    gap: 2.4cqw;
+  }
+  .b-node {
+    background: #1b2028; border: 1px solid #2b333e; border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3cqw; font-weight: 600; color: #e6ebf1; letter-spacing: -.01em;
+  }
+
+  /* S14 / cierre */
+  .b-s14 { display: flex; flex-direction: column; justify-content: center; padding: 0 9cqw; }
+  .b-s14 .line { margin: 0; line-height: 1.16; letter-spacing: -.022em; }
+  .b-s14 .dim { font-size: 5.6cqw; font-weight: 600; color: #8f99a6; }
+  .b-s14 .full { font-size: 6.6cqw; font-weight: 800; color: #f7f8fa; margin-top: .4cqw; }
+  .b-s14 .full .dot { color: #f5a524; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="sheet">
+    <div>
+      <p class="kicker">Charla · memoria externa</p>
+      <h1>Dirección B — El muro</h1>
+      <p class="why">Grafito y el ámbar de los diálogos de error reales. Tipografía pesada, bloques sólidos y una
+        alerta diegética en la esquina. Cuenta la historia desde el síntoma — el límite — en vez de desde la
+        terminal. Más cartel, más agresiva; también más cerca de parecer una slide de consultora.</p>
+    </div>
+    <div class="meta">
+      <div class="sw">
+        <span class="chip" style="background:#14171c"></span>
+        <span class="chip" style="background:#1b2028"></span>
+        <span class="chip" style="background:#f5a524"></span>
+        <span class="chip" style="background:#eef1f4"></span>
+      </div>
+      <p>#14171c · #1b2028 · #f5a524</p>
+      <p>Segoe UI Bold / Black 800</p>
+      <p>Cascadia Code (etiquetas)</p>
+    </div>
+  </header>
+
+  <section class="frame">
+    <div class="cap"><b>S1</b><span>portada · sin nombre ni logo</span></div>
+    <div class="stage b b-s1">
+      <p class="b-alert">límite alcanzado</p>
+      <h1 class="b-clock">2:00<span class="ampm">AM</span></h1>
+      <p class="b-lede">El contexto <em>se agotó</em>.</p>
+      <div class="b-gauge"><span></span></div>
+    </div>
+  </section>
+
+  <section class="frame">
+    <div class="cap"><b>S12</b><span>contenido · las reglas envuelven las cuatro piezas</span><span class="note">REGLAS aparece con un clic (fragment)</span></div>
+    <div class="stage b b-s12">
+      <div class="b-frame">
+        <span class="b-tag">REGLAS</span>
+        <div class="b-grid">
+          <div class="b-node">un agente</div>
+          <div class="b-node">una carpeta</div>
+          <div class="b-node">un visor</div>
+          <div class="b-node">un canal</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="frame">
+    <div class="cap"><b>S14</b><span>cierre · misma tipografía que S1</span></div>
+    <div class="stage b b-s14">
+      <p class="line dim">El contexto se agota.</p>
+      <p class="line full">El disco no<span class="dot">.</span></p>
+      <div class="b-gauge"><span style="width:0"></span></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Previsualización estática · sin CDN ni fuentes web · lienzo 16:9</span>
+    <a href="direccion-a-terminal.html">← Ver dirección A — Terminal a las 2 AM</a>
+  </footer>
+
+</div>
+</body>
+</html>
