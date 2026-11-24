@@ -27,7 +27,11 @@
   .reveal { font-family: var(--sans); color: var(--ink); font-weight: 400; }
   .reveal .slides { text-align: left; }
   .reveal .slides section { height: 1080px; overflow: hidden; background: var(--bg); }
-  .reveal .progress, .reveal .controls, .reveal .slide-number { display: none; }
+  .reveal .controls, .reveal .slide-number { display: none; }
+
+  /* Barra de progreso: una sola, en todas las slides, avanzando con el recorrido */
+  .reveal .progress { display: block; height: 3px; background: rgba(255,255,255,.07); color: var(--accent); }
+  .reveal .progress span { opacity: .85; }
 
   .frame {
     position: absolute; inset: 0;
@@ -40,10 +44,6 @@
   .mono { font-family: var(--mono); }
   .voz { font-weight: 300; letter-spacing: -.012em; }
   .remate { font-weight: 800; letter-spacing: -.04em; }
-
-  /* El indicador de contexto: firma del mazo */
-  .gauge { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,.07); }
-  .gauge span { display: block; height: 100%; width: 8%; background: var(--accent); opacity: .8; }
 
   .cursor {
     display: inline-block; background: var(--accent);
@@ -170,7 +170,6 @@
         <h1 class="clock">2:00<span class="ampm">AM</span><span class="cursor"></span></h1>
         <div class="rule"></div>
         <p class="lede">El contexto se agotó.</p>
-        <div class="gauge"><span></span></div>
       </div>
       <aside class="notes">
         Son las 2 de la mañana, llevas 3 horas trabajando, le preguntas algo a tu modelo, pero te responde
@@ -432,7 +431,6 @@
           <li>los <b>proyectos</b> personales</li>
         </ul>
         <p class="receipts">casi <span class="num">7.000</span> notas · 7.459 fuentes · 430 commits</p>
-        <div class="gauge"><span></span></div>
       </div>
       <aside class="notes">
         Lo llevo usando durante el último año y medio. Y dentro hay de todo: cómo está montado mi servidor
@@ -456,7 +454,6 @@
       <div class="frame s14">
         <p class="above">El contexto se agota.</p>
         <p class="full">El disco no<span class="dot">.</span></p>
-        <div class="gauge"><span style="width:0"></span></div>
       </div>
       <aside class="notes">
         Ahora son las 2 de la mañana y sé que el problema no es el modelo: era que no se acordaba.
@@ -475,7 +472,7 @@
 <script>
   Reveal.initialize({
     width: 1920, height: 1080, margin: 0, center: false,
-    controls: false, progress: false, hash: true, slideNumber: false,
+    controls: false, progress: true, hash: true, slideNumber: false,
     transition: 'fade', transitionSpeed: 'fast',
     pdfSeparateFragments: false,
     plugins: [ RevealNotes ],

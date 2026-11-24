@@ -28,12 +28,16 @@ Las excepciones viven en este archivo y en `charla-memoria-externa/brief-slides.
 ```js
 Reveal.initialize({
   width: 1920, height: 1080, margin: 0, center: false,
-  controls: false, progress: false, hash: true,
+  controls: false, progress: true, hash: true,
   transition: 'fade', transitionSpeed: 'fast',
   pdfSeparateFragments: false,
   plugins: [RevealNotes],
 });
 ```
+
+La barra de progreso va activa en **todas** las slides y en el acento: es la única
+señal de recorrido del mazo. Arranca a cero en la portada y se llena en el cierre.
+Nada de barras decorativas que aparezcan en tres slides y no avancen.
 
 Paleta y tipos salen de `charla-memoria-externa/assets/style.css`:
 `#0b0f14` fondo · `#e8eef5` tinta · `#5cc8ff` acento · `#1e2a35` líneas.
